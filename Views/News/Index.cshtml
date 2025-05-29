@@ -1,0 +1,25 @@
+@model IEnumerable<Bazis.Models.News>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="header">
+        <div class="header-title">Новости</div>
+    </div>
+
+    <div class="content">
+        @foreach (var item in Model) {
+        <a asp-action="Details" asp-route-id="@item.Id">
+        <div class="news-item">
+            <img src="/img/news/news.jpeg" alt="Обновление сервиса" class="image">
+            <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+            <p>@Html.DisplayFor(modelItem => item.PreviewText)</p>
+            <div class="date">@Html.DisplayFor(modelItem => item.ReleaseDate)</div>
+        </div>
+        </a>
+        }
+    </div>
+
+

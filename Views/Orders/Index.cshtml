@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@model IEnumerable<Bazis.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="header">
+        <div class="header-title">Активные записи</div>
+    </div>
+
+    <div class="content">
+       @foreach (var item in Model) {
+            <a asp-action="Details" asp-route-id="@item.Id">
+                <div class="service-history-item">
+                    <div class="date">@Html.DisplayFor(modelItem => item.CreatedAt)</div>
+                    <div class="details">Заказ-наряд №@Html.DisplayFor(modelItem => item.Id)</div>
+                    <div class="price"></div>
+                </div>
+            </a>
+        }
+    </div>
+

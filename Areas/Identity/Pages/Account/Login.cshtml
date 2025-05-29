@@ -1,0 +1,28 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    //Layout = null;
+}
+
+
+<div class="container">
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="title">Введите номер телефона</div>
+                <div class="subtitle">чтобы войти или стать клиентом BAZIS MOTORS</div>
+                <input name="Email"  class="input" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input name="Password"  class="input" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <div class="description">На указанный номер придет SMS с кодом для подтверждения входа</div>
+                    <button id="login-submit" type="submit" class="button">Получить код</button>
+                      <div class="privacy-text">
+            Нажимая на кнопку «Получить код», я даю согласие на
+            <a href="#">обработку своих персональных данных</a></div>    
+            </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

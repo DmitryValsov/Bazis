@@ -1,0 +1,34 @@
+@model Bazis.Models.News
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="header">
+        <a asp-action="Index" class="back-button">← Назад</a>
+        <div class="header-title">Детали новости</div>
+    </div>
+
+    <div class="content">
+        <h1 class="news-title">@Html.DisplayFor(model => model.Title)</h1>
+        <div class="news-meta">@Html.DisplayFor(model => model.ReleaseDate) | Автор: администратор</div>
+        <img src="/img/news/news.jpeg" alt="Открытие нового филиала" class="news-image">
+        <div class="news-content">
+          @Html.DisplayFor(model => model.DetailText)
+        </div>
+
+        <div class="related-news">
+            <div class="related-title">Рекомендуем прочитать</div>
+            <a href="#" class="related-item">
+                <img src="https://via.placeholder.com/50" alt="Новость 1">
+                Акция на шиномонтаж до конца месяца
+            </a>
+            <a href="#" class="related-item">
+                <img src="https://via.placeholder.com/50" alt="Новость 2">
+                Новый ассортимент масел в наших филиалах
+            </a>
+        </div>
+    </div>
+
+

@@ -1,0 +1,59 @@
+@model Bazis.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+ <div class="header">
+        <a asp-action="Index" class="back-button">←</a>
+        <div class="header-title">Заказ-наряд №@Html.DisplayFor(model => model.Id)</div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Авторaботы:</div>
+
+        <div class="line-item">
+            <span>ФИО</span>
+            <span> @Html.DisplayFor(model => model.Name)</span>
+        </div>
+        <div class="line-item">
+            <span>Номер телефона</span>
+            <span> @Html.DisplayFor(model => model.Phone)</span>
+        </div>
+        <div class="line-item">
+            <span>Комментарий</span>
+            <span>@Html.DisplayFor(model => model.Comment)</span>
+        </div>
+
+
+        <div class="section-title">Услуги:</div>
+        <div class="line-item">
+            <span>1</span>
+            <span>@Html.DisplayFor(model => model.Usluga)</span>
+        </div>
+
+
+        <div class="total">
+            <span>Итого:</span>
+            <span></span>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-title">Автомобиль</div>
+            <div class="footer-value">@Html.DisplayFor(model => model.Auto)</div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-title">Дата записи</div>
+            <div class="footer-value">@Html.DisplayFor(model => model.CreatedAt)</div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-title">Статус</div>
+            <div class="footer-value">В ожидании</div>
+        </div>
+    </div>
+
+

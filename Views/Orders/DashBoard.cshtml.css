@@ -1,0 +1,66 @@
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+.header-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.main {
+    flex: 1;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.car-card {
+    width: 240px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+}
+.car-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+.car-info {
+    font-size: 16px;
+    font-weight: bold;
+    color: #002B5C;
+}
+.button {
+    width: 100%;
+    padding: 15px;
+    background-color: #002B5C;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.button_add_auto
+{
+    padding-bottom: 100px;
+}

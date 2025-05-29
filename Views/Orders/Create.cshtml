@@ -1,0 +1,1051 @@
+@model Bazis.Models.Order
+
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #002B5C;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #004080;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .service-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .service-card.selected {
+            background-color: #e0f7fa;
+        }
+
+        .time-slot {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #002B5C;
+            border-radius: 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .time-slot.disabled {
+            color: #ccc;
+            border-color: #ccc;
+            pointer-events: none;
+        }
+
+        .time-slot.selected {
+            background-color: #002B5C;
+            color: #fff;
+        }
+        .search-box {
+            display: flex;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            margin: 10px 20px;
+            border-radius: 5px;
+        }
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-box .icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .service-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .service-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 60px; /* Отступ для фиксации футера */
+        }
+
+        .header {
+           padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .header_2 {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ccc;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            z-index: 1000;
+        }
+
+        .back-button {
+            margin-right: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .header-subtitle {
+            font-size: 12px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .select-box {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            appearance: none; /* Убирает стандартные стрелки */
+        }
+
+
+        .details-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #F1F1F1;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #002B5C;
+        }
+
+        .details-text {
+            font-size: 16px;
+            color: #444;
+        }
+
+        .edit-icon {
+            margin-left: auto;
+            font-size: 18px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+            color: #002B5C;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #002B5C;
+        }
+
+
+    </style>
+    <!-- Выбор сервиса -->
+
+
+    <div id="page1" class="page active">
+        <div class="header">Выберите сервис</div>
+
+        <div class="search-box">
+            <span class="icon">🔍</span>
+            <input type="text" placeholder="Найти">
+        </div>
+        <div class="content">
+
+        <div class="service-item service-card" data-service="Базис-сервис - 11 км Окружной дороги,6">
+            <div class="service-title">Базис-сервис - 11 км Окружной дороги,6
+            </div>
+            <div class="service-subtitle">Базис-сервис - 11 км Окружной дороги,6
+            </div>
+            <div class="map-placeholder">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A31cf70e4ff9eab0beba9c5983599426ed17f1ebf24cd7c0fa43cdb83164d6ded&amp;source=constructor" width="100%" height="200" frameborder="0"></iframe>
+            </div>
+
+        </div>
+        <div class="service-item service-card" data-service="Базис-сервис - Федюнинского,83">
+            <div class="service-title">Базис-сервис - Федюнинского,83</div>
+            <div class="service-subtitle">Базис-сервис - Федюнинского,83</div>
+            <div class="map-placeholder">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A29e71fe31eba29116ec9267fbe89a60ac8c44f2c7ef22b70ec41ce889d5efaa0&amp;source=constructor" width="100%" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
+
+            <div class="service-item service-card" data-service="Базис-сервис - Пермякова, 19">
+                <div class="service-title">Базис-сервис - Пермякова, 19
+                </div>
+                <div class="service-subtitle">Базис-сервис - Пермякова, 19
+                </div>
+                <div class="map-placeholder">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A189e875d6374f957f8d072cae72607a12346d6dc153d3ec71f2f32a539e7f6ee&amp;source=constructor" width="100%" height="200" frameborder="0"></iframe>
+                </div>
+            </div>
+
+            <div class="service-item service-card" data-service="Базис-сервис - Окружная, 202">
+                <div class="service-title">Базис-сервис - Окружная, 202
+                </div>
+                <div class="service-subtitle">Базис-сервис - Окружная, 202
+                </div>
+                <div class="map-placeholder">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A6b8854e40c71c15d81789628171b8b15c442be245a49ed46c5a883a0353fccb1&amp;source=constructor" width="100%" height="200" frameborder="0"></iframe>
+                </div>
+            </div>
+
+        <button class="button" id="toPage1-5" disabled>Продолжить</button>
+
+        </div>
+
+    </div>
+
+
+    <div id="page1-5" class="page">
+        <div class="header">Выберите услугу</div>
+        <!--<div class="header_2">
+            <div id="toPage1" class="back-button">←</div>
+            <div class="header-title">Базис-Сервис - Федюнинского, 83</div>
+        </div>-->
+        <div class="content" style="padding-top: 50px;">
+        <div class="service-card" data-service="Замена масла">
+            Замена масла
+        </div>
+        <div class="service-card" data-service="Диагностика">
+            Диагностика
+        </div>
+        <div class="service-card" data-service="Техническое обслуживание">
+            Техническое обслуживание
+        </div>
+        <div class="service-card" data-service="Шиномонтаж">
+            Шиномонтаж
+        </div>
+        <button class="button" id="toPage2" disabled>Продолжить</button>
+        </div>
+    </div>
+
+
+    <!-- Выбор автомобиля -->
+    <div id="page2" class="page">
+<div class="header">Выберите автомобиль</div>
+        <!--<div class="header_2">
+            <div class="back-button"  id="toPage1-5">←</div>
+                <div class="header-title">Базис-Сервис - Федюнинского, 83</div>
+        </div>-->
+        <div class="main" style="margin-top: 60px;">
+        <div class="main-title">Выбор автомобиля</div>
+
+      
+           <!-- php
+                $json = json_decode($contents);
+              /*  foreach ($json->list as $value => $key)
+                    {
+                        foreach ($key as $model)
+                            {
+                                var_dump($model);
+                            }
+                    }*/
+
+                    <table>
+  <thead>
+  <tr><th>Марка</th><th>Кол-во</th><th>Модели</th></tr></thead>
+  <tbody id="tbl">
+  
+  </tbody>
+</table>
+            endphp-->
+        
+
+        <select id="carBrand" class="select-box"></select>
+ <option value="">Выберите марку</option>
+</select>
+ 
+<select id="carModel" class="select-box" disabled>
+ <option value="">Сначала выберите марку</option>
+</select>
+
+
+        <button class="button" id="toPage3" disabled>Продолжить</button>
+        </div>
+    </div>
+
+    <!--Выбор услуги-->
+
+
+
+    <!--/Выбор услуги-->
+
+    <!-- Выбор даты и времени -->
+    <div id="page3" class="page">
+        <style>
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { font-family: Arial, sans-serif; background: #f7f8fa; color: #0f1944; }
+            .phone { width: 375px; margin: 20px auto; border: 16px solid #333; border-radius: 36px; position: relative; }
+            .screen { background: #fff; border-radius: 20px; padding: 16px; width: 100%; position: relative; }
+
+            /* Header */
+            .header { display: flex; align-items: center; margin-bottom: 16px; }
+            .back { background: none; border: none; cursor: pointer; padding: 4px; margin-right: 8px; }
+            .back svg { display: block; }
+            .logo { width: 32px; height: 32px; margin-right: 8px; }
+            .title-block { display: flex; flex-direction: column; }
+            .title-block .title { font-size: 13px; font-weight: 600; line-height: 1.2; }
+            .title-block .subtitle { font-size: 9px; color: #6b7280; margin-top: 2px; }
+
+            h1 { font-size: 20px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+
+            /* Calendar */
+            .calendar { background: #fff; border-radius: 12px; padding: 12px; }
+            .month { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+            .month button { background: none; border: none; cursor: pointer; padding: 4px; font-size: 20px; line-height: 1; }
+            .month-label { display: flex; flex-direction: column; align-items: center; }
+            .month-name { font-size: 18px; font-weight: 600; }
+            .year-name { font-size: 14px; color: #6b7280; margin-top: 2px; }
+            .weekdays, .days { display: grid; grid-template-columns: repeat(7, 1fr); }
+            .weekdays div { padding: 6px; font-size: 14px; color: #9ca3af; text-align: center; }
+            .days div { padding: 6px; font-size: 14px; text-align: center; margin-bottom: 4px; border-radius: 50%; }
+            .days div.blank { visibility: hidden; }
+            .days div.past { color: #9ca3af; }
+            .days div.no-slots { color: #000; }
+            .days div.available { color: #0f1944; cursor: pointer; }
+            .days div.selected { background: #0f1944; color: #fff; }
+
+            /* Timeslots */
+            .timeslots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+            .timeslots button { padding: 10px 0; border: 1px solid #0f1944; border-radius: 8px; background: #fff; font-size: 14px; cursor: pointer; }
+            .timeslots button.available { color: #0f1944; }
+            .timeslots button.selected { background: #0f1944; color: #fff; }
+
+            /* Legend */
+            .legend { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+            .legend-item { display: flex; align-items: center; font-size: 12px; }
+            .legend-item .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+            .legend-item .available-dot { background: #0f1944; }
+            .legend-item .no-slots-dot { background: #000; }
+
+            /* Continue button */
+            .btn { width: 100%; padding: 14px 0; background: #0f1944; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-bottom: 48px; }
+
+            /* Navbar */
+            .navbar { position: absolute; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-around; padding: 8px 0; }
+            .navbar .item { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: #0f1944; }
+            .navbar .item svg { width: 24px; height: 24px; margin-bottom: 4px; }
+        </style>
+
+
+               
+                
+
+                <h1>Выберите дату и время</h1>
+
+                <!-- Calendar -->
+                <div class="calendar">
+                    <div class="month">
+                        <button class="prev">‹</button>
+                        <div class="month-label">
+                            <span class="month-name" id="monthName"></span>
+                            <span class="year-name" id="yearName"></span>
+                        </div>
+                        <button class="next">›</button>
+                    </div>
+                    <div class="weekdays">
+                        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+                    </div>
+                    <div class="days" id="daysContainer"></div>
+                </div>
+
+                <!-- Time slots -->
+                <div class="timeslots" id="timeslotsContainer">
+                    <!-- Временные слоты появятся здесь -->
+                </div>
+
+                <!-- Legend -->
+                <div class="legend">
+                    <div class="legend-item"><span class="dot available-dot"></span>Есть время для записи</div>
+                    <div class="legend-item"><span class="dot no-slots-dot"></span>Нет времени для записи</div>
+                </div>
+
+                <button class="btn" id="toPage4" disabled>Продолжить</button>
+
+
+
+<script>
+ // глобальные переменные для хранения выбора
+ let selectedCarBrand = '';
+ let selectedCarModel = '';
+ 
+ // куда лежит ваш JSON
+ const jsonUrl = '/data/cars.json';
+ 
+ // объект для хранения данных из JSON
+ let carData = {};
+ 
+ // 1) Загружаем JSON и заполняем селект брендов
+ fetch(jsonUrl)
+   .then(res => {
+     if (!res.ok) throw new Error('Ошибка ' + res.status);
+     return res.json();
+   })
+   .then(doc => {
+     carData = doc.list || {};
+     const brandSel = document.getElementById('carBrand');
+     // наполняем
+     Object.keys(carData).forEach(brand => {
+       const opt = document.createElement('option');
+       opt.value = brand;
+       opt.textContent = brand;
+       brandSel.appendChild(opt);
+     });
+     brandSel.disabled = false;
+   })
+   .catch(err => {
+     console.error('Не удалось загрузить cars.json', err);
+   });
+ 
+ // 2) При выборе марки сохраняем в переменную и наполняем модели
+ document.getElementById('carBrand').addEventListener('change', function() {
+   selectedCarBrand = this.value;
+   selectedCarModel = ''; // сброс модели при смене бренда
+ 
+   const modelSel = document.getElementById('carModel');
+   modelSel.innerHTML = '';
+ 
+   if (!selectedCarBrand || !carData[selectedCarBrand]) {
+     modelSel.disabled = true;
+     modelSel.innerHTML = '<option value="">— Сначала выберите марку —</option>';
+     return;
+   }
+ 
+   // вытаскиваем модели, пропуская первый элемент (кол-во)
+   const models = carData[selectedCarBrand].slice(1).filter(x => x);
+ 
+   // placeholder
+   modelSel.innerHTML = '<option value="">— Выберите модель —</option>';
+   models.forEach(m => {
+     const opt = document.createElement('option');
+     opt.value = m;
+     opt.textContent = m;
+     modelSel.appendChild(opt);
+   });
+   modelSel.disabled = false;
+ });
+ 
+ // 3) При выборе модели сохраняем в переменную
+ document.getElementById('carModel').addEventListener('change', function() {
+   selectedCarModel = this.value;
+ });
+</script>
+
+
+        <script>
+
+        
+
+
+
+
+            const monthNames = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+            const today = new Date();
+            let currentMonth = today.getMonth();
+            let currentYear = today.getFullYear();
+
+            let selectedDate = null;
+            let selectedTime = null;
+
+            const daysContainer      = document.getElementById('daysContainer');
+            const timeslotsContainer = document.getElementById('timeslotsContainer');
+            const monthNameEl        = document.getElementById('monthName');
+            const yearNameEl         = document.getElementById('yearName');
+            const continueBtn        = document.querySelector('.btn');
+
+            // Объект с доступными слотами по дате (формат YYYY-MM-DD)
+            const slotsByDate = {
+                "2025-05-27": ["10:00", "11:30"],
+                "2025-05-28": ["10:00","11:30","12:30","14:00","15:00","16:00","17:00","18:00","19:00"]
+                // добавьте свои даты и слоты здесь
+            };
+
+            function formatDateISO(year, month, day) {
+                const mm = String(month + 1).padStart(2, '0');
+                const dd = String(day).padStart(2, '0');
+                return `${year}-${mm}-${dd}`;
+            }
+
+            function renderTimeslots(dateKey) {
+                timeslotsContainer.innerHTML = '';
+                const times = slotsByDate[dateKey] || [];
+                if (times.length === 0) {
+                    timeslotsContainer.innerHTML = '<p>Нет доступных слотов на выбранную дату.</p>';
+                    return;
+                }
+                times.forEach(time => {
+                    const btn = document.createElement('button');
+                    btn.textContent = time;
+                    btn.classList.add('available');
+                    btn.addEventListener('click', () => {
+                        timeslotsContainer.querySelectorAll('button').forEach(el => el.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        selectedTime = time;  // сохраняем время
+                    });
+                    timeslotsContainer.appendChild(btn);
+                });
+            }
+
+            function renderCalendar(month, year) {
+                monthNameEl.textContent = monthNames[month];
+                yearNameEl.textContent = year;
+                daysContainer.innerHTML = '';
+
+                const firstDay = new Date(year, month, 1).getDay();
+                const blanks = (firstDay + 6) % 7; // сдвиг, чтобы Пн=0
+                for (let i = 0; i < blanks; i++) {
+                    const div = document.createElement('div');
+                    div.classList.add('blank');
+                    daysContainer.appendChild(div);
+                }
+
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const date = new Date(year, month, d);
+                    const iso = formatDateISO(year, month, d);
+                    const dayDiv = document.createElement('div');
+                    dayDiv.textContent = d;
+
+                    if (date < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+                        dayDiv.classList.add('past');
+                    } else if (slotsByDate[iso]?.length > 0) {
+                        dayDiv.classList.add('available');
+                        dayDiv.addEventListener('click', () => {
+                            daysContainer.querySelectorAll('div').forEach(el => el.classList.remove('selected'));
+                            dayDiv.classList.add('selected');
+                            selectedDate = iso;           // сохраняем дату
+                            selectedTime = null;          // сбрасываем время
+                            renderTimeslots(iso);
+                            document.getElementById('toPage4').disabled = false;
+                        });
+                    } else {
+                        dayDiv.classList.add('no-slots');
+                    }
+
+                    daysContainer.appendChild(dayDiv);
+                }
+            }
+
+            document.querySelector('.prev').addEventListener('click', () => {
+                currentMonth = (currentMonth === 0 ? 11 : currentMonth - 1);
+                if (currentMonth === 11) currentYear--;
+                renderCalendar(currentMonth, currentYear);
+                timeslotsContainer.innerHTML = '';
+                selectedDate = selectedTime = null;
+            });
+            document.querySelector('.next').addEventListener('click', () => {
+                currentMonth = (currentMonth === 11 ? 0 : currentMonth + 1);
+                if (currentMonth === 0) currentYear++;
+                renderCalendar(currentMonth, currentYear);
+                timeslotsContainer.innerHTML = '';
+                selectedDate = selectedTime = null;
+            });
+
+            continueBtn.addEventListener('click', () => {
+                if (!selectedDate || !selectedTime) {
+                    alert('Пожалуйста, выберите дату и время.');
+                    return;
+                }
+                document.getElementById('toPage4').disabled = false;
+                // Здесь можно отправить selectedDate и selectedTime на сервер
+                console.log('Запись на', selectedDate, selectedTime);
+                // Например:
+                // fetch('/api/book', { method: 'POST', body: JSON.stringify({ date: selectedDate, time: selectedTime }) })
+            });
+
+
+
+            // Инициализация
+            renderCalendar(currentMonth, currentYear);
+        </script>
+
+
+
+        <!--<div class="header_2">
+            <div class="back-button"  id="toPage2">←</div>
+            <div class="header-title">Выберите дату и время</div>
+        </div>
+        <div id="calendar" class="content">
+            <h3>Доступные даты</h3>
+            <div id="availableDates"></div>
+        </div>
+        <div id="timeSlots" class="content">
+            <h3>Доступное время</h3>
+
+        </div>-->
+        <!--<button class="button" id="toPage4" disabled>Продолжить</button>-->
+    </div>
+
+
+    <!-- Детали записи -->
+    <div id="page4" class="page">
+
+        <div class="content" style="">
+                <div id="details"></div>
+
+        </div>
+    </div>
+
+
+    <script>
+        // Данные о доступных слотах (даты и время)
+        const schedule = {
+            "2024-12-23": [],
+            "2024-12-24": ["10:00", "12:30"],
+            "2024-12-25": ["11:30", "14:00", "16:00"],
+            "2024-12-26": ["11:30", "14:00", "16:00"]
+        };
+
+        // Выбранные значения
+        let selectedServiceAddress = ''; // Адрес сервиса
+        let selectedServiceType = '';   // Тип услуги
+        
+        //let selectedCarBrand = '';
+        //let selectedCarModel = '';
+        
+        
+        //let selectedDate = '';
+        //let selectedTime = '';
+
+        // Навигация между страницами
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Выбор сервиса
+        document.querySelectorAll('#page1 .service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#page1 .service-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedServiceAddress = card.dataset.service;
+                document.getElementById('toPage1-5').disabled = false;
+            });
+        });
+
+        // Переход к выбору услуги
+        document.getElementById('toPage1-5').addEventListener('click', () => {
+            showPage('page1-5');
+        });
+
+        // Выбор услуги
+        document.querySelectorAll('#page1-5 .service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#page1-5 .service-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedServiceType = card.dataset.service;
+                document.getElementById('toPage2').disabled = false;
+            });
+        });
+
+        // Переход к выбору автомобиля
+        document.getElementById('toPage2').addEventListener('click', () => {
+            showPage('page2');
+        });
+
+        // Выбор марки автомобиля
+        //document.getElementById('carBrand').addEventListener('change', (e) => {
+        //    selectedCarBrand = e.target.value;
+         //   const carModelSelect = document.getElementById('carModel');
+           // carModelSelect.disabled = false;
+          //  carModelSelect.innerHTML = '<option value="">Модель</option>';
+
+            //php
+            //    foreach ($json->list as $value => $key)
+            //    {
+            //endphp
+            //if (selectedCarBrand === '{{$value}}')
+            //{
+            //    foreach($key as $model)
+             //   carModelSelect.innerHTML += '<option value="{{$model}}">{{$model}}</option>';
+              //  endforeach
+           // }
+
+
+            //php
+            //    }
+            //endphp
+
+           // if (selectedCarBrand === 'Hyundai') {
+           //     carModelSelect.innerHTML += '<option value="Solaris">Solaris</option>';
+           //     carModelSelect.innerHTML += '<option value="Elantra">Elantra</option>';
+           // } else if (selectedCarBrand === 'KIA') {
+            //    carModelSelect.innerHTML += '<option value="Rio">Rio</option>';
+            //    carModelSelect.innerHTML += '<option value="Sportage">Sportage</option>';
+            //}
+        //});
+
+        // Выбор модели автомобиля
+        document.getElementById('carModel').addEventListener('change', (e) => {
+            selectedCarModel = e.target.value;
+            document.getElementById('toPage3').disabled = selectedCarModel === '';
+        });
+
+        // Переход к выбору даты
+        document.getElementById('toPage3').addEventListener('click', () => {
+            showPage('page3');
+            //createDateSelector();
+        });
+
+
+// функция для дополняющего нулями
+function pad(n){ return n < 10 ? '0' + n : n; }
+ 
+document.addEventListener('DOMContentLoaded', function(){
+ var d = new Date();
+ 
+ // формат ISO без миллисекунд и без Z, т.е. yyyy-MM-ddTHH:mm:ss
+ var formatted =
+     d.getFullYear() + '-' +
+     pad(d.getMonth() + 1) + '-' +
+     pad(d.getDate()) + 'T' +
+     pad(d.getHours()) + ':' +
+     pad(d.getMinutes()) + ':' +
+     pad(d.getSeconds());
+ 
+ // подставляем в скрытое поле
+ document.getElementById('CreatedAt').value = formatted;
+});
+
+
+
+        // Переход к деталям записи
+        document.getElementById('toPage4').addEventListener('click', () => {
+            showPage('page4');
+            document.getElementById('details').innerHTML = `
+
+    <style>
+        .svg-container {
+            width: 24px;
+            height: 24px;
+        }
+        .svg-container svg {
+            display: block;
+            width: 24px;
+            height: 24px;
+        }
+
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #0e294b;
+            margin-left: 16px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #0e294b;
+        }
+
+        .record-details {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .record-details > div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .record-details svg, .record-details img {
+                margin-right: 8px;
+                width: 20px;
+                height: 20px;
+            }
+
+            .record-details .editable-icon {
+                margin-left: auto;
+                width: 20px;
+                height: 20px;
+            }
+
+        .service {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 97%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+            max-block-size: 0 auto;
+            resize: none;
+        }
+
+
+        button {
+            background-color: #004080;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 3px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                background-color: #0e294b;
+            }
+
+        .required-field::after {
+            content: "*";
+            color: black;
+            margin-left: 4px;
+        }
+        .left-content {
+            display: flex;
+            align-items: center;
+        }
+        .left-content svg {
+            width: 35px;
+            height: 35px;
+        }
+        .left-content > *:not(:last-child) {
+
+            margin-right: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Детали записи</h1>
+
+
+
+<form asp-controller="Orders" asp-action="Create" method="post">
+   @Html.AntiForgeryToken()
+
+  <input 
+    type="hidden" 
+    name="UserId" 
+    id="UserId" 
+    value="@ViewData["UserId"]" />
+
+
+  <input 
+    type="hidden" 
+    name="CreatedAt" 
+    id="CreatedAt" 
+    value="@ViewData["CreatedAt"] " />
+
+        <div class="record-details">
+            <div>
+                <div class="left-content">
+                    <svg width="216" height="216" viewBox="0 0 216 216" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_45_54)">
+                            <rect width="216" height="216" rx="108" fill="white" />
+                            <path d="M33.35 102.904C34.5807 102.904 35.482 102.557 36.054 101.864C36.626 101.171 36.912 100.347 36.912 99.394V97.574C36.912 96.4473 36.548 95.65 35.82 95.182C35.092 94.6967 34.2687 94.454 33.35 94.454H31.322V102.904H33.35ZM36.548 85.328C36.548 84.288 36.262 83.5687 35.69 83.17C35.118 82.754 34.2947 82.546 33.22 82.546H31.322V90.06H33.428C34.4333 90.06 35.2047 89.67 35.742 88.89C36.2793 88.0927 36.548 87.122 36.548 85.978V85.328ZM35.118 108.234C33.766 108.234 32.0153 108.199 29.866 108.13C27.7167 108.061 26.174 108.017 25.238 108H22.742V77.528H27.24C28.332 77.528 29.58 77.4933 30.984 77.424C32.388 77.3373 33.402 77.294 34.026 77.294C36.054 77.294 37.7613 77.4587 39.148 77.788C40.552 78.1173 41.6527 78.6113 42.45 79.27C43.2473 79.9287 43.8107 80.6913 44.14 81.558C44.4867 82.4247 44.66 83.456 44.66 84.652C44.66 86.4893 44.2353 88.0667 43.386 89.384C42.5367 90.7013 41.306 91.5247 39.694 91.854C43.7847 92.218 45.83 94.6187 45.83 99.056C45.83 100.391 45.6307 101.604 45.232 102.696C44.8333 103.771 44.218 104.733 43.386 105.582C42.5713 106.414 41.462 107.064 40.058 107.532C38.654 108 37.0073 108.234 35.118 108.234ZM63.2096 108L62.0396 103.138H54.6556L53.6676 108H46.0236L53.9536 79.634L53.3296 77.528H64.0676L72.7516 108H63.2096ZM58.0096 86.472L55.7216 97.834H60.7656L58.0096 86.472ZM73.1272 108V102.618L82.2012 86.03L84.2812 83.586L73.9852 84.158V77.528H93.9012V81.974L84.0992 99.992L82.3052 102.02L94.2132 101.448V108H73.1272ZM96.6305 108V77.528H105.497V108H96.6305ZM118.119 108.546C116.784 108.546 115.536 108.425 114.375 108.182C113.231 107.957 112.269 107.653 111.489 107.272C110.709 106.891 110.067 106.527 109.565 106.18C109.079 105.833 108.672 105.487 108.343 105.14L108.993 98.822C109.703 99.7753 110.657 100.607 111.853 101.318C113.049 102.011 114.34 102.358 115.727 102.358C117.113 102.358 118.11 102.211 118.717 101.916C119.341 101.621 119.653 101.084 119.653 100.304C119.653 99.472 119.297 98.7613 118.587 98.172C117.893 97.5827 116.689 96.872 114.973 96.04C114.349 95.728 113.82 95.4507 113.387 95.208C112.953 94.948 112.373 94.532 111.645 93.96C110.934 93.3707 110.353 92.764 109.903 92.14C109.452 91.4987 109.053 90.684 108.707 89.696C108.36 88.6907 108.187 87.616 108.187 86.472C108.187 80.284 111.679 77.19 118.665 77.19C119.774 77.19 120.814 77.3113 121.785 77.554C122.773 77.7793 123.544 78.0307 124.099 78.308C124.653 78.5853 125.156 78.9147 125.607 79.296C126.075 79.66 126.369 79.92 126.491 80.076C126.612 80.2147 126.699 80.3273 126.751 80.414L125.451 85.432C124.775 84.6347 123.925 84.0453 122.903 83.664C121.897 83.2653 120.935 83.066 120.017 83.066C117.798 83.066 116.689 83.7593 116.689 85.146C116.689 85.51 116.758 85.8393 116.897 86.134C117.035 86.4287 117.261 86.6973 117.573 86.94C117.885 87.1827 118.171 87.3907 118.431 87.564C118.708 87.7373 119.081 87.954 119.549 88.214C120.034 88.4567 120.398 88.656 120.641 88.812C123.171 89.8867 125.026 91.1607 126.205 92.634C127.401 94.1073 127.999 95.9013 127.999 98.016C127.999 101.448 127.149 104.065 125.451 105.868C123.769 107.653 121.325 108.546 118.119 108.546Z" fill="#0E294B" />
+                            <path d="M29.346 142H21.52L23.938 111.528H36.132L38.42 121.746L39.46 126.92L40.448 121.772L42.476 111.528H53.344L55.58 142H47.494L46.168 124.086L45.856 117.482L41.878 138.958H35.092L30.308 117.482L30.152 124.086L29.346 142ZM66.6712 130.222C66.6712 133.099 66.8879 135.101 67.3212 136.228C67.7719 137.355 68.5519 137.918 69.6612 137.918C70.4759 137.918 71.0912 137.719 71.5072 137.32C71.9232 136.904 72.2352 136.063 72.4432 134.798C72.6686 133.515 72.7812 131.6 72.7812 129.052V122.786C72.7812 120.307 72.5386 118.461 72.0532 117.248C71.5679 116.035 70.7706 115.428 69.6612 115.428C68.5519 115.428 67.7719 116.026 67.3212 117.222C66.8879 118.401 66.6712 120.559 66.6712 123.696V130.222ZM69.1152 142.546C67.6766 142.546 66.3766 142.416 65.2152 142.156C64.0712 141.896 63.0832 141.532 62.2512 141.064C61.4192 140.596 60.6912 139.998 60.0672 139.27C59.4606 138.542 58.9666 137.762 58.5852 136.93C58.2212 136.098 57.9266 135.127 57.7012 134.018C57.4759 132.891 57.3199 131.773 57.2332 130.664C57.1466 129.537 57.1032 128.272 57.1032 126.868C57.1032 124.788 57.2072 122.977 57.4152 121.434C57.6406 119.891 58.0479 118.444 58.6372 117.092C59.2266 115.723 60.0066 114.613 60.9772 113.764C61.9652 112.915 63.2306 112.247 64.7732 111.762C66.3332 111.277 68.1706 111.034 70.2852 111.034C71.7412 111.034 73.0499 111.173 74.2112 111.45C75.3726 111.71 76.3692 112.074 77.2012 112.542C78.0332 113.01 78.7526 113.617 79.3592 114.362C79.9832 115.107 80.4772 115.905 80.8412 116.754C81.2226 117.586 81.5259 118.565 81.7512 119.692C81.9766 120.819 82.1326 121.937 82.2192 123.046C82.3059 124.155 82.3492 125.412 82.3492 126.816C82.3492 128.896 82.2366 130.707 82.0112 132.25C81.7859 133.793 81.3786 135.24 80.7892 136.592C80.1999 137.927 79.4112 139.019 78.4232 139.868C77.4352 140.7 76.1612 141.359 74.6012 141.844C73.0586 142.312 71.2299 142.546 69.1152 142.546ZM89.8866 142V118.418H83.8026V111.528H104.759V118.418H98.6746V142H89.8866ZM115.878 130.222C115.878 133.099 116.095 135.101 116.528 136.228C116.979 137.355 117.759 137.918 118.868 137.918C119.683 137.918 120.298 137.719 120.714 137.32C121.13 136.904 121.442 136.063 121.65 134.798C121.876 133.515 121.988 131.6 121.988 129.052V122.786C121.988 120.307 121.746 118.461 121.26 117.248C120.775 116.035 119.978 115.428 118.868 115.428C117.759 115.428 116.979 116.026 116.528 117.222C116.095 118.401 115.878 120.559 115.878 123.696V130.222ZM118.322 142.546C116.884 142.546 115.584 142.416 114.422 142.156C113.278 141.896 112.29 141.532 111.458 141.064C110.626 140.596 109.898 139.998 109.274 139.27C108.668 138.542 108.174 137.762 107.792 136.93C107.428 136.098 107.134 135.127 106.908 134.018C106.683 132.891 106.527 131.773 106.44 130.664C106.354 129.537 106.31 128.272 106.31 126.868C106.31 124.788 106.414 122.977 106.622 121.434C106.848 119.891 107.255 118.444 107.844 117.092C108.434 115.723 109.214 114.613 110.184 113.764C111.172 112.915 112.438 112.247 113.98 111.762C115.54 111.277 117.378 111.034 119.492 111.034C120.948 111.034 122.257 111.173 123.418 111.45C124.58 111.71 125.576 112.074 126.408 112.542C127.24 113.01 127.96 113.617 128.566 114.362C129.19 115.107 129.684 115.905 130.048 116.754C130.43 117.586 130.733 118.565 130.958 119.692C131.184 120.819 131.34 121.937 131.426 123.046C131.513 124.155 131.556 125.412 131.556 126.816C131.556 128.896 131.444 130.707 131.218 132.25C130.993 133.793 130.586 135.24 129.996 136.592C129.407 137.927 128.618 139.019 127.63 139.868C126.642 140.7 125.368 141.359 123.808 141.844C122.266 142.312 120.437 142.546 118.322 142.546ZM142.812 131.86V142H134.18V111.528H137.612C138.444 111.528 139.683 111.493 141.33 111.424C142.976 111.337 144.337 111.294 145.412 111.294C149.156 111.294 151.946 112.117 153.784 113.764C155.638 115.411 156.566 117.933 156.566 121.33C156.566 123.341 156.124 125.126 155.24 126.686C154.373 128.246 153.22 129.485 151.782 130.404C152.562 130.595 153.229 131.037 153.784 131.73C154.356 132.423 154.798 133.247 155.11 134.2C155.422 135.136 155.69 136.089 155.916 137.06C156.158 138.013 156.427 138.958 156.722 139.894C157.034 140.83 157.372 141.532 157.736 142H148.142C147.951 141.757 147.804 141.081 147.7 139.972C147.596 138.845 147.448 137.502 147.258 135.942C147.084 134.365 146.833 133.047 146.504 131.99C146.469 131.99 146.426 131.99 146.374 131.99C146.044 131.99 145.689 131.99 145.308 131.99C144.944 131.973 144.623 131.955 144.346 131.938C144.068 131.921 143.774 131.903 143.462 131.886C143.167 131.869 142.95 131.86 142.812 131.86ZM142.812 127.024H143.644C144.077 127.024 144.441 127.007 144.736 126.972C145.03 126.937 145.351 126.877 145.698 126.79C146.062 126.686 146.356 126.53 146.582 126.322C146.824 126.114 147.05 125.845 147.258 125.516C147.466 125.187 147.622 124.762 147.726 124.242C147.83 123.722 147.882 123.115 147.882 122.422V120.368C147.882 118.86 147.483 117.811 146.686 117.222C145.906 116.615 144.779 116.312 143.306 116.312H142.812V127.024ZM168.468 142.546C167.134 142.546 165.886 142.425 164.724 142.182C163.58 141.957 162.618 141.653 161.838 141.272C161.058 140.891 160.417 140.527 159.914 140.18C159.429 139.833 159.022 139.487 158.692 139.14L159.342 132.822C160.053 133.775 161.006 134.607 162.202 135.318C163.398 136.011 164.69 136.358 166.076 136.358C167.463 136.358 168.46 136.211 169.066 135.916C169.69 135.621 170.002 135.084 170.002 134.304C170.002 133.472 169.647 132.761 168.936 132.172C168.243 131.583 167.038 130.872 165.322 130.04C164.698 129.728 164.17 129.451 163.736 129.208C163.303 128.948 162.722 128.532 161.994 127.96C161.284 127.371 160.703 126.764 160.252 126.14C159.802 125.499 159.403 124.684 159.056 123.696C158.71 122.691 158.536 121.616 158.536 120.472C158.536 114.284 162.029 111.19 169.014 111.19C170.124 111.19 171.164 111.311 172.134 111.554C173.122 111.779 173.894 112.031 174.448 112.308C175.003 112.585 175.506 112.915 175.956 113.296C176.424 113.66 176.719 113.92 176.84 114.076C176.962 114.215 177.048 114.327 177.1 114.414L175.8 119.432C175.124 118.635 174.275 118.045 173.252 117.664C172.247 117.265 171.285 117.066 170.366 117.066C168.148 117.066 167.038 117.759 167.038 119.146C167.038 119.51 167.108 119.839 167.246 120.134C167.385 120.429 167.61 120.697 167.922 120.94C168.234 121.183 168.52 121.391 168.78 121.564C169.058 121.737 169.43 121.954 169.898 122.214C170.384 122.457 170.748 122.656 170.99 122.812C173.521 123.887 175.376 125.161 176.554 126.634C177.75 128.107 178.348 129.901 178.348 132.016C178.348 135.448 177.499 138.065 175.8 139.868C174.119 141.653 171.675 142.546 168.468 142.546Z" fill="#0E294B" />
+                        </g>
+                        <rect x="1.5" y="1.5" width="213" height="213" rx="106.5" stroke="#0E294B" stroke-width="3" />
+                        <defs>
+                            <clipPath id="clip0_45_54">
+                                <rect width="216" height="216" rx="108" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <p>${selectedServiceAddress}</p>
+                    <input type="hidden" name="ServiceAddress" id="ServiceAddress"  class="form-input"  value="${selectedServiceAddress}">
+                </div>
+                <div class="svg-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 47 45" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g><path style="opacity:1" fill="#f7f6f6" d="M -0.5,-0.5 C 12.8333,-0.5 26.1667,-0.5 39.5,-0.5C 36.6166,2.87559 37.2833,5.54226 41.5,7.5C 42.5,6.16667 43.5,4.83333 44.5,3.5C 43.3698,2.37765 42.7031,1.04432 42.5,-0.5C 43.8333,-0.5 45.1667,-0.5 46.5,-0.5C 46.5,14.5 46.5,29.5 46.5,44.5C 30.8333,44.5 15.1667,44.5 -0.5,44.5C -0.5,29.5 -0.5,14.5 -0.5,-0.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#171616" d="M 39.5,-0.5 C 40.5,-0.5 41.5,-0.5 42.5,-0.5C 42.7031,1.04432 43.3698,2.37765 44.5,3.5C 43.5,4.83333 42.5,6.16667 41.5,7.5C 37.2833,5.54226 36.6166,2.87559 39.5,-0.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#161414" d="M 33.5,5.5 C 36.8591,5.69807 38.6924,7.36473 39,10.5C 33.1667,16.3333 27.3333,22.1667 21.5,28C 19.8988,28.2734 18.3988,28.7734 17,29.5C 16.3333,27.5 16.3333,25.5 17,23.5C 22.366,17.304 27.866,11.304 33.5,5.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#141212" d="M 3.5,2.5 C 11.5,2.5 19.5,2.5 27.5,2.5C 27.5,3.83333 27.5,5.16667 27.5,6.5C 20.5,6.5 13.5,6.5 6.5,6.5C 6.5,16.5 6.5,26.5 6.5,36.5C 16.5,36.5 26.5,36.5 36.5,36.5C 36.5,30.8333 36.5,25.1667 36.5,19.5C 37.8333,19.5 39.1667,19.5 40.5,19.5C 40.6662,25.8421 40.4995,32.1754 40,38.5C 39.5,39 39,39.5 38.5,40C 26.8333,40.6667 15.1667,40.6667 3.5,40C 3,39.5 2.5,39 2,38.5C 1.33333,27.1667 1.33333,15.8333 2,4.5C 2.71719,3.9558 3.21719,3.28913 3.5,2.5 Z" /></g>
+                    </svg>
+                </div>
+            </div>
+            <div>
+                <div class="left-content">
+                    <svg width="216" height="216" viewBox="0 0 216 216" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="216" height="216" rx="108" fill="#CFCFCF" />
+                        <g clip-path="url(#clip0_45_54)">
+                            <g clip-path="url(#clip1_45_54)">
+                                <path d="M58.0625 151.641C58.0625 153.045 58.6206 154.393 59.6139 155.386C60.6073 156.379 61.9546 156.938 63.3594 156.938H151.641C153.045 156.938 154.393 156.379 155.386 155.386C156.379 154.393 156.938 153.045 156.938 151.641V89.8438H58.0625V151.641ZM128.688 97.7891C128.688 97.5549 128.781 97.3304 128.946 97.1648C129.112 96.9993 129.336 96.9062 129.57 96.9062H138.398C138.633 96.9062 138.857 96.9993 139.023 97.1648C139.188 97.3304 139.281 97.5549 139.281 97.7891V106.617C139.281 106.851 139.188 107.076 139.023 107.241C138.857 107.407 138.633 107.5 138.398 107.5H129.57C129.336 107.5 129.112 107.407 128.946 107.241C128.781 107.076 128.688 106.851 128.688 106.617V97.7891ZM128.688 115.445C128.688 115.211 128.781 114.987 128.946 114.821C129.112 114.656 129.336 114.562 129.57 114.562H138.398C138.633 114.562 138.857 114.656 139.023 114.821C139.188 114.987 139.281 115.211 139.281 115.445V124.273C139.281 124.508 139.188 124.732 139.023 124.898C138.857 125.063 138.633 125.156 138.398 125.156H129.57C129.336 125.156 129.112 125.063 128.946 124.898C128.781 124.732 128.688 124.508 128.688 124.273V115.445ZM111.031 97.7891C111.031 97.5549 111.124 97.3304 111.29 97.1648C111.455 96.9993 111.68 96.9062 111.914 96.9062H120.742C120.976 96.9062 121.201 96.9993 121.366 97.1648C121.532 97.3304 121.625 97.5549 121.625 97.7891V106.617C121.625 106.851 121.532 107.076 121.366 107.241C121.201 107.407 120.976 107.5 120.742 107.5H111.914C111.68 107.5 111.455 107.407 111.29 107.241C111.124 107.076 111.031 106.851 111.031 106.617V97.7891ZM111.031 115.445C111.031 115.211 111.124 114.987 111.29 114.821C111.455 114.656 111.68 114.562 111.914 114.562H120.742C120.976 114.562 121.201 114.656 121.366 114.821C121.532 114.987 121.625 115.211 121.625 115.445V124.273C121.625 124.508 121.532 124.732 121.366 124.898C121.201 125.063 120.976 125.156 120.742 125.156H111.914C111.68 125.156 111.455 125.063 111.29 124.898C111.124 124.732 111.031 124.508 111.031 124.273V115.445ZM111.031 133.102C111.031 132.867 111.124 132.643 111.29 132.477C111.455 132.312 111.68 132.219 111.914 132.219H120.742C120.976 132.219 121.201 132.312 121.366 132.477C121.532 132.643 121.625 132.867 121.625 133.102V141.93C121.625 142.164 121.532 142.388 121.366 142.554C121.201 142.719 120.976 142.812 120.742 142.812H111.914C111.68 142.812 111.455 142.719 111.29 142.554C111.124 142.388 111.031 142.164 111.031 141.93V133.102ZM93.375 115.445C93.375 115.211 93.468 114.987 93.6336 114.821C93.7991 114.656 94.0237 114.562 94.2578 114.562H103.086C103.32 114.562 103.545 114.656 103.71 114.821C103.876 114.987 103.969 115.211 103.969 115.445V124.273C103.969 124.508 103.876 124.732 103.71 124.898C103.545 125.063 103.32 125.156 103.086 125.156H94.2578C94.0237 125.156 93.7991 125.063 93.6336 124.898C93.468 124.732 93.375 124.508 93.375 124.273V115.445ZM93.375 133.102C93.375 132.867 93.468 132.643 93.6336 132.477C93.7991 132.312 94.0237 132.219 94.2578 132.219H103.086C103.32 132.219 103.545 132.312 103.71 132.477C103.876 132.643 103.969 132.867 103.969 133.102V141.93C103.969 142.164 103.876 142.388 103.71 142.554C103.545 142.719 103.32 142.812 103.086 142.812H94.2578C94.0237 142.812 93.7991 142.719 93.6336 142.554C93.468 142.388 93.375 142.164 93.375 141.93V133.102ZM75.7188 115.445C75.7188 115.211 75.8118 114.987 75.9773 114.821C76.1429 114.656 76.3674 114.562 76.6016 114.562H85.4297C85.6638 114.562 85.8884 114.656 86.0539 114.821C86.2195 114.987 86.3125 115.211 86.3125 115.445V124.273C86.3125 124.508 86.2195 124.732 86.0539 124.898C85.8884 125.063 85.6638 125.156 85.4297 125.156H76.6016C76.3674 125.156 76.1429 125.063 75.9773 124.898C75.8118 124.732 75.7188 124.508 75.7188 124.273V115.445ZM75.7188 133.102C75.7188 132.867 75.8118 132.643 75.9773 132.477C76.1429 132.312 76.3674 132.219 76.6016 132.219H85.4297C85.6638 132.219 85.8884 132.312 86.0539 132.477C86.2195 132.643 86.3125 132.867 86.3125 133.102V141.93C86.3125 142.164 86.2195 142.388 86.0539 142.554C85.8884 142.719 85.6638 142.812 85.4297 142.812H76.6016C76.3674 142.812 76.1429 142.719 75.9773 142.554C75.8118 142.388 75.7188 142.164 75.7188 141.93V133.102ZM151.641 65.125H139.299V58.0625H128.705V65.125H86.2948V58.0625H75.7011V65.125H63.3594C62.6664 65.1192 61.9792 65.2505 61.3372 65.5115C60.6953 65.7724 60.1113 66.1578 59.6189 66.6455C59.1266 67.1331 58.7356 67.7133 58.4684 68.3528C58.2013 68.9922 58.0633 69.6781 58.0625 70.3711V82.7812H156.938V70.3711C156.937 69.6781 156.799 68.9922 156.532 68.3528C156.264 67.7133 155.873 67.1331 155.381 66.6455C154.889 66.1578 154.305 65.7724 153.663 65.5115C153.021 65.2505 152.334 65.1192 151.641 65.125Z" fill="black" />
+                            </g>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_45_54">
+                                <rect width="113" height="113" fill="white" transform="translate(51 51)" />
+                            </clipPath>
+                            <clipPath id="clip1_45_54">
+                                <rect width="113" height="113" fill="white" transform="translate(51 51)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <!--<p>Пятница, 9 октября<br>11:00</p>-->
+                    <p>${selectedDate}</p>
+                    
+                </div>
+                <div class="svg-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 47 45" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g><path style="opacity:1" fill="#f7f6f6" d="M -0.5,-0.5 C 12.8333,-0.5 26.1667,-0.5 39.5,-0.5C 36.6166,2.87559 37.2833,5.54226 41.5,7.5C 42.5,6.16667 43.5,4.83333 44.5,3.5C 43.3698,2.37765 42.7031,1.04432 42.5,-0.5C 43.8333,-0.5 45.1667,-0.5 46.5,-0.5C 46.5,14.5 46.5,29.5 46.5,44.5C 30.8333,44.5 15.1667,44.5 -0.5,44.5C -0.5,29.5 -0.5,14.5 -0.5,-0.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#171616" d="M 39.5,-0.5 C 40.5,-0.5 41.5,-0.5 42.5,-0.5C 42.7031,1.04432 43.3698,2.37765 44.5,3.5C 43.5,4.83333 42.5,6.16667 41.5,7.5C 37.2833,5.54226 36.6166,2.87559 39.5,-0.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#161414" d="M 33.5,5.5 C 36.8591,5.69807 38.6924,7.36473 39,10.5C 33.1667,16.3333 27.3333,22.1667 21.5,28C 19.8988,28.2734 18.3988,28.7734 17,29.5C 16.3333,27.5 16.3333,25.5 17,23.5C 22.366,17.304 27.866,11.304 33.5,5.5 Z" /></g>
+                        <g><path style="opacity:1" fill="#141212" d="M 3.5,2.5 C 11.5,2.5 19.5,2.5 27.5,2.5C 27.5,3.83333 27.5,5.16667 27.5,6.5C 20.5,6.5 13.5,6.5 6.5,6.5C 6.5,16.5 6.5,26.5 6.5,36.5C 16.5,36.5 26.5,36.5 36.5,36.5C 36.5,30.8333 36.5,25.1667 36.5,19.5C 37.8333,19.5 39.1667,19.5 40.5,19.5C 40.6662,25.8421 40.4995,32.1754 40,38.5C 39.5,39 39,39.5 38.5,40C 26.8333,40.6667 15.1667,40.6667 3.5,40C 3,39.5 2.5,39 2,38.5C 1.33333,27.1667 1.33333,15.8333 2,4.5C 2.71719,3.9558 3.21719,3.28913 3.5,2.5 Z" /></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <h2>Услуги</h2>
+        <p>${selectedServiceType}</p>
+         <input type="hidden"  name="Usluga" 
+      id="Usluga" 
+      class="form-control"
+        value="${selectedServiceType}">
+        <h2>Ваши данные</h2>
+            <div class="form-group">
+                <label for="name" class="required-field">Имя</label>
+                <input  name="Name" 
+ class="form-input" id="name" placeholder="Ваше фио">
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="required-field">Телефон</label>
+                 <input name="Phone" 
+ class="form-input" id="phone"  placeholder="Ваш телефон">
+            </div>
+             <div class="form-group">
+                <label for="phone" class="required-field">Авто</label>
+                 <input name="Auto" class="form-input" readonly  value="${selectedCarBrand}-${selectedCarModel}">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="Comment"  placeholder="Комментарий к записи"></textarea>
+            </div>
+             <input type="hidden" name="Status" class="form-input"  value="0">
+
+            <button value="Create" type="submit">Записаться</button>
+        </form>
+    </div>
+
+
+        `;
+        });
+
+        // Подтверждение записи
+        document.getElementById('confirm').addEventListener('click', () => {
+            alert(`Запись успешно оформлена! Сервис: ${selectedServiceAddress}, Услуга: ${selectedServiceType}, Дата: ${selectedDate}, Время: ${selectedTime}`);
+        });
+    </script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
