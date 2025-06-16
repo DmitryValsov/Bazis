@@ -1,0 +1,957 @@
+/* _content/Bazis/Areas/Admin/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-e5tkx5b5ln] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-e5tkx5b5ln] {
+  color: #0077cc;
+}
+
+.btn-primary[b-e5tkx5b5ln] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-e5tkx5b5ln], .nav-pills .show > .nav-link[b-e5tkx5b5ln] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-e5tkx5b5ln] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-e5tkx5b5ln] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-e5tkx5b5ln] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-e5tkx5b5ln] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-e5tkx5b5ln] {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  background-color: #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.footer-item[b-e5tkx5b5ln] {
+  text-align: center;
+  font-size: 12px;
+}
+.footer-icon[b-e5tkx5b5ln] {
+ font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
+  color: #000;
+}
+.active .footer-icon[b-e5tkx5b5ln] {
+  color: #002B5C;
+}
+
+
+a[b-e5tkx5b5ln]
+{
+color:black;
+}
+/* _content/Bazis/Areas/Identity/Pages/Account/Login.cshtml.rz.scp.css */
+body[b-emifky0eme] {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container[b-emifky0eme] {
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.title[b-emifky0eme] {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.subtitle[b-emifky0eme] {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+.input[b-emifky0eme] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.description[b-emifky0eme] {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+}
+.button[b-emifky0eme] {
+    width: 100%;
+    padding: 12px;
+    background-color: #002B5C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.privacy-text[b-emifky0eme] {
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+}
+.privacy-text a[b-emifky0eme] {
+    color: #002B5C;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+body[b-emifky0eme] {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #002B5C;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+.header[b-emifky0eme] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.profile-circle[b-emifky0eme] {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #DDDDDD;
+    margin-right: 10px;
+}
+.user-name[b-emifky0eme] {
+    font-size: 18px;
+    font-weight: 700;
+}
+.content[b-emifky0eme] {
+    flex: 1;
+    padding: 20px;
+    margin-top: 70px; /* Высота хедера */
+    margin-bottom: 60px; /* Высота футера */
+    overflow-y: auto;
+}
+.button[b-emifky0eme] {
+    width: 100%;
+    padding: 15px;
+    background-color: #002B5C;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.section[b-emifky0eme] {
+    margin-bottom: 20px;
+}
+.section-title[b-emifky0eme] {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.slider[b-emifky0eme] {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Для Firefox */
+    -ms-overflow-style: none; /* Для IE и Edge */
+}
+.slider[b-emifky0eme]::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+.slider-item[b-emifky0eme] {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.add-button[b-emifky0eme] {
+    position: fixed;
+    bottom: 80px; /* Расположить над футером */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #002B5C;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    cursor: pointer;
+    z-index: 1000;
+}
+.footer[b-emifky0eme] {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.footer-item[b-emifky0eme] {
+    text-align: center;
+    font-size: 12px;
+}
+.footer-icon[b-emifky0eme] {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+}
+.active .footer-icon[b-emifky0eme] {
+    color: #002B5C;
+}
+/* _content/Bazis/Views/Chat/Index.cshtml.rz.scp.css */
+body[b-0eb6wh48io] {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #F9F9F9;
+    color: #002B5C;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+.header[b-0eb6wh48io] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-title[b-0eb6wh48io] {
+    font-size: 22px;
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+}
+
+.back-button[b-0eb6wh48io] {
+    font-size: 20px;
+    color: #002B5C;
+    text-decoration: none;
+}
+
+
+
+
+.chat-message[b-0eb6wh48io] {
+    background-color: #E9E9E9;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+    color: #002B5C;
+    font-size: 14px;
+}
+
+.chat-message.system[b-0eb6wh48io] {
+    text-align: center;
+    background-color: transparent;
+    margin: 20px 0;
+    font-size: 12px;
+    color: #666;
+}
+
+
+.chat-input[b-0eb6wh48io] {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    outline: none;
+}
+
+.chat-send-button[b-0eb6wh48io] {
+    background-color: #002B5C;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+.chat-container[b-0eb6wh48io] {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.chat-footer[b-0eb6wh48io] {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px 15px;
+    position: fixed; /* Закрепляем элемент */
+    bottom: 80px; /* Расстояние до футера */
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+
+.footer[b-0eb6wh48io] {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    background-color: #FFFFFF;
+    position: fixed; /* Закрепляем футер */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* Фиксированная высота для правильного позиционирования */
+}
+/* _content/Bazis/Views/Home/Index.cshtml.rz.scp.css */
+body[b-ohw14x2e9j] {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #002B5C;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+.header[b-ohw14x2e9j] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.profile-circle[b-ohw14x2e9j] {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #DDDDDD;
+    margin-right: 10px;
+}
+.user-name[b-ohw14x2e9j] {
+    font-size: 18px;
+    font-weight: 700;
+}
+.content[b-ohw14x2e9j] {
+    flex: 1;
+    padding: 20px;
+    margin-top: 70px; /* Высота хедера */
+    margin-bottom: 60px; /* Высота футера */
+    overflow-y: auto;
+}
+.button[b-ohw14x2e9j] {
+    width: 100%;
+    padding: 15px;
+    background-color: #002B5C;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.section[b-ohw14x2e9j] {
+    margin-bottom: 20px;
+}
+.section-title[b-ohw14x2e9j] {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.slider[b-ohw14x2e9j] {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Для Firefox */
+    -ms-overflow-style: none; /* Для IE и Edge */
+}
+.slider[b-ohw14x2e9j]::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+.slider-item[b-ohw14x2e9j] {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.add-button[b-ohw14x2e9j] {
+    position: fixed;
+    bottom: 80px; /* Расположить над футером */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #002B5C;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    cursor: pointer;
+    z-index: 1000;
+}
+.footer[b-ohw14x2e9j] {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.footer-item[b-ohw14x2e9j] {
+    text-align: center;
+    font-size: 12px;
+}
+.footer-icon[b-ohw14x2e9j] {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+}
+.active .footer-icon[b-ohw14x2e9j] {
+    color: #002B5C;
+}
+/* _content/Bazis/Views/News/Details.cshtml.rz.scp.css */
+.header[b-1nwfgx2bo7] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-button[b-1nwfgx2bo7] {
+    font-size: 20px;
+    color: #002B5C;
+    text-decoration: none;
+}
+
+.header-title[b-1nwfgx2bo7] {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+.content[b-1nwfgx2bo7] {
+    padding: 20px;
+}
+
+.news-title[b-1nwfgx2bo7] {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    color: #002B5C;
+    margin-bottom: 10px;
+}
+
+.news-meta[b-1nwfgx2bo7] {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.news-image[b-1nwfgx2bo7] {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-content[b-1nwfgx2bo7] {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.related-news[b-1nwfgx2bo7] {
+    margin-top: 30px;
+}
+
+.related-title[b-1nwfgx2bo7] {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #002B5C;
+}
+
+.related-item[b-1nwfgx2bo7] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #002B5C;
+    font-size: 16px;
+}
+
+.related-item img[b-1nwfgx2bo7] {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+/* _content/Bazis/Views/News/Index.cshtml.rz.scp.css */
+.header[b-7gp01q5uye] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-title[b-7gp01q5uye] {
+    font-size: 22px;
+    font-weight: bold;
+    color: #002B5C;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content[b-7gp01q5uye] {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    margin-top: 70px; /* Высота шапки */
+}
+
+.news-item[b-7gp01q5uye] {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.news-item:hover[b-7gp01q5uye] {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.news-item h3[b-7gp01q5uye] {
+    font-size: 18px;
+    font-weight: bold;
+    color: #002B5C;
+    margin-bottom: 10px;
+}
+
+.news-item p[b-7gp01q5uye] {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.news-item .date[b-7gp01q5uye] {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+    text-align: right;
+    font-style: italic;
+}
+
+.news-item .image[b-7gp01q5uye] {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+/* _content/Bazis/Views/Orders/DashBoard.cshtml.rz.scp.css */
+
+.header[b-ru3mu5lzth] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+.header-title[b-ru3mu5lzth] {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.main[b-ru3mu5lzth] {
+    flex: 1;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.car-card[b-ru3mu5lzth] {
+    width: 240px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+}
+.car-icon[b-ru3mu5lzth] {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+.car-info[b-ru3mu5lzth] {
+    font-size: 16px;
+    font-weight: bold;
+    color: #002B5C;
+}
+.button[b-ru3mu5lzth] {
+    width: 100%;
+    padding: 15px;
+    background-color: #002B5C;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.button_add_auto[b-ru3mu5lzth]
+{
+    padding-bottom: 100px;
+}
+/* _content/Bazis/Views/Orders/Details.cshtml.rz.scp.css */
+.header[b-zw19yfajys] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-title[b-zw19yfajys] {
+    font-size: 22px;
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+}
+
+.back-button[b-zw19yfajys] {
+    font-size: 20px;
+    color: #002B5C;
+    text-decoration: none;
+}
+
+.content[b-zw19yfajys] {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.order-number[b-zw19yfajys] {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.section-title[b-zw19yfajys] {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
+.line-item[b-zw19yfajys] {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.line-item span:last-child[b-zw19yfajys] {
+    color: #666;
+}
+
+.total[b-zw19yfajys] {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.footer-section[b-zw19yfajys] {
+    margin-top: 30px;
+}
+
+.footer-title[b-zw19yfajys] {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.footer-value[b-zw19yfajys] {
+    font-size: 14px;
+    color: #666;
+}
+/* _content/Bazis/Views/Orders/Index.cshtml.rz.scp.css */
+.header[b-7g9qkrt9am] {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+.header-title[b-7g9qkrt9am] {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.content[b-7g9qkrt9am] {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    margin-top: 60px; /* Высота заголовка */
+}
+
+.service-history-item[b-7g9qkrt9am] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-history-item .date[b-7g9qkrt9am] {
+    font-size: 18px;
+    font-weight: bold;
+    color: #002B5C;
+}
+
+.service-history-item .details[b-7g9qkrt9am] {
+    flex: 1;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.service-history-item .price[b-7g9qkrt9am] {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+}
+/* _content/Bazis/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-wmgafawej1] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-wmgafawej1] {
+  color: #0077cc;
+}
+
+.btn-primary[b-wmgafawej1] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-wmgafawej1], .nav-pills .show > .nav-link[b-wmgafawej1] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-wmgafawej1] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-wmgafawej1] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-wmgafawej1] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-wmgafawej1] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-wmgafawej1] {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  background-color: #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.footer-item[b-wmgafawej1] {
+  text-align: center;
+  font-size: 12px;
+}
+.footer-icon[b-wmgafawej1] {
+ font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
+  color: #000;
+}
+.active .footer-icon[b-wmgafawej1] {
+  color: #002B5C;
+}
+
+
+a[b-wmgafawej1]
+{
+color:black;
+}
+/* _content/Bazis/Views/__Order/Index.cshtml.rz.scp.css */
+
+

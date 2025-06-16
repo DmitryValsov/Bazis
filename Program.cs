@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Bazis.Data;
+using Telegram.Bot;
+using Bazis.Hubs;
+using Bazis.Services;
+using Telegram.Bot.Extensions;
+using Telegram.Bot.Types.ReplyMarkups;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +20,22 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSignalR();
+
+
+// Telegram.Bot client
+builder.Services.AddSingleton<ITelegramBotClient>(sp =>
+    new TelegramBotClient(builder.Configuration["Telegram:BotToken"])
+);
+
+// BackgroundService для «обратки» из Telegram
+builder.Services.AddHostedService<TelegramRelayService>();
+
 
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -37,6 +55,7 @@ using(var scope = app.Services.CreateScope())
 }
 
 
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -44,7 +63,14 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-
+/*
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/chatHub");
+    endpoints.MapDefaultControllerRoute();
+});
+*/
+app.MapHub<ChatHub>("/chatHub");
 app.MapControllerRoute(
  name: "areas",
  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"

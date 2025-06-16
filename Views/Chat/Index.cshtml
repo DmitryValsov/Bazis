@@ -2,64 +2,45 @@
         <h1>Поддержка</h1>
     </div>
 
-    <div class="chat-container" id="chat-container">
-        <!-- Сообщения будут загружаться сюда -->
-    </div>
+    <!--<div class="chat-container" id="chat-container">-->
+   
+         <div id="messages"></div>
+   
 
     <div class="chat-footer">
-        <input type="text" class="chat-input" id="chat-input" placeholder="Напишите сообщение...">
-        <button class="send-button" id="send-button">Отправить</button>
+         <div id="input">
+        <input type="text"  class="chat-input" id="msg" placeholder="Напишите сообщение...">
+        <button class="send-button" id="send">Отправить</button>
+        </div>
     </div>
 
-    <script>
-        const chatContainer = document.getElementById('chat-container');
-        const chatInput = document.getElementById('chat-input');
-        const sendButton = document.getElementById('send-button');
 
-        // Загрузка всех сообщений
-        function loadMessages() {
-            $.get('/messages', (messages) => {
-                chatContainer.innerHTML = ''; // Очистка перед загрузкой
-                messages.forEach((message) => {
-                    const messageElement = document.createElement('div');
-                    messageElement.classList.add('message', message.sender === 'user' ? 'user' : 'manager');
-                    messageElement.textContent = message.message;
-                    chatContainer.appendChild(messageElement);
-                });
-
-                // Прокрутка вниз
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            });
-        }
-
-        // Отправка нового сообщения
-
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                $.post('/messages', {
-                    sender: 'user', // Указываем отправителя
-                    message: message,
-                }, () => {
-                    chatInput.value = ''; // Очистка поля ввода
-                    loadMessages(); // Обновление чата
-                });
-            }
-        }
-
-        // Обработчик клика на кнопку "Отправить"
-        sendButton.addEventListener('click', sendMessage);
-
-        // Отправка сообщения по Enter
-        chatInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Периодическое обновление чата
-        setInterval(loadMessages, 2000); // Обновление каждые 2 секунды
-
-        // Изначальная загрузка сообщений
-        loadMessages();
-    </script>
+ 
+ <script>
+   // 1) Настраиваем подключение к хабу
+   const connection = new signalR.HubConnectionBuilder()
+     .withUrl("/chatHub")
+     .build();
+ 
+   // 2) Обработка приходящих сообщений
+   connection.on("ReceiveMessage", (user, text) => {
+     const msg = document.createElement("div");
+     msg.textContent = user + ": " + text;
+     document.getElementById("messages").appendChild(msg);
+     document.getElementById("messages").scrollTop = 1e9;
+   });
+ 
+   // 3) Запускаем подключение
+   connection.start()
+     .then(() => console.log("SignalR подключён"))
+     .catch(err => console.error(err.toString()));
+ 
+   // 4) Отправка сообщений на сервер
+   document.getElementById("send").addEventListener("click", () => {
+     const text = document.getElementById("msg").value;
+     if (!text) return;
+     connection.invoke("SendMessage", text)
+       .catch(err => console.error(err.toString()));
+     document.getElementById("msg").value = "";
+   });
+ </script>

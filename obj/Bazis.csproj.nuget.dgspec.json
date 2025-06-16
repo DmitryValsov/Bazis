@@ -79,6 +79,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Telegram.Bot": {
+              "target": "Package",
+              "version": "[18.0.0, )"
+            },
+            "Telegram.Bots.Extensions.Polling": {
+              "target": "Package",
+              "version": "[5.9.0, )"
             }
           },
           "imports": [
