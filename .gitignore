@@ -1,0 +1,55 @@
+# ================================
+# ASP.NET Core (.NET 9) .gitignore
+# ================================
+
+## Build output
+/bin/
+/obj/
+/out/
+/publish/
+
+## IDEs and editors
+# Visual Studio
+.vs/
+/*.suo
+/*.user
+/*.userosscache
+/*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+## NuGet packages
+*.nupkg
+# The "packages" folder can be ignored when using PackageReference
+/packages/
+
+## ASP.NET Core files
+# User secrets (dotnet user-secrets)
+secrets.json
+# Local app settings for development
+appsettings.Development.*.json
+
+## Logs and databases
+*.log
+logs/
+/TestResults/
+/*.sqlite
+/*.db
+/*.mdf
+/*.ldf
+/*.db-shm
+/*.db-wal
+
+## Entity Framework Migrations
+Migrations/
+
+## Test and coverage
+*.coverage
+*.coveragexml
+*.trx
+*.testsettings
+*.vsmdi
