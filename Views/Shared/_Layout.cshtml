@@ -5,60 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bazis</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Bazis.styles.css" asp-append-version="true" />
+    <!--<link rel="stylesheet" href="~/Bazis.styles.css" asp-append-version="true" />-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 </head>
 <body>
 
-    <div class="container" style="--bs-gutter-x: 0;">
-        <main role="main" class="pb-3">
+   
             @RenderBody()
-        </main>
-    </div>
+     
 
-    <div class="footer">
-        <div class="footer-item active">
-
-            <a href="/">
-            <div class="footer-icon"><img width="30" height="30" src="/img/menu/house.png"></div>
-            <div>
-                Главная
-            </div>
-            </a>
-
-        </div>
-
-        <a href="/Orders/DashBoard">
-        <div class="footer-item">
-            <div class="footer-icon"><img width="30" height="30" src="/img/menu/image.png"></div>
-            <div>Автомобиль</div>
-        </div>
-        </a>
-
-        <a href="/Orders/Create">
-        <div class="footer-item">
-            <div class="footer-icon"><img width="30" height="30" src="/img/menu/order.PNG"></div>
-            <div>Запись</div>
-        </div>
-        </a>
-
-        <a href="/News">
-        <div class="footer-item">
-            <div class="footer-icon">
-                <img width="30" height="30" src="/img/menu/lupa.PNG"></div>
-            <div>Новости</div>
-        </div>
-        </a>
-
-        <a href="/Chat">
-        <div class="footer-item">
-            <div class="footer-icon"><img width="30" height="30" src="/img/menu/chat.PNG"></div>
-            <div>Поддержка</div>
-        </div>
-        </a>
-    </div>
+    <nav class="navbar">
+    <a href="#"><svg viewBox="0 0 24 24"><!-- home icon --></svg><span>Главная</span></a>
+    <a href="#" class="active"><svg viewBox="0 0 24 24"><!-- services icon --></svg><span>Сервисы</span></a>
+    <a href="#"><svg viewBox="0 0 24 24"><!-- records icon --></svg><span>Записи</span></a>
+    <a href="#"><svg viewBox="0 0 24 24"><!-- profile icon --></svg><span>Профиль</span></a>
+  </nav>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

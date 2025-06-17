@@ -373,7 +373,6 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nezrqnk58p-muycvpuwrr.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/v0zgfp0y55-87fc7y1x7t.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/yfc7ypekbg-mlv21k5csn.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-jry0hd7zyi.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/bluhkdfuoc-61n19gt1b8.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-xtxxf3hu2r.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/mq2dgs3ezn-bqjiyaj88i.gz
@@ -436,8 +435,6 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/2gbbcsqpez-87fc7y1x7t.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7eu498ovqt-mlv21k5csn.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/931s4vku6p-sw27x4tcma.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-7hw13md153.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-7hw13md153.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/staticwebassets.build.json
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/staticwebassets.build.json.cache
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/staticwebassets.development.json
@@ -449,3 +446,6 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/Bazis.genruntimeconfig.cache
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/ref/Bazis.dll
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7pxwpux83a-d36mzp6s1a.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-nmp8epn7yj.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-yxx2r4skj2.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-yxx2r4skj2.gz
