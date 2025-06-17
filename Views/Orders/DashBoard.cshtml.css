@@ -1,66 +1,180 @@
 
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #ccc;
-    background-color: #fff;
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-}
-.header-title {
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
-}
-.main {
-    flex: 1;
-    padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.car-card {
-    width: 240px;
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-top: 20px;
-}
-.car-icon {
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-.car-info {
-    font-size: 16px;
-    font-weight: bold;
-    color: #002B5C;
-}
-.button {
-    width: 100%;
-    padding: 15px;
-    background-color: #002B5C;
-    color: #fff;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-.button_add_auto
-{
-    padding-bottom: 100px;
-}
+    :root {
+      --clr-bg: #F9FAFB;
+      --clr-primary: #4F46E5;
+      --clr-primary-light: #EEF2FF;
+      --clr-dark: #111827;
+      --clr-gray: #6B7280;
+      --r-sm: 12px;
+      --r-lg: 20px;
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 16px;
+      --gap-lg: 24px;
+      --ff: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg);
+      color: var(--clr-dark);
+      padding-bottom: 120px;
+    }
+
+    .page {
+      padding: var(--gap-lg) var(--gap-md);
+    }
+
+    .header {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: var(--gap-lg);
+    }
+
+    .tabs {
+      display: flex;
+      background: var(--clr-primary-light);
+      border-radius: var(--r-lg);
+      margin-bottom: var(--gap-lg);
+      padding: 4px;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: var(--gap-sm) 0;
+      font-weight: 600;
+      color: var(--clr-gray);
+      border-radius: var(--r-lg);
+      transition: 0.2s;
+    }
+
+    .tab.active {
+      background: var(--clr-primary);
+      color: white;
+    }
+
+    .card-banner {
+      background: #3B82F6;
+      border-radius: var(--r-sm);
+      color: white;
+      padding: var(--gap-md);
+      margin-bottom: var(--gap-lg);
+    }
+
+    .card-banner p {
+      margin-top: var(--gap-xs);
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: var(--gap-md);
+    }
+
+    .appointment-card {
+      background: white;
+      border-radius: var(--r-sm);
+      padding: var(--gap-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--gap-md);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .appointment-info {
+      max-width: 65%;
+    }
+
+    .appointment-info .date {
+      font-size: 14px;
+      color: var(--clr-gray);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .appointment-info .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .appointment-info .address {
+      font-size: 14px;
+      color: var(--clr-gray);
+    }
+
+    .appointment-img {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--r-sm);
+      object-fit: cover;
+    }
+
+    .btn-edit {
+      margin-top: var(--gap-sm);
+      background: #F3F4F6;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .link {
+      font-size: 14px;
+      color: var(--clr-primary);
+      margin-top: var(--gap-sm);
+      display: inline-block;
+    }
+
+    .btn-add {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--clr-primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--r-lg);
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 0 calc(env(safe-area-inset-bottom) + 4px);
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: var(--clr-gray);
+    }
+
+    .navbar a.active {
+      color: var(--clr-primary);
+    }
+
+    .navbar svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      margin-bottom: 2px;
+    }
+  

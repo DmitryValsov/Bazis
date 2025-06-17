@@ -552,71 +552,185 @@ body[b-0eb6wh48io] {
 }
 /* _content/Bazis/Views/Orders/DashBoard.cshtml.rz.scp.css */
 
-.header[b-ru3mu5lzth] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #ccc;
-    background-color: #fff;
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-}
-.header-title[b-ru3mu5lzth] {
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
-}
-.main[b-ru3mu5lzth] {
-    flex: 1;
-    padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.car-card[b-ru3mu5lzth] {
-    width: 240px;
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-top: 20px;
-}
-.car-icon[b-ru3mu5lzth] {
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-.car-info[b-ru3mu5lzth] {
-    font-size: 16px;
-    font-weight: bold;
-    color: #002B5C;
-}
-.button[b-ru3mu5lzth] {
-    width: 100%;
-    padding: 15px;
-    background-color: #002B5C;
-    color: #fff;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-.button_add_auto[b-ru3mu5lzth]
-{
-    padding-bottom: 100px;
-}
+    :root[b-ru3mu5lzth] {
+      --clr-bg: #F9FAFB;
+      --clr-primary: #4F46E5;
+      --clr-primary-light: #EEF2FF;
+      --clr-dark: #111827;
+      --clr-gray: #6B7280;
+      --r-sm: 12px;
+      --r-lg: 20px;
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 16px;
+      --gap-lg: 24px;
+      --ff: 'Inter', sans-serif;
+    }
+
+    *[b-ru3mu5lzth] { margin: 0; padding: 0; box-sizing: border-box; }
+    body[b-ru3mu5lzth] {
+      font-family: var(--ff);
+      background: var(--clr-bg);
+      color: var(--clr-dark);
+      padding-bottom: 120px;
+    }
+
+    .page[b-ru3mu5lzth] {
+      padding: var(--gap-lg) var(--gap-md);
+    }
+
+    .header[b-ru3mu5lzth] {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: var(--gap-lg);
+    }
+
+    .tabs[b-ru3mu5lzth] {
+      display: flex;
+      background: var(--clr-primary-light);
+      border-radius: var(--r-lg);
+      margin-bottom: var(--gap-lg);
+      padding: 4px;
+    }
+
+    .tab[b-ru3mu5lzth] {
+      flex: 1;
+      text-align: center;
+      padding: var(--gap-sm) 0;
+      font-weight: 600;
+      color: var(--clr-gray);
+      border-radius: var(--r-lg);
+      transition: 0.2s;
+    }
+
+    .tab.active[b-ru3mu5lzth] {
+      background: var(--clr-primary);
+      color: white;
+    }
+
+    .card-banner[b-ru3mu5lzth] {
+      background: #3B82F6;
+      border-radius: var(--r-sm);
+      color: white;
+      padding: var(--gap-md);
+      margin-bottom: var(--gap-lg);
+    }
+
+    .card-banner p[b-ru3mu5lzth] {
+      margin-top: var(--gap-xs);
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .section-title[b-ru3mu5lzth] {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: var(--gap-md);
+    }
+
+    .appointment-card[b-ru3mu5lzth] {
+      background: white;
+      border-radius: var(--r-sm);
+      padding: var(--gap-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--gap-md);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .appointment-info[b-ru3mu5lzth] {
+      max-width: 65%;
+    }
+
+    .appointment-info .date[b-ru3mu5lzth] {
+      font-size: 14px;
+      color: var(--clr-gray);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .appointment-info .title[b-ru3mu5lzth] {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .appointment-info .address[b-ru3mu5lzth] {
+      font-size: 14px;
+      color: var(--clr-gray);
+    }
+
+    .appointment-img[b-ru3mu5lzth] {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--r-sm);
+      object-fit: cover;
+    }
+
+    .btn-edit[b-ru3mu5lzth] {
+      margin-top: var(--gap-sm);
+      background: #F3F4F6;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .link[b-ru3mu5lzth] {
+      font-size: 14px;
+      color: var(--clr-primary);
+      margin-top: var(--gap-sm);
+      display: inline-block;
+    }
+
+    .btn-add[b-ru3mu5lzth] {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--clr-primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--r-lg);
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .navbar[b-ru3mu5lzth] {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 0 calc(env(safe-area-inset-bottom) + 4px);
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar a[b-ru3mu5lzth] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: var(--clr-gray);
+    }
+
+    .navbar a.active[b-ru3mu5lzth] {
+      color: var(--clr-primary);
+    }
+
+    .navbar svg[b-ru3mu5lzth] {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      margin-bottom: 2px;
+    }
+  
 /* _content/Bazis/Views/Orders/Details.cshtml.rz.scp.css */
 .header[b-zw19yfajys] {
     padding: 15px 20px;

@@ -447,5 +447,5 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/ref/Bazis.dll
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7pxwpux83a-d36mzp6s1a.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-nmp8epn7yj.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-yxx2r4skj2.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-yxx2r4skj2.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-noabjqzgzo.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-noabjqzgzo.gz
