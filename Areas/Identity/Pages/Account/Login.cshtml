@@ -6,21 +6,370 @@
     //Layout = null;
 }
 
+<style>
+    /* ====== Design Tokens ====== */
+    :root {
+      --clr-bg-dark:       #1F1F2F;
+      --clr-bg-light:      #FFFFFF;
+      --clr-primary-start: #6366F1;
+      --clr-primary-end:   #4F46E5;
+      --clr-text-white:    #FFFFFF;
+      --clr-text-light:    rgba(255,255,255,0.8);
+      --clr-text-dark:     #111827;
+      --clr-text-gray:     #6B7280;
+      --r-sm:              12px;
+      --r-lg:              20px;
+      --gap-xs:            4px;
+      --gap-sm:            8px;
+      --gap-md:            16px;
+      --gap-lg:            24px;
+      --header-h:          88px;
+      --btn-h:             56px;
+      --ff:                'Inter', sans-serif;
+      /* Увеличенная длительность и более мягкая кривая для переходов */
+      --transition:        0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-<div class="container">
-            <form id="account" method="post">
+    /* ====== Reset ====== */
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    html, body {
+      height:100%; font-family:var(--ff);
+      background:var(--clr-bg-dark); overflow:hidden;
+    }
+    button, input { border:none; background:none; font:inherit; }
+
+    /* ====== Onboarding Container ====== */
+    .onboard {
+      position:relative; width:100%; height:100%;
+      overflow:hidden;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* ====== Pages & Smooth Slide+Fade Transition ====== */
+    .page {
+      position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      /* slide out + fade out */
+      transform: translateX(100%);
+      opacity: 0;
+      /* плавный переход transform и opacity */
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .page.active {
+      /* slide in + fade in */
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* ====== Large Hero Header ====== */
+    .hero {
+      flex:0 0 var(--header-h);
+      display:flex; align-items:center; gap:var(--gap-sm);
+      padding: 0 var(--gap-md);
+      background:var(--clr-bg-dark); color:var(--clr-text-white);
+    }
+    .hero__logo {
+      width:32px; height:32px;
+      background: linear-gradient(90deg, var(--clr-primary-start), var(--clr-primary-end));
+      border-radius:var(--r-sm);
+    }
+    .hero__title {
+      font-size:18px; font-weight:500; line-height:1;
+    }
+
+    /* ====== Card ====== */
+    .card {
+      flex:1; background:var(--clr-bg-light);
+      border-top-left-radius:var(--r-lg);
+      border-top-right-radius:var(--r-lg);
+      margin-top:-var(--gap-sm);
+      padding:var(--gap-lg) var(--gap-md);
+      display:flex; flex-direction:column;
+    }
+    .card .main { flex:1; overflow-y:auto; }
+
+    /* ====== Text Styles ====== */
+    .title-xl { font-size:32px; font-weight:700; line-height:1.1; color:var(--clr-text-dark); text-align:center; margin-bottom:var(--gap-sm); }
+    .title-lg { font-size:24px; font-weight:700; line-height:1.2; color:var(--clr-text-dark); text-align:center; margin-bottom:var(--gap-md); }
+    .text-gray { font-size:15px; color:var(--clr-text-gray); text-align:center; margin-bottom:var(--gap-md); }
+    .note { font-size:12px; color:var(--clr-text-gray); text-align:center; margin-top:var(--gap-sm); }
+
+    /* ====== Dots (Welcome) ====== */
+    .dots { display:flex; justify-content:center; gap:var(--gap-xs); margin:var(--gap-md) 0; }
+    .dots__dot { width:8px; height:8px; border-radius:50%; background:var(--clr-text-gray); transition:background var(--transition); }
+    .dots__dot.active { background:var(--clr-primary-start); }
+
+    /* ====== Action Block ====== */
+    .action {
+      flex:0 0 auto; display:flex; flex-direction:column;
+      align-items:center; padding-bottom: env(safe-area-inset-bottom);
+    }
+    .btn {
+      width:100%; max-width:360px; height:var(--btn-h);
+      border-radius:var(--r-sm); font-size:16px; font-weight:600;
+      color:var(--clr-text-white);
+      background:linear-gradient(90deg, var(--clr-primary-start), var(--clr-primary-end));
+      display:flex; align-items:center; justify-content:center;
+      transition:transform var(--transition), opacity var(--transition);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.disabled { opacity:0.5; pointer-events:none; }
+
+    /* ====== Phone Input ====== */
+    .input-group { position:relative; margin-bottom:var(--gap-md); }
+    .input-group .flag {
+      position:absolute; l
+      eft:var(--gap-md); 
+      top:50%;
+      width:24px; height:16px; 
+      /*background:
+        url('https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg')
+        no-repeat center/contain;
+      transform:translateY(-50%);*/
+    }
+    #phone {
+      width:100%; padding:14px var(--gap-md) 14px 56px;
+      font-size:16px; color:var(--clr-text-dark);
+      background:var(--clr-bg-light);
+      border:2px solid var(--clr-text-gray);
+      border-radius:var(--r-sm);
+      transition:border-color var(--transition);
+    }
+    #phone:focus { border-color:var(--clr-primary-start); }
+    .error { font-size:13px; color:red; display:none; margin-bottom:var(--gap-md); }
+
+    /* ====== OTP Inputs ====== */
+    .otp {
+      display:flex; justify-content:space-between; gap:var(--gap-md); margin-bottom:var(--gap-md);
+    }
+    .otp input {
+      width:64px; height:64px; font-size:24px; font-weight:600;
+      text-align:center; background:var(--clr-bg-light);
+      border:2px solid var(--clr-text-gray); border-radius:var(--r-sm);
+      transition:border-color var(--transition);
+    }
+    .otp input:focus { border-color:var(--clr-primary-start); }
+
+    /* ====== Resend Button ====== */
+    #resend-btn {
+      margin-top:var(--gap-sm); font-size:14px;
+      color:var(--clr-primary-start); background:none; cursor:pointer;
+    }
+    #resend-btn.disabled { color:var(--clr-text-gray); cursor:default; }
+  </style>
+
+
+  <div class="onboard">
+
+    <!-- Page 1: Welcome -->
+    <section id="step-1" class="page active">
+      <div class="hero">
+        <div class="hero__logo" aria-hidden="true"></div>
+        <div class="hero__title">Базис Моторс</div>
+      </div>
+      <div class="card">
+        <div class="main">
+          <h1 class="title-xl">Добро пожаловать<br>в Базис Моторс</h1>
+          <p class="text-gray">Быстрое и удобное обслуживание вашего авто</p>
+          <div class="dots" aria-hidden="true">
+            <span class="dots__dot active"></span>
+            <span class="dots__dot"></span>
+            <span class="dots__dot"></span>
+          </div>
+        </div>
+        <div class="action">
+          <button id="next-1" class="btn" aria-label="Начать">НАЧАТЬ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 2: Phone Input -->
+    <section id="step-2" class="page">
+      <div class="hero">
+        <div class="hero__logo" aria-hidden="true"></div>
+        <div class="hero__title">Базис Моторс</div>
+      </div>
+      
+      <div class="card">
+        <form id="account" method="post">
+        <div class="main">
+          <h2 class="title-lg">Введите номер телефона</h2>
+          <div class="input-group">
+            <div class="flag" aria-hidden="true"></div>
+             
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="title">Введите номер телефона</div>
-                <div class="subtitle">чтобы войти или стать клиентом BAZIS MOTORS</div>
-                <input name="Email"  class="input" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <input name="Password"  class="input" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <div class="description">На указанный номер придет SMS с кодом для подтверждения входа</div>
-                    <button id="login-submit" type="submit" class="button">Получить код</button>
-                      <div class="privacy-text">
-            Нажимая на кнопку «Получить код», я даю согласие на
-            <a href="#">обработку своих персональных данных</a></div>    
-            </form>
-</div>
+             <input
+              name="Email"
+              type="text"
+              inputmode="tel"
+              id="phone"
+              maxlength="18"
+              placeholder="name@example.com"
+              aria-describedby="err-phone"
+            >
+            <input
+              name="Password"
+              style="margin-top:10px;"
+              type="text"
+              inputmode="tel"
+              id="phone"
+              maxlength="18"
+              placeholder="Пароль"
+              aria-describedby="err-phone"
+            >
+          
+          </div>
+          <div id="err-phone" class="error">Неверный формат номера</div>
+        </div>
+        <div class="action">
+          <button type="submit" class="btn" aria-label="Продолжить">ПРОДОЛЖИТЬ</button>
+        </div>
+        </form>
+          
+      </div>
+      
+    </section>
+
+    <!-- Page 3: OTP -->
+    <section id="step-3" class="page">
+      <div class="hero">
+        <div class="hero__logo" aria-hidden="true" style="background:var(--clr-primary-start)"></div>
+        <div class="hero__title" style="color:var(--clr-text-dark)">Базис Моторс</div>
+      </div>
+      <div class="card">
+        <div class="main">
+          <h2 class="title-lg">Введите код</h2>
+          <p class="text-gray">
+            Мы отправили SMS с кодом на номер <strong id="sent-num">+7 (___) ___-__-__</strong>
+          </p>
+          <div class="otp" aria-label="Поле для кода">
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 1">
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 2">
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 3">
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 4">
+          </div>
+        </div>
+        <div class="action">
+          <button id="next-3" class="btn disabled" aria-label="Подтвердить">ПОДТВЕРДИТЬ</button>
+          <button id="resend-btn" class="disabled" disabled aria-label="Отправить код повторно">
+            Не получили код? 0:56
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    (function(){
+      const pages = ['#step-1','#step-2','#step-3'].map(s=>document.querySelector(s));
+      const dots  = document.querySelectorAll('.dots__dot');
+      const btn1  = document.getElementById('next-1');
+      const btn2  = document.getElementById('next-2');
+      const btn3  = document.getElementById('next-3');
+      const phone = document.getElementById('phone');
+      const err   = document.getElementById('err-phone');
+      const sent  = document.getElementById('sent-num');
+      const otpEls= [...document.querySelectorAll('.otp input')];
+      const resend= document.getElementById('resend-btn');
+      let timer=56, tid;
+
+      function showStep(i){
+        pages.forEach((p,idx)=>{
+          p.classList.toggle('active', idx===i);
+          if(idx===0){
+            dots.forEach((d,j)=>d.classList.toggle('active', j===i));
+          }
+        });
+      }
+
+      // Step 1 → 2
+      btn1.onclick = ()=> showStep(1);
+
+      // Phone mask & enable next
+      function mask(v){
+        let d=v.replace(/\D/g,''), fmt='+7';
+        if(!d.startsWith('7')) d='7'+d;
+        d=d.slice(0,11);
+        if(d.length>1) fmt+=' ('+d.slice(1,4)+')';
+        if(d.length>4) fmt+=' '+d.slice(4,7);
+        if(d.length>7) fmt+='-'+d.slice(7,9);
+        if(d.length>9) fmt+='-'+d.slice(9,11);
+        return fmt;
+      }
+      /*
+      phone.oninput = e=>{
+        e.target.value = mask(e.target.value);
+        const valid = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(e.target.value);
+        btn2.classList.toggle('disabled', !valid);
+      };
+      */
+
+      // Step 2 → 3
+      /*
+      btn2.onclick = ()=>{
+        if(btn2.classList.contains('disabled')) return;
+        sent.textContent = phone.value;
+        showStep(2);
+        resend.textContent = 'Не получили код? ' + format(timer);
+        resend.disabled = true; resend.classList.add('disabled');
+        tid = setInterval(()=>{
+          timer--;
+          if(timer<=0){
+            clearInterval(tid);
+            resend.disabled=false; resend.classList.remove('disabled');
+            resend.textContent = 'Не получили код? Отправить ещё раз';
+          } else {
+            resend.textContent = 'Не получили код? ' + format(timer);
+          }
+        },1000);
+      };
+*/
+      function format(s){
+        let m=Math.floor(s/60), sec=s%60;
+        return m+':'+String(sec).padStart(2,'0');
+      }
+
+      // OTP inputs
+      otpEls.forEach((i,idx)=>{
+        i.oninput = ()=>{
+          if(i.value && otpEls[idx+1]) otpEls[idx+1].focus();
+          btn3.classList.toggle('disabled', !otpEls.every(x=>x.value));
+        };
+        i.onkeydown = e=>{
+          if(e.key==='Backspace' && !i.value && otpEls[idx-1]) {
+            otpEls[idx-1].focus();
+          }
+        };
+      });
+
+      btn3.onclick = ()=> {
+        if(btn3.classList.contains('disabled')) return;
+        alert('Код подтверждён!');
+      };
+
+      // Resend click
+      resend.onclick = ()=>{
+        if(resend.disabled) return;
+        timer = 60;
+        resend.disabled=true; resend.classList.add('disabled');
+        resend.textContent = 'Не получили код? ' + format(timer);
+        tid = setInterval(()=>{
+          timer--;
+          if(timer<=0){
+            clearInterval(tid);
+            resend.disabled=false; resend.classList.remove('disabled');
+            resend.textContent = 'Не получили код? Отправить ещё раз';
+          } else {
+            resend.textContent = 'Не получили код? ' + format(timer);
+          }
+        },1000);
+      };
+
+    })();
+  </script>
 
 
 @section Scripts {
