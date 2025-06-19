@@ -5,21 +5,222 @@
 }
 
 
-<div class="header">
-        <div class="header-title">Новости</div>
-    </div>
 
-    <div class="content">
-        @foreach (var item in Model) {
-        <a asp-action="Details" asp-route-id="@item.Id">
-        <div class="news-item">
-            <img src="/img/news/news.jpeg" alt="Обновление сервиса" class="image">
-            <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
-            <p>@Html.DisplayFor(modelItem => item.PreviewText)</p>
-            <div class="date">@Html.DisplayFor(modelItem => item.ReleaseDate)</div>
-        </div>
-        </a>
-        }
+
+ <style>
+    /* =============== Переменные =============== */
+    :root {
+      --clr-bg-dark: #082d5f;
+      --clr-bg-light: #FFFFFF;
+      --clr-primary-start: #6366F1;
+      --clr-primary-end: #4F46E5;
+      --clr-text-white: #FFFFFF;
+      --clr-text-light: rgba(255,255,255,0.8);
+      --clr-text-dark: #111827;
+      --clr-text-gray: #6B7280;
+      --r-sm: 12px;
+      --r-lg: 20px;
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 16px;
+      --gap-lg: 24px;
+      --ff: 'Inter', sans-serif;
+      --transition: 0.3s ease;
+    }
+    /* =============== Сброс =============== */
+    * { margin:0; padding:0; box-sizing:border-box }
+    html, body { height:100%; }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      overflow-x:hidden;
+    }
+    a { text-decoration:none; color:inherit }
+    img { max-width:100%; display:block }
+
+    /* =============== Большой хедер =============== */
+    .hero {
+      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+      background: var(--clr-bg-dark);
+    }
+    .hero__header {
+      display:flex; align-items:center; gap:var(--gap-sm);
+    }
+    .hero__logo {
+      width:32px; height:32px; background:var(--clr-primary-start);
+      border-radius:var(--r-sm);
+    }
+    .hero__title { font-size:18px; font-weight:500; }
+    .hero__main-title {
+      margin-top:var(--gap-lg);
+      font-size:32px; font-weight:700; line-height:1.1;
+      color: var(--clr-text-white);
+    }
+    .hero__subtitle {
+      margin-top:var(--gap-xs);
+      font-size:15px; color:var(--clr-text-light);
+    }
+
+    /* =============== Малый хедер при скролле =============== */
+    .small-header {
+      position:fixed; top:0; left:0; right:0;
+      display:flex; justify-content:space-between; align-items:center;
+      padding: env(safe-area-inset-top) var(--gap-md) 8px;
+      background:var(--clr-bg-dark); z-index:100;
+      opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .small-header.visible {
+      opacity:1; pointer-events:auto;
+    }
+    .small-header button {
+      background:none; border:none; padding:8px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .small-header svg {
+      width:24px; height:24px; fill:var(--clr-text-white);
+    }
+
+    /* =============== Контент =============== */
+    .content {
+      background:var(--clr-bg-light);
+      color:var(--clr-text-dark);
+      border-top-left-radius:var(--r-lg);
+      border-top-right-radius:var(--r-lg);
+      margin-top:-var(--gap-sm);
+      padding:var(--gap-lg) var(--gap-md) calc(var(--gap-lg) + env(safe-area-inset-bottom));
+    }
+    /* Слайдер новостей */
+    .slider {
+      position:relative; margin-bottom:var(--gap-lg);
+    }
+    .slides {
+      display:flex; gap:var(--gap-md);
+      overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .slides::-webkit-scrollbar { display:none }
+    .slide {
+      flex:0 0 80%; scroll-snap-align:center;
+      height:200px;
+      background:linear-gradient(135deg,var(--clr-primary-start),var(--clr-primary-end));
+      border-radius:var(--r-sm); box-shadow:0 8px 24px rgba(0,0,0,0.1);
+      color:#fff; display:flex; align-items:flex-end;
+      padding:var(--gap-md); transition:transform var(--transition);
+    }
+    .slide:hover { transform:scale(1.02); }
+    .slide h3 { font-size:1.25rem; margin-bottom:4px; }
+    .slide span { font-size:0.9rem; opacity:0.9; }
+    .arrows {
+      position:absolute; top:50%; width:100%; display:flex; justify-content:space-between;
+      transform:translateY(-50%);
+    }
+    .arrow-btn {
+      background:rgba(255,255,255,0.7); border-radius:50%; padding:8px;
+      margin:0 var(--gap-sm); transition:background var(--transition);
+    }
+    .arrow-btn:hover { background:rgba(255,255,255,0.9); }
+    .arrow-btn svg { width:24px; height:24px; fill:var(--clr-bg-dark); }
+
+    /* Грид карточек новостей */
+    .news-grid {
+      display:grid; grid-template-columns:1fr; gap:var(--gap-lg);
+      margin-bottom: var(--gap-lg);
+    }
+   
+    .card {
+      background:var(--clr-bg-light); border-radius:var(--r-sm);
+      box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden;
+      display:flex; flex-direction:column; transition:transform var(--transition);
+    }
+    .card:hover { transform:translateY(-4px); }
+    .card img { height:140px; object-fit:cover; }
+    .card-body { padding:var(--gap-md); display:flex; flex-direction:column; flex:1; }
+    .card-body time { font-size:0.85rem; color:var(--clr-text-gray); }
+    .card-body h4 { margin:8px 0; color:var(--clr-text-dark); flex:1; }
+    .read-btn {
+      margin-top:auto; padding:10px;
+      text-align:center; background:var(--clr-primary-start);
+      color:var(--clr-text-white); border-radius:var(--r-sm);
+      font-weight:600;
+      transition:background var(--transition);
+    }
+    .read-btn:hover { background:var(--clr-primary-end); }
+
+   
+  </style>
+
+  <!-- Большой хедер -->
+  <div class="hero" id="hero">
+    <div class="hero__header">
+      <div class="hero__logo"></div>
+      <div class="hero__title">Базис Моторс</div>
     </div>
+    <div class="hero__main-title">Новости</div>
+    <div class="hero__subtitle">Будьте в курсе последних обновлений и событий.</div>
+  </div>
+
+  <!-- Малый хедер при скролле -->
+  
+
+  <!-- Основной контент -->
+  <div class="content">
+    <!-- Слайдер новостей -->
+    <section class="slider">
+      <div class="slides" id="slides">
+        <div class="slide"><div><h3>Открытие нового сервиса</h3><span>18 июня 2025</span></div></div>
+        <div class="slide"><div><h3>Расширение графика работы</h3><span>10 июня 2025</span></div></div>
+        <div class="slide"><div><h3>Обновление мобильного приложения</h3><span>1 июня 2025</span></div></div>
+      </div>
+      <div class="arrows">
+        <button class="arrow-btn" id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6l6 6"/></svg></button>
+        <button class="arrow-btn" id="nextBtn"><svg viewBox="0 0 24 24"><path d="M9 6l6 6l-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <!-- Грид карточек новостей (статически в HTML) -->
+    <section class="news-grid">
+      @foreach (var item in Model) {
+      <a asp-action="Details" asp-route-id="@item.Id">      
+        <div class="card">
+        <img src="/img/news/news.jpeg" alt="Открытие нового сервиса">
+        <div class="card-body">
+          <time datetime="2025-06-18">@Html.DisplayFor(modelItem => item.ReleaseDate)</time>
+          <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+          <button class="read-btn">Читать</button>
+        </div>
+      </div>
+      </a>
+      }
+      
+      <!-- При необходимости добавьте новые карточки аналогичным образом -->
+    </section>
+  </div>
+
+  <!-- Нижняя навигация -->
+
+
+  <script>
+    // Показ маленького хедера при скролле
+    const hero = document.getElementById('hero');
+    const smallHdr = document.getElementById('smallHeader');
+    window.addEventListener('scroll', () => {
+      smallHdr.classList.toggle('visible', window.scrollY >= hero.offsetHeight - 60);
+    });
+
+    // Логика стрелок слайдера
+    const slidesEl = document.getElementById('slides');
+    document.getElementById('prevBtn').addEventListener('click', () =>
+      slidesEl.scrollBy({ left: -slidesEl.offsetWidth, behavior: 'smooth' })
+    );
+    document.getElementById('nextBtn').addEventListener('click', () =>
+      slidesEl.scrollBy({ left: slidesEl.offsetWidth, behavior: 'smooth' })
+    );
+  </script>
+
+
+
+
 
 

@@ -1,38 +1,15 @@
-/*html {
-  font-size: 14px;
+ /* Нижняя навигация */
+ .navbar {
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--clr-bg-light);
+  display:flex; justify-content:space-around; align-items:center;
+  padding:8px 0 calc(env(safe-area-inset-bottom)+4px);
+  box-shadow:0 -1px 4px rgba(0,0,0,0.05);
 }
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.navbar a {
+  display:flex; flex-direction:column; align-items:center;
+  font-size:12px; color:var(--clr-text-gray);
+  transition:color var(--transition);
 }
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
-
-a
-{
-color:black;
- text-decoration: none; 
-}
- */
+.navbar a.active { color:var(--clr-primary-start); }
+.navbar svg { width:24px; height:24px; margin-bottom:2px; fill:currentColor; }

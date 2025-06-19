@@ -5,30 +5,239 @@
 }
 
 
-<div class="header">
-        <a asp-action="Index" class="back-button">← Назад</a>
-        <div class="header-title">Детали новости</div>
-    </div>
 
-    <div class="content">
-        <h1 class="news-title">@Html.DisplayFor(model => model.Title)</h1>
-        <div class="news-meta">@Html.DisplayFor(model => model.ReleaseDate) | Автор: администратор</div>
-        <img src="/img/news/news.jpeg" alt="Открытие нового филиала" class="news-image">
-        <div class="news-content">
-          @Html.DisplayFor(model => model.DetailText)
-        </div>
 
-        <div class="related-news">
-            <div class="related-title">Рекомендуем прочитать</div>
-            <a href="#" class="related-item">
-                <img src="https://via.placeholder.com/50" alt="Новость 1">
-                Акция на шиномонтаж до конца месяца
-            </a>
-            <a href="#" class="related-item">
-                <img src="https://via.placeholder.com/50" alt="Новость 2">
-                Новый ассортимент масел в наших филиалах
-            </a>
-        </div>
+<style>
+    :root {
+      --clr-bg-dark: #1F1F2F;
+      --clr-bg-light: #FFFFFF;
+      --clr-primary-start: #6366F1;
+      --clr-primary-end: #4F46E5;
+      --clr-text-white: #FFFFFF;
+      --clr-text-dark: #111827;
+      --clr-text-gray: #6B7280;
+      --clr-accent: #1890FF;
+      --r-sm: 12px;
+      --r-lg: 20px;
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 16px;
+      --gap-lg: 24px;
+      --ff: 'Inter', sans-serif;
+      --reader-width: 700px;
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg-light);
+      color: var(--clr-text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a { color:inherit; text-decoration:none }
+    img { max-width:100%; display:block }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      padding: var(--gap-md);
+      font-size: 0.9rem;
+      color: var(--clr-text-gray);
+      background: var(--clr-bg-light);
+    }
+    .breadcrumbs a { color: var(--clr-accent); }
+    .breadcrumbs span { margin: 0 var(--gap-xs); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      width:100%; height:300px;
+      background:url('/img/news/news.jpeg') center/cover no-repeat;
+      display:flex; align-items:flex-end;
+      padding: var(--gap-md);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+    }
+    .hero-content {
+      position: relative;
+      color: var(--clr-text-white);
+      max-width: var(--reader-width);
+    }
+    .hero-content h1 { font-size:2rem; margin-bottom:var(--gap-xs); }
+    .meta {
+      font-size:0.9rem; color:var(--clr-text-light);
+    }
+
+    /* Article */
+    .article {
+      max-width: var(--reader-width);
+      margin: var(--gap-lg) auto;
+      padding:0 var(--gap-md);
+    }
+    .article p { margin-bottom: var(--gap-md); }
+    .article blockquote {
+      margin: var(--gap-md) 0;
+      padding: var(--gap-md);
+      background: #f0f4ff;
+      border-left: 4px solid var(--clr-primary-start);
+      font-style: italic;
+    }
+    .article figure {
+      margin: var(--gap-lg) 0;
+      text-align: center;
+    }
+    .article figcaption {
+      margin-top: var(--gap-xs);
+      font-size:0.85rem; color:var(--clr-text-gray);
+    }
+
+    /* Share bar */
+    .share-bar {
+      position: fixed;
+      top: 50%; right: 16px;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column;
+      gap: var(--gap-sm);
+      z-index:100;
+    }
+    .share-bar button {
+      background: var(--clr-primary-start);
+      border:none; width:40px; height:40px;
+      border-radius:50%; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition: background 0.3s;
+    }
+    .share-bar button:hover { background: var(--clr-primary-end); }
+    .share-bar svg { width:20px; height:20px; fill:currentColor; }
+
+    /* Related */
+    .related {
+      max-width: var(--reader-width);
+      margin: var(--gap-lg) auto;
+      padding:0 var(--gap-md);
+    }
+    .related h2 { margin-bottom: var(--gap-md); }
+    .related-cards {
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+      gap: var(--gap-md);
+    }
+    .related-card {
+      background: #fff;
+      border-radius: var(--r-sm);
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .related-card img { height:120px; object-fit:cover; }
+    .related-card-body { padding: var(--gap-sm); flex:1; display:flex; flex-direction:column; }
+    .related-card-body time { font-size:0.85rem; color:var(--clr-text-gray); }
+    .related-card-body h3 { margin:8px 0; font-size:1rem; flex:1; }
+    .related-card-body a { color:var(--clr-accent); font-weight:600; }
+
+    /* Comments */
+    .comments {
+      max-width: var(--reader-width);
+      margin: var(--gap-lg) auto;
+      padding:0 var(--gap-md) var(--gap-lg);
+    }
+    .comments h2 { margin-bottom: var(--gap-md); }
+    .comment-box {
+      width:100%; padding: var(--gap-sm); border:1px solid #ccc;
+      border-radius: var(--r-sm); resize:none; height:80px;
+      margin-bottom: var(--gap-sm);
+      font-family: inherit;
+    }
+    .comments button {
+      padding:8px 16px; background: var(--clr-accent);
+      color:#fff; border:none; border-radius: var(--r-sm);
+      cursor:pointer;
+    }
+
+    /* Footer */
+    .footer {
+      padding: var(--gap-lg) var(--gap-md);
+      text-align:center; font-size:0.85rem;
+      color: var(--clr-text-gray);
+    }
+   
+  </style>
+
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="/">Главная</a><span>›</span>
+    <a href="/News">Новости</a><span>›</span>
+    <span>@Html.DisplayFor(model => model.Title)</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>@Html.DisplayFor(model => model.Title)</h1>
+      <div class="meta">@Html.DisplayFor(model => model.ReleaseDate) · Дмитрий Власов · 4 мин. чтения</div>
     </div>
+  </section>
+
+  <!-- Share bar -->
+  <div class="share-bar">
+    <button aria-label="Share to Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6v1.8h2.8l-.4 3h-2.4v7A10 10 0 0022 12"/></svg></button>
+    <button aria-label="Share to Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.7c-.8.4-1.6.6-2.4.8a4.3 4.3 0 001.9-2.4 8.6 8.6 0 01-2.7 1 4.3 4.3 0 00-7.3 3.9A12.2 12.2 0 013 4.9a4.3 4.3 0 001.3 5.8 4.2 4.2 0 01-2-.5v.1a4.3 4.3 0 003.5 4.2 4.3 4.3 0 01-2 .1 4.3 4.3 0 004 2.9A8.6 8.6 0 012 19.5 12.1 12.1 0 008.9 21c7.5 0 11.6-6.2 11.6-11.6v-.5c.8-.6 1.5-1.4 2-2.3"/></svg></button>
+  </div>
+
+  <!-- Article content -->
+  <article class="article">
+    <p>
+       @Html.DisplayFor(model => model.DetailText)
+    </p>
+    <blockquote>«Мы стремимся сделать обслуживание автомобилей доступным и качественным для каждого клиента»</blockquote>
+    <p>Записывайтесь онлайн через приложение или сайт, и приходите в любое удобное для вас время. Будем рады видеть вас в &quot;Базис Моторс&quot;!</p>
+    
+  </article>
+
+  <!-- Related articles -->
+  <section class="related">
+    <h2>Читайте также</h2>
+    <div class="related-cards">
+      <div class="related-card">
+        <img src="https://via.placeholder.com/300x200" alt="Акция на шиномонтаж">
+        <div class="related-card-body">
+          <time>10 июня 2025</time>
+          <h3>Акция на шиномонтаж</h3>
+          <a href="#">Читать</a>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="https://via.placeholder.com/300x200" alt="График работы расширен">
+        <div class="related-card-body">
+          <time>1 июня 2025</time>
+          <h3>График работы расширен</h3>
+          <a href="#">Читать</a>
+        </div>
+      </div>
+      <div class="related-card">
+        <img src="https://via.placeholder.com/300x200" alt="Обновление приложения">
+        <div class="related-card-body">
+          <time>25 мая 2025</time>
+          <h3>Обновление мобильного приложения</h3>
+          <a href="#">Читать</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comments -->
+  <section class="comments">
+    <h2>Комментарии</h2>
+    <textarea class="comment-box" placeholder="Оставить комментарий..."></textarea>
+    <button>Отправить</button>
+  </section>
+
+  <!-- Footer -->
+  
+
+
 
 
