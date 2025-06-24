@@ -5,55 +5,232 @@
 }
 
 
+ <style>
+    /* =============== Переменные =============== */
+    :root {
+      --clr-bg-dark:       #1F1F2F;
+      --clr-bg-light:      #FFFFFF;
+      --clr-primary-start: #082d5f;
+      --clr-primary-end:   #082d5f;
+      --clr-text-white:    #FFFFFF;
+      --clr-text-light:    rgba(255,255,255,0.8);
+      --clr-text-dark:     #111827;
+      --clr-text-gray:     #6B7280;
+      --clr-danger:        #e30613;
+      --r-sm:              12px;
+      --r-lg:              20px;
+      --gap-xs:            4px;
+      --gap-sm:            8px;
+      --gap-md:            16px;
+      --gap-lg:            24px;
+      --ff: 'Inter', sans-serif;
+    }
+    /* =============== Reset =============== */
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      overflow-x: hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+    img, iframe { max-width:100%; display:block; }
 
- <div class="header">
-        <a asp-action="Index" class="back-button">←</a>
-        <div class="header-title">Заказ-наряд №@Html.DisplayFor(model => model.Id)</div>
+    /* =============== Hero Header =============== */
+    .hero {
+      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+      background: var(--clr-bg-dark);
+    }
+    .hero__header { display:flex; align-items:center; }
+    .hero__header button {
+      background:none; border:none; padding:var(--gap-sm); margin-right:var(--gap-sm); cursor:pointer;
+    }
+    .hero__header button svg {
+      width:24px; height:24px; stroke:var(--clr-text-white); stroke-width:2;
+    }
+    .hero__logo {
+      width:32px; height:32px;
+      background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      border-radius:var(--r-sm); margin-right:var(--gap-sm);
+    }
+    .hero__title { font-size:18px; font-weight:500; }
+    .hero__main-title {
+      margin-top:var(--gap-lg);
+      font-size:32px; font-weight:700; line-height:1.1;
+    }
+
+    /* =============== Small Header on scroll =============== */
+    .small-header {
+      position:fixed; top:0; left:0; right:0;
+      display:flex; align-items:center;
+      padding:env(safe-area-inset-top) var(--gap-md) 8px;
+      background:var(--clr-bg-dark);
+      opacity:0; pointer-events:none; transition:opacity .3s; z-index:100;
+    }
+    .small-header.visible { opacity:1; pointer-events:auto; }
+    .small-header button {
+      background:none; border:none; padding:var(--gap-sm); cursor:pointer;
+    }
+    .small-header button svg {
+      width:24px; height:24px; stroke:var(--clr-text-white); stroke-width:2;
+    }
+    .small-header .title {
+      flex:1; text-align:center; font-size:18px; font-weight:500; color:var(--clr-text-white);
+    }
+
+    /* =============== Content =============== */
+    .content {
+      background:var(--clr-bg-light);
+      color:var(--clr-text-dark);
+      border-top-left-radius:var(--r-lg);
+      border-top-right-radius:var(--r-lg);
+      margin-top:-var(--gap-sm);
+      padding:var(--gap-lg) var(--gap-md) calc(var(--gap-lg) + env(safe-area-inset-bottom));
+    }
+    h2 { font-size:18px; font-weight:600; margin-bottom:var(--gap-md); }
+
+    /* =============== Card =============== */
+    .card {
+      background:var(--clr-bg-light);
+      border-radius:var(--r-sm);
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      padding:var(--gap-md);
+      margin-bottom:var(--gap-lg);
+    }
+
+    /* Summary block */
+    .summary { display:flex; justify-content:space-between; align-items:center; }
+    .summary .left { display:flex; flex-direction:column; gap:var(--gap-xs); }
+    .summary .left .label { font-size:14px; color:var(--clr-text-gray); }
+    .summary .left .value { font-size:20px; font-weight:600; color:var(--clr-text-dark); }
+    .summary img { width:80px; height:80px; border-radius:var(--r-sm); object-fit:cover; }
+
+    /* Field list */
+    .field-list { list-style:none; }
+    .field-list li {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:var(--gap-sm) 0; border-bottom:1px solid var(--clr-text-gray);
+    }
+    .field-list li:last-child { border:none; }
+    .field-list .label { color:var(--clr-text-gray); }
+    .field-list .value { font-weight:600; }
+
+    /* Map */
+    .map-container {
+      margin-top: var(--gap-md);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      height: 200px;
+    }
+
+    /* Notes */
+    .notes { font-size:14px; color:var(--clr-text-gray); white-space:pre-wrap; }
+
+    /* Actions */
+    .actions { display:flex; flex-direction:column; gap:var(--gap-sm); margin-bottom:var(--gap-lg); }
+   
+    .actions .btn {
+      flex:1; padding:14px 0; font-size:16px; font-weight:600;
+      border-radius:var(--r-sm); border:none; cursor:pointer;
+      transition:background .2s,color .2s;
+    }
+    .btn-primary {
+      background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      color:var(--clr-text-white);
+    }
+    .btn-primary:hover { opacity:.9; }
+    .btn-secondary {
+      background:transparent; color:var(--clr-primary-start);
+      border:2px solid var(--clr-primary-start);
+    }
+    .btn-secondary:hover {
+      background:var(--clr-primary-start); color:var(--clr-text-white);
+    }
+    .btn-danger { background:var(--clr-danger); color:#fff; }
+    .btn-danger:hover { opacity:.9; }
+
+    /* Bottom Navigation */
+    .navbar {
+      position:fixed; bottom:0; left:0; right:0;
+      background:var(--clr-bg-light);
+      display:flex; justify-content:space-around; align-items:center;
+      padding:8px 0 calc(env(safe-area-inset-bottom)+4px);
+      box-shadow:0 -1px 4px rgba(0,0,0,0.05);
+      z-index:100;
+    }
+    .navbar a { display:flex; flex-direction:column; align-items:center; font-size:12px; color:var(--clr-text-gray); }
+    .navbar a.active { color:var(--clr-primary-start); }
+    .navbar svg { width:24px; height:24px; margin-bottom:2px; fill:currentColor; }
+  </style>
+
+  <!-- Hero -->
+  <div class="hero" id="hero">
+    <div class="hero__header">
+      <button aria-label="Назад" onclick="location.href='/Orders/';"">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="hero__logo"></div>
+      <div class="hero__title">Базис Моторс</div>
+    </div>
+    <div class="hero__main-title">Детали записи</div>
+  </div>
+
+
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Краткая информация -->
+    <div class="card summary">
+      <div class="left">
+        <div class="label">Дата и время</div>
+        <div class="value">@Html.DisplayFor(model => model.CreatedAt)</div>
+        <div class="label">Услуга</div>
+        <div class="value">@Html.DisplayFor(model => model.Usluga)</div>
+      </div>
+      <img src="https://via.placeholder.com/80" alt="Диагностика">
     </div>
 
-    <div class="content">
-        <div class="section-title">Авторaботы:</div>
+    <!-- Параметры записи -->
+    <div class="card">
+      <ul class="field-list">
+        <li><span class="label">Автомобиль</span><span class="value">@Html.DisplayFor(model => model.Auto)</span></li>
+        <li><span class="label">Сервис</span><span class="value">@Html.DisplayFor(model => model.ServiceAddress)</span></li>
+        <li><span class="label">ФИО</span><span class="value">@Html.DisplayFor(model => model.Name)</span></li>
+        <li><span class="label">Телефон</span><span class="value">@Html.DisplayFor(model => model.Phone)</span></li>
+      </ul>
 
-        <div class="line-item">
-            <span>ФИО</span>
-            <span> @Html.DisplayFor(model => model.Name)</span>
-        </div>
-        <div class="line-item">
-            <span>Номер телефона</span>
-            <span> @Html.DisplayFor(model => model.Phone)</span>
-        </div>
-        <div class="line-item">
-            <span>Комментарий</span>
-            <span>@Html.DisplayFor(model => model.Comment)</span>
-        </div>
-
-
-        <div class="section-title">Услуги:</div>
-        <div class="line-item">
-            <span>1</span>
-            <span>@Html.DisplayFor(model => model.Usluga)</span>
-        </div>
-
-
-        <div class="total">
-            <span>Итого:</span>
-            <span></span>
-        </div>
-
-        <div class="footer-section">
-            <div class="footer-title">Автомобиль</div>
-            <div class="footer-value">@Html.DisplayFor(model => model.Auto)</div>
-        </div>
-
-        <div class="footer-section">
-            <div class="footer-title">Дата записи</div>
-            <div class="footer-value">@Html.DisplayFor(model => model.CreatedAt)</div>
-        </div>
-
-        <div class="footer-section">
-            <div class="footer-title">Статус</div>
-            <div class="footer-value">В ожидании</div>
-        </div>
+      <!-- Карта сервиса -->
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps?q=ул.+Мельникайте,+125&output=embed"
+          width="100%" height="100%" frameborder="0" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
     </div>
 
+    <!-- Примечание -->
+    <div class="card">
+      <div class="label">Комментарий</div>
+      <div class="notes">
+       @Html.DisplayFor(model => model.Comment)
+      </div>
+    </div>
 
+    <!-- Кнопки действий -->
+   <!-- <div class="actions">
+      <button class="btn btn-secondary">Изменить</button>
+      <button class="btn btn-danger">Отменить</button>
+      <button class="btn btn-primary">Подтвердить</button>
+    </div>-->
+  </div>
+
+
+
+  <script>
+    const hero = document.getElementById('hero');
+    const smallHdr = document.getElementById('smallHeader');
+    window.addEventListener('scroll', () => {
+      smallHdr.classList.toggle('visible', window.scrollY >= hero.offsetHeight);
+    });
+  </script>

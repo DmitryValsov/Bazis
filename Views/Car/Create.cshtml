@@ -1,0 +1,237 @@
+@model Bazis.Models.Car
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+ <style>
+    :root {
+      --clr-bg-dark: #1F1F2F;
+      --clr-bg-light: #FFFFFF;
+      --clr-primary-start: #6366F1;
+      --clr-primary-end: #4F46E5;
+      --clr-text-white: #FFFFFF;
+      --clr-text-light: rgba(255,255,255,0.8);
+      --clr-text-dark: #111827;
+      --clr-text-gray: #6B7280;
+      --r-sm: 12px;
+      --r-lg: 20px;
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 16px;
+      --gap-lg: 24px;
+      --ff: 'Inter', sans-serif;
+      --shadow-card: 0 4px 12px rgba(0,0,0,0.1);
+      --input-height: 48px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; font-family:var(--ff); background:var(--clr-bg-light); color:var(--clr-text-dark); -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; }
+
+    /* Hero */
+    .hero {
+      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      border-bottom-left-radius: var(--r-lg);
+      border-bottom-right-radius: var(--r-lg);
+      text-align: center;
+    }
+    .hero__header { display:flex; align-items:center; justify-content:center; gap:var(--gap-sm); }
+    .hero__logo { width:32px; height:32px; background:var(--clr-primary-start); border-radius:var(--r-sm); }
+    .hero__title { font-size:18px; font-weight:500; }
+    .hero__main-title { margin-top:var(--gap-lg); font-size:32px; font-weight:700; line-height:1.1; }
+    .hero__subtitle { margin-top:var(--gap-xs); font-size:15px; color:var(--clr-text-light); }
+
+    /* Content */
+    .content {
+      padding: var(--gap-lg) var(--gap-md) calc(var(--gap-lg) + env(safe-area-inset-bottom));
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section__header { text-align:center; margin-bottom:var(--gap-lg); }
+    .section__header h2 { font-size:28px; font-weight:600; position:relative; display:inline-block; }
+    .section__header h2::after { content:''; display:block; width:30%; height:4px; background:var(--clr-primary-start); margin:var(--gap-xs) auto 0; border-radius:2px; }
+
+    /* Form card */
+    .form-card {
+      background:var(--clr-bg-light);
+      border-radius:var(--r-lg);
+      box-shadow:var(--shadow-card);
+      padding:calc(var(--gap-lg)*1.5) var(--gap-lg) var(--gap-lg);
+      margin-top:-20px;
+    }
+    .form-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:var(--gap-lg);
+    }
+  
+    .form-group { position:relative; }
+    .form-group select,
+    .form-group input { width:100%; height:var(--input-height); padding:0 var(--gap-md); font-size:16px; border:2px solid #E2E8F0; border-radius:var(--r-sm); background:var(--clr-bg-light); transition:border-color .2s; appearance:none; }
+    .form-group input:focus,
+    .form-group select:focus { outline:none; border-color:var(--clr-primary-start); box-shadow:0 4px 12px rgba(99,102,241,0.2); }
+    .form-group label {
+      position:absolute; top:50%; left:var(--gap-md);
+      transform:translateY(-50%);
+      background:var(--clr-bg-light);
+      padding:0 var(--gap-xs);
+      color:var(--clr-text-gray);
+      font-size:14px; font-weight:600;
+      transition:transform .2s, font-size .2s;
+      pointer-events:none;
+    }
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group select:focus + label,
+    .form-group select:not([value=""]) + label {
+      transform:translateY(-150%) scale(0.9);
+      color:var(--clr-primary-end);
+    }
+
+    /* Photo upload */
+    .photo-upload {
+      border:2px dashed var(--clr-primary-start);
+      border-radius:var(--r-sm);
+      height:150px;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      cursor:pointer; transition:background .2s;
+      position:relative;
+    }
+    .photo-upload:hover { background:rgba(99,102,241,0.05); }
+    .photo-upload input { opacity:0; position:absolute; width:100%; height:100%; top:0; left:0; cursor:pointer; }
+    .photo-upload svg { width:48px; height:48px; fill:var(--clr-primary-start); margin-bottom:var(--gap-sm); }
+    .photo-upload p { color:var(--clr-text-gray); font-size:14px; }
+
+    .form-submit {
+      display:block;
+      width:fit-content;
+      margin:var(--gap-md) auto 0;
+      padding:12px 40px;
+      font-size:16px; font-weight:600;
+      color:var(--clr-text-white);
+      background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      border:none; border-radius:var(--r-sm);
+      cursor:pointer;
+      transition:opacity .2s;
+    }
+    .form-submit:hover { opacity:0.9; }
+  </style>
+
+  <div class="hero">
+    <div class="hero__header">
+      <div class="hero__logo"></div>
+      <div class="hero__title">Базис Моторс</div>
+    </div>
+    <div class="hero__main-title">Добавить автомобиль</div>
+    <div class="hero__subtitle">Введите данные вашего авто</div>
+  </div>
+  <div class="content">
+    <div class="section__header"><h2>Новый автомобиль</h2></div>
+    <div class="form-card">
+        
+<form asp-controller="Car" id="addCarForm asp-action="Create" method="post">
+   @Html.AntiForgeryToken()
+    
+        <div class="form-grid">
+          <div class="form-group">
+            <select id="brand" name="Brand" required>
+              <option value="" disabled selected hidden></option>
+              <option>Chery</option>
+              <option>Changan</option>
+              <option>Toyota</option>
+              <option>BMW</option>
+            </select>
+            <label for="brand">Марка</label>
+          </div>
+          <div class="form-group">
+            <select id="model" name="Model" required>
+              <option value="" disabled selected hidden></option>
+            </select>
+            <label for="model">Модель</label>
+          </div>
+          <div class="form-group">
+            <select id="year" name="Year" required>
+              <option value="" disabled selected hidden></option>
+            </select>
+            <label for="year">Год выпуска</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="color" name="Color" placeholder=" " required />
+            <label for="color">Цвет</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="vin" name="VIN" placeholder=" " pattern="[A-HJ-NPR-Z0-9]{17}" maxlength="17" required />
+            <label for="vin">VIN (17 символов)</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="plate" name="GosNomer" placeholder="A111AA 116" pattern="^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\s?\d{2,3}$" required />
+            <label for="plate">Гос. номер</label>
+          </div>
+          <div class="photo-upload">
+            <svg viewBox="0 0 24 24"><path d="M19 16.9V19H5v-2.1c0-.5-.4-1-1-1-1.7 0-3 1.3-3 3v1h22v-1c0-1.7-1.3-3-3-3-.6 0-1 .5-1 1zM14 11c0-1.7-1.3-3-3-3S8 9.3 8 11c0 .6.3 1.2.8 1.6C9.1 13.9 11 16 11 16s1.9-2.1 2.2-3.4c.5-.4.8-1 .8-1.6zM18 3H6c-1.1 0-2 .9-2 2v8h2V5h12v8h2V5c0-1.1-.9-2-2-2z"/></svg>
+            <p>Нажмите или перетащите фото автомобиля</p>
+            <input type="file" id="photo" name="Img" accept="image/*" />
+          </div>
+        </div>
+        <button type="submit" value="Create" class="form-submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Populate years
+      const yearSel = document.getElementById('year');
+      const currentYear = new Date().getFullYear();
+      for(let y=currentYear; y>=1990; y--) {
+        const opt = document.createElement('option'); opt.value = y; opt.textContent = y;
+        yearSel.appendChild(opt);
+      }
+      // Models
+      const models = {
+        'Chery': ['Tiggo 8 Pro','Tiggo 4'],
+        'Changan': ['CS85 Coupe','CS75 Plus'],
+        'Toyota': ['Camry','RAV4'],
+        'BMW': ['X5','3 Series']
+      };
+      document.getElementById('brand').addEventListener('change', e => {
+        const opts = models[e.target.value] || [];
+        const msel = document.getElementById('model');
+        msel.innerHTML = '<option value="" disabled selected hidden></option>' + opts.map(m => `<option>${m}</option>`).join('');
+      });
+      // Plate mask
+      const plate = document.getElementById('plate');
+      plate.addEventListener('input', () => {
+        const allowedLetters = 'АВЕКМНОРСТУХ';
+        let v = plate.value.toUpperCase().replace(/[^АВЕКМНОРСТУХ0-9]/g, '');
+        let part = '';
+        for (let i = 0; i < v.length; i++) {
+          if (i === 0 || (i >= 4 && i < 6)) {
+            if (allowedLetters.includes(v[i])) part += v[i];
+          } else if ((i >= 1 && i <= 3) || (i >= 6 && i <= 8)) {
+            if (/[0-9]/.test(v[i])) part += v[i];
+          }
+          if (i === 5) part += ' ';
+        }
+        plate.value = part;
+      });
+      // Prevent zoom
+      const body = document.body; let scrollPos = 0;
+      const lock = () => { scrollPos = window.pageYOffset; body.style.position='fixed'; body.style.top=`-${scrollPos}px`; };
+      const unlock = () => { body.style.position=''; body.style.top=''; window.scrollTo(0, scrollPos); };
+      ['vin','plate'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('focus', lock);
+        el.addEventListener('blur', unlock);
+      });
+    });
+  </script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

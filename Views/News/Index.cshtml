@@ -12,8 +12,8 @@
     :root {
       --clr-bg-dark: #082d5f;
       --clr-bg-light: #FFFFFF;
-      --clr-primary-start: #6366F1;
-      --clr-primary-end: #4F46E5;
+      --clr-primary-start: #082d5f;
+      --clr-primary-end: #082d5f;
       --clr-text-white: #FFFFFF;
       --clr-text-light: rgba(255,255,255,0.8);
       --clr-text-dark: #111827;
@@ -40,9 +40,48 @@
     img { max-width:100%; display:block }
 
     /* =============== Большой хедер =============== */
+   
+
     .hero {
-      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
-      background: var(--clr-bg-dark);
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
+      position: relative;
+      
+      overflow: hidden;
+       padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+    }
+    /* Малый тонкий круг сверху-слева */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      left: -250px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    /* Средний круг справа */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: 50px;
+      right: -300px;
+      border: 12px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    /* Большой круг внизу-справа */
+    .hero .circle {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      bottom: -400px;
+      right: -400px;
+      border: 20px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
     }
     .hero__header {
       display:flex; align-items:center; gap:var(--gap-sm);
@@ -130,7 +169,7 @@
     }
    
     .card {
-      background:var(--clr-bg-light); border-radius:var(--r-sm);
+      background:#F4F5F7; border-radius:var(--r-sm);
       box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden;
       display:flex; flex-direction:column; transition:transform var(--transition);
     }

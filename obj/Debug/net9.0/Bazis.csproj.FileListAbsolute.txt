@@ -447,6 +447,7 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/ref/Bazis.dll
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7pxwpux83a-d36mzp6s1a.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-oanay3ftyj.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Car/Index.cshtml.rz.scp.css
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-htixjaun3e.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-htixjaun3e.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-2mnzg67vt6.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Car/Create.cshtml.rz.scp.css
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-c40tnbj2gr.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-c40tnbj2gr.gz

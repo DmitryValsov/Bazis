@@ -29,5 +29,7 @@ public class ApplicationDbContext : IdentityDbContext
 
     }
 
+public DbSet<Bazis.Models.Car> Car { get; set; } = default!;
+
 
 }

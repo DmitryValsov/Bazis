@@ -269,7 +269,9 @@ body[b-emifky0eme] {
 .active .footer-icon[b-emifky0eme] {
     color: #002B5C;
 }
-/* _content/Bazis/Views/Car/Index.cshtml.rz.scp.css */
+/* _content/Bazis/Views/Car/Create.cshtml.rz.scp.css */
+@media(min-width:600px) { .form-grid[b-kquf3nmerj] { grid-template-columns:repeat(2,1fr); } }
+@media(min-width:900px) { .form-grid[b-kquf3nmerj] { grid-template-columns:repeat(3,1fr); } }
 /* _content/Bazis/Views/Chat/Index.cshtml.rz.scp.css */
 body[b-0eb6wh48io] {
     margin: 0;
@@ -584,84 +586,7 @@ body[b-0eb6wh48io] {
     }
   
 /* _content/Bazis/Views/Orders/Details.cshtml.rz.scp.css */
-.header[b-zw19yfajys] {
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    background-color: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.header-title[b-zw19yfajys] {
-    font-size: 22px;
-    font-weight: bold;
-    flex: 1;
-    text-align: center;
-}
-
-.back-button[b-zw19yfajys] {
-    font-size: 20px;
-    color: #002B5C;
-    text-decoration: none;
-}
-
-.content[b-zw19yfajys] {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.order-number[b-zw19yfajys] {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.section-title[b-zw19yfajys] {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 20px 0 10px;
-}
-
-.line-item[b-zw19yfajys] {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.line-item span:last-child[b-zw19yfajys] {
-    color: #666;
-}
-
-.total[b-zw19yfajys] {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-}
-
-.footer-section[b-zw19yfajys] {
-    margin-top: 30px;
-}
-
-.footer-title[b-zw19yfajys] {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.footer-value[b-zw19yfajys] {
-    font-size: 14px;
-    color: #666;
-}
+@media (min-width:600px) { .actions[b-zw19yfajys] { flex-direction:row; } }
 /* _content/Bazis/Views/Orders/Index.cshtml.rz.scp.css */
 .header[b-7g9qkrt9am] {
     padding: 15px 20px;

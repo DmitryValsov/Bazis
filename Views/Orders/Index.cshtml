@@ -1,29 +1,358 @@
 @{
-    ViewData["Title"] = "Home Page";
+//    ViewData["Title"] = "Home Page";
 }
 
 
 @model IEnumerable<Bazis.Models.Order>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
 
+ <style>
+    :root {
+      --clr-bg-dark:       #1F1F2F;
+      --clr-bg-light:      #FFFFFF;
+      --clr-primary-start: #082d5f;
+      --clr-primary-end:   #082d5f;
+      --clr-text-white:    #FFFFFF;
+      --clr-text-light:    rgba(255,255,255,0.8);
+      --clr-text-dark:     #111827;
+      --clr-text-gray:     #6B7280;
+      --clr-danger:        #e30613;
+      --r-sm:              12px;
+      --r-lg:              20px;
+      --gap-xs:            4px;
+      --gap-sm:            8px;
+      --gap-md:            16px;
+      --gap-lg:            24px;
+      --ff: 'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; }
 
-<div class="header">
-        <div class="header-title">Активные записи</div>
+    /* Header */
+    .hero {
+      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+      background: var(--clr-bg-dark);
+    }
+    .hero__header { display:flex; align-items:center; }
+    .hero__header button {
+      background:none; border:none; padding:var(--gap-sm); margin-right:var(--gap-sm); cursor:pointer;
+    }
+    .hero__header button svg {
+      width:24px; height:24px; stroke:var(--clr-text-white); stroke-width:2;
+    }
+    .hero__logo {
+      width:32px; height:32px;
+      background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      border-radius:var(--r-sm); margin-right:var(--gap-sm);
+    }
+    .hero__title { font-size:18px; font-weight:500; }
+    .hero__main-title {
+      margin-top:var(--gap-lg);
+      font-size:32px; font-weight:700; line-height:1.1;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #F3F4F6;
+      border-radius: var(--r-lg);
+      margin: var(--gap-lg) 0 var(--gap-lg);
+      padding: 4px;
+      overflow: hidden;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: var(--gap-sm) 0;
+      font-weight: 600;
+      color: var(--clr-text-gray);
+      border-radius: var(--r-lg);
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .tab.active {
+      background: linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      color: white;
+    }
+
+    /* Content */
+    .content {
+      background:var(--clr-bg-light);
+      color:var(--clr-text-dark);
+      border-top-left-radius:var(--r-lg);
+      border-top-right-radius:var(--r-lg);
+      margin-top:-var(--gap-sm);
+      padding:var(--gap-lg) var(--gap-md) calc(var(--gap-lg) + env(safe-area-inset-bottom));
+      min-height: 80vh;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--gap-md);
+      color: var(--clr-text-dark);
+    }
+
+    /* Cards */
+    .card-appointment {
+      background:var(--clr-bg-light);
+      border-radius:var(--r-sm);
+      box-shadow:0 2px 8px rgba(8,45,95,0.07);
+      padding:var(--gap-md);
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--gap-md);
+      transition:box-shadow .17s;
+      cursor: pointer;
+      position:relative;
+      border: 1px solid #F3F4F6;
+    }
+    .card-appointment:hover {
+      box-shadow: 0 4px 24px rgba(8, 45, 95, 0.13);
+    }
+    .appointment-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .appointment-info .date {
+      font-size: 14px;
+      color: var(--clr-text-gray);
+      margin-bottom: var(--gap-xs);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .appointment-info .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: var(--clr-primary-start);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .appointment-info .address {
+      font-size: 14px;
+      color: var(--clr-text-gray);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .appointment-img {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--r-sm);
+      object-fit: cover;
+      margin-left: var(--gap-md);
+      background: #EEF2FF;
+    }
+    .btn-edit {
+      margin-top: var(--gap-xs);
+      background: #F3F4F6;
+      color: var(--clr-primary-start);
+      padding: 5px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+      transition: background .17s;
+    }
+    .btn-edit:hover {
+      background: #EEF2FF;
+    }
+    .status {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--clr-text-gray);
+    }
+    .status.done {
+      color: #00923F;
+    }
+    .status.canceled {
+      color: var(--clr-danger);
+    }
+
+    /* Banner */
+    .card-banner {
+      background: #233E68;
+      border-radius: var(--r-sm);
+      color: #fff;
+      padding: var(--gap-md);
+      margin-bottom: var(--gap-lg);
+      box-shadow: 0 2px 12px rgba(8, 45, 95, 0.07);
+      font-weight: 600;
+    }
+    .card-banner p {
+      margin-top: var(--gap-xs);
+      font-size: 14px;
+      opacity: 0.92;
+    }
+
+    .btn-add {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
+      color: white;
+      padding: 14px 36px;
+      border-radius: var(--r-lg);
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(8, 45, 95, 0.12);
+      z-index: 10;
+      border: none;
+      transition: background .2s;
+      letter-spacing: .03em;
+    }
+    .btn-add:hover { background: #164385; }
+
+    .show-more-link {
+      font-size: 14px;
+      color: var(--clr-primary-start);
+      margin-top: 0;
+      display: inline-block;
+      cursor: pointer;
+      padding-left: 2px;
+      font-weight: 600;
+      transition:color .16s;
+    }
+    .show-more-link:hover {
+      color: var(--clr-primary-end);
+      text-decoration: underline;
+    }
+
+    /* Navbar */
+    .navbar {
+      position:fixed; bottom:0; left:0; right:0;
+      background:var(--clr-bg-light);
+      display:flex; justify-content:space-around; align-items:center;
+      padding:8px 0 calc(env(safe-area-inset-bottom)+4px);
+      box-shadow:0 -1px 4px rgba(0,0,0,0.05);
+      z-index:100;
+    }
+    .navbar a { display:flex; flex-direction:column; align-items:center; font-size:12px; color:var(--clr-text-gray); }
+    .navbar a.active { color:var(--clr-primary-start); }
+    .navbar svg { width:24px; height:24px; margin-bottom:2px; fill:currentColor; }
+  </style>
+
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero__header">
+      <button aria-label="Назад" onclick="history.back()">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="hero__logo"></div>
+      <div class="hero__title">Базис Моторс</div>
+    </div>
+    <div class="hero__main-title">Записи</div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('current')">Текущие</div>
+      <div class="tab" onclick="showTab('history')">История</div>
     </div>
 
-    <div class="content">
-       @foreach (var item in Model) {
-            <a asp-action="Details" asp-route-id="@item.Id">
-                <div class="service-history-item">
-                    <div class="date">@Html.DisplayFor(modelItem => item.CreatedAt)</div>
-                    <div class="details">Заказ-наряд №@Html.DisplayFor(modelItem => item.Id)</div>
-                    <div class="price"></div>
-                </div>
-            </a>
-        }
+    <div class="card-banner">
+      -20% скидка
+      <p>на обслуживание автомобиля<br>Предложение действует: 11 ч. 24 м.</p>
     </div>
+
+    <!-- Ближайшие записи -->
+    <div id="current-list">
+      <div class="section-title">Ближайшие</div>
+      @foreach (var item in Model) {
+      <a class="card-appointment" asp-action="Details" asp-route-id="@item.Id">
+        <div class="appointment-info">
+          <div class="date">@Html.DisplayFor(modelItem => item.CreatedAt)</div>
+          <div class="title">@Html.DisplayFor(modelItem => item.Usluga)</div>
+          <div class="address">@Html.DisplayFor(modelItem => item.ServiceAddress)</div>
+          <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>
+        </div>
+        <img src="https://via.placeholder.com/64x64?text=TO" alt="" class="appointment-img">
+      </a>
+      }
+      
+      <span class="show-more-link" onclick="showTab('current', true)">Посмотреть все</span>
+    </div>
+
+    <!-- История записей -->
+    <div id="history-list" style="display:none;">
+      <div class="section-title">История</div>
+      
+     <a class="card-appointment" href="record-detail.html">
+        <div class="appointment-info">
+          <div class="date">02 февраля 2025, 09:30</div>
+          <div class="title">Диагностика подвески</div>
+          <div class="address">ул. Широтная, 201</div>
+          <div class="status canceled">Отменено</div>
+        </div>
+        <img src="https://via.placeholder.com/64x64?text=Diag" alt="" class="appointment-img">
+      </a>
+      <a class="card-appointment" href="record-detail.html">
+        <div class="appointment-info">
+          <div class="date">02 февраля 2025, 09:30</div>
+          <div class="title">Диагностика подвески</div>
+          <div class="address">ул. Широтная, 201</div>
+          <div class="status canceled">Отменено</div>
+        </div>
+        <img src="https://via.placeholder.com/64x64?text=Diag" alt="" class="appointment-img">
+      </a>
+      <span class="show-more-link" onclick="showTab('history', true)">Посмотреть все</span>
+    </div>
+  </div>
+
+  <a href="record-add.html" class="btn-add">+ Запись</a>
+
+  <nav class="navbar">
+    <a href="index.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+      <span>Главная</span>
+    </a>
+    <a href="records.html" class="active">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+      <span>Записи</span>
+    </a>
+    <a href="profile.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+      <span>Профиль</span>
+    </a>
+  </nav>
+
+  <script>
+    // Tabs switch logic
+    function showTab(tab, showAll) {
+      document.querySelectorAll('.tab').forEach((el, i) => {
+        el.classList.toggle('active', (tab === 'current' && i === 0) || (tab === 'history' && i === 1));
+      });
+      document.getElementById('current-list').style.display = (tab === 'current') ? 'block' : 'none';
+      document.getElementById('history-list').style.display = (tab === 'history') ? 'block' : 'none';
+
+      // Раскрытие "Посмотреть все" (для примера - просто скрываем кнопку, карточки не ограничены)
+      if (showAll) {
+        const list = tab === 'current' ? document.getElementById('current-list') : document.getElementById('history-list');
+        let btn = list.querySelector('.show-more-link');
+        if (btn) btn.style.display = 'none';
+        // Тут можешь дописать логику для загрузки всех записей или убрать ограничение по количеству
+      }
+    }
+  </script>
+
+
+
 

@@ -12,6 +12,7 @@ using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bazis.Controllers
 {
@@ -20,25 +21,52 @@ namespace Bazis.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public OrdersController(ApplicationDbContext context, IWebHostEnvironment env)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public OrdersController(ApplicationDbContext context, IWebHostEnvironment env, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _env = env;
+            _userManager = userManager;
         }
 
         // GET: Orders
 
-        public IActionResult DashBoard()
+        public async Task<IActionResult> DashBoard()
         {
         
-            return View();
+             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound(); // Или перенаправить на страницу входа
+            }
+
+            var applicationDbContext = await _context.Orders
+            .Where(p => p.UserId == user.Id) // Предполагается, что у вас есть поле UserId в модели Post
+            .ToListAsync();
+
+            //var applicationDbContext = _context.Orders.Include(o => o.UserId);
+            //return View(await applicationDbContext.ToListAsync());
+            return View(applicationDbContext);
         }
 
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Orders.Include(o => o.User);
-            return View(await applicationDbContext.ToListAsync());
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound(); // Или перенаправить на страницу входа
+            }
+
+            var applicationDbContext = await _context.Orders
+            .Where(p => p.UserId == user.Id) // Предполагается, что у вас есть поле UserId в модели Post
+            .ToListAsync();
+
+            //var applicationDbContext = _context.Orders.Include(o => o.UserId);
+            //return View(await applicationDbContext.ToListAsync());
+            return View(applicationDbContext);
         }
 
         // GET: Orders/Details/5
