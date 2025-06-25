@@ -15,25 +15,25 @@
      <aside class="sidebar" id="sidebar">
     <div class="logo">Admin</div>
     <nav class="nav">
-      <a href="#" data-page="dashboard" class="active"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9h-3v9H6v-9z"/></svg><span>Дашборд</span></a>
-      <a href="#" data-page="appointments"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg><span>Записи</span></a>
-      <a href="#" data-page="users"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22v-2a8 8 0 0116 0v2"/></svg><span>Пользователи</span></a>
-      <a href="#" data-page="rewards"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v6c0 5 5 9 10 9s10-4 10-9V7z"/></svg><span>Бонусы</span></a>
-      <a href="#" data-page="cars"><svg viewBox="0 0 24 24"><path d="M3 13v-2l1-2h16l1 2v2H3zm0 2a2 2 0 110 4 2 2 0 010-4zm16 0a2 2 0 110 4 2 2 0 010-4z"/></svg><span>Авто</span></a>
-      <a href="#" data-page="centers"><svg viewBox="0 0 24 24"><path d="M12 7l5 5h-3v6h-4v-6H7z"/></svg><span>Центры/Мастера</span></a>
-      <a href="#" data-page="services"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg><span>Услуги</span></a>
-      <a href="#" data-page="news"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg><span>Новости</span></a>
-      <a href="#" data-page="promotions"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v6c0 5 5 9 10 9s10-4 10-9V7z"/></svg><span>Акции</span></a>
-      <a href="#" data-page="faq"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9h6v6H9z"/></svg><span>FAQ</span></a>
-      <a href="#" data-page="reports"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zm0 6h14v2H5zm0 6h14v2H5z"/></svg><span>Отчёты</span></a>
-      <a href="#" data-page="settings"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8z"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2M4.93 4.93l1.41 1.41m12.02 12.02l1.41 1.41M4.93 19.07l1.41-1.41m12.02-12.02l1.41-1.41"/></svg><span>Настройки</span></a>
+      <a href="/Admin/"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9h-3v9H6v-9z"/></svg><span>Дашборд</span></a>
+      <a href="/Admin/Orders/"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg><span>Записи</span></a>
+      <a><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22v-2a8 8 0 0116 0v2"/></svg><span>Пользователи</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M12 2L2 7v6c0 5 5 9 10 9s10-4 10-9V7z"/></svg><span>Бонусы</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M3 13v-2l1-2h16l1 2v2H3zm0 2a2 2 0 110 4 2 2 0 010-4zm16 0a2 2 0 110 4 2 2 0 010-4z"/></svg><span>Авто</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M12 7l5 5h-3v6h-4v-6H7z"/></svg><span>Центры/Мастера</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg><span>Услуги</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg><span>Новости</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M12 2L2 7v6c0 5 5 9 10 9s10-4 10-9V7z"/></svg><span>Акции</span></a>
+      <a><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9h6v6H9z"/></svg><span>FAQ</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zm0 6h14v2H5zm0 6h14v2H5z"/></svg><span>Отчёты</span></a>
+      <a><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8z"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2M4.93 4.93l1.41 1.41m12.02 12.02l1.41 1.41M4.93 19.07l1.41-1.41m12.02-12.02l1.41-1.41"/></svg><span>Настройки</span></a>
     </nav>
   </aside>
   <div class="overlay" id="overlay"></div>
 
-  <div class="main" id="main">
+  <div class="main">
     <header class="header">
-      <button class="menu-btn" id="menuBtn" aria-label="Меню">
+      <button class="menu-btn" id="menuBtn" aria-label="Открыть меню">
         <svg viewBox="0 0 24 24"><path stroke="#111" stroke-width="2" stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <div class="user">
@@ -42,12 +42,14 @@
       </div>
     </header>
 
+
             @RenderBody()
 
   </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

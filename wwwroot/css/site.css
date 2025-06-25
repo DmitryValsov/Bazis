@@ -1,15 +1,32 @@
- /* Нижняя навигация */
- .navbar {
-  position:fixed; bottom:0; left:0; right:0;
-  background:var(--clr-bg-light);
+ /* Bottom Nav */
+ .nav-hero {
+  position:sticky; bottom:0; left:0; right:0;
+  height:64px;;
+  background:linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
   display:flex; justify-content:space-around; align-items:center;
-  padding:8px 0 calc(env(safe-area-inset-bottom)+4px);
-  box-shadow:0 -1px 4px rgba(0,0,0,0.05);
+  border-top-left-radius:var(--r-lg); border-top-right-radius:var(--r-lg);
+  overflow:hidden;
 }
-.navbar a {
+.nav-hero::before, .nav-hero::after, .nav-hero .big-circle { content: ''; position:absolute; border-radius:50%; }
+.nav-hero::before {
+  width:300px; height:300px; top:-150px; left:-150px;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.nav-hero::after {
+  width:400px; height:400px; top:-100px; right:-200px;
+  border:8px solid rgba(255,255,255,0.08);
+}
+.nav-hero .big-circle {
+  width:500px; height:500px; bottom:-250px; right:-250px;
+  border:12px solid rgba(255,255,255,0.06);
+}
+.nav-hero a {
+  position:relative; z-index:1;
+  text-decoration:none; color:rgba(255,255,255,0.7);
   display:flex; flex-direction:column; align-items:center;
-  font-size:12px; color:var(--clr-text-gray);
-  transition:color var(--transition);
+  font-size:12px;
 }
-.navbar a.active { color:var(--clr-primary-start); }
-.navbar svg { width:24px; height:24px; margin-bottom:2px; fill:currentColor; }
+.nav-hero a.active { color:#FFFFFF; }
+.nav-hero svg {
+  width:24px; height:24px; fill:currentColor; margin-bottom:4px;
+}

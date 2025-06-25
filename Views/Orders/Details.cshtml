@@ -8,10 +8,10 @@
  <style>
     /* =============== Переменные =============== */
     :root {
-      --clr-bg-dark:       #1F1F2F;
+    --clr-bg-dark:       #082d5f;
       --clr-bg-light:      #FFFFFF;
-      --clr-primary-start: #082d5f;
-      --clr-primary-end:   #082d5f;
+      --clr-primary-start: #0C2E5E;
+      --clr-primary-end:   #0A254D;
       --clr-text-white:    #FFFFFF;
       --clr-text-light:    rgba(255,255,255,0.8);
       --clr-text-dark:     #111827;
@@ -38,9 +38,47 @@
     img, iframe { max-width:100%; display:block; }
 
     /* =============== Hero Header =============== */
-    .hero {
-      padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
-      background: var(--clr-bg-dark);
+    /* =============== Большой хедер (hero) =============== */
+     .hero {
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
+      position: relative;
+      
+      overflow: hidden;
+       padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+    }
+    /* Малый тонкий круг сверху-слева */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      left: -250px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    /* Средний круг справа */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: 50px;
+      right: -300px;
+      border: 12px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    /* Большой круг внизу-справа */
+    .hero .circle {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      bottom: -400px;
+      right: -400px;
+      border: 20px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
     }
     .hero__header { display:flex; align-items:center; }
     .hero__header button {
@@ -81,7 +119,7 @@
 
     /* =============== Content =============== */
     .content {
-      background:var(--clr-bg-light);
+      background:#F4F5F7;
       color:var(--clr-text-dark);
       border-top-left-radius:var(--r-lg);
       border-top-right-radius:var(--r-lg);
@@ -92,9 +130,9 @@
 
     /* =============== Card =============== */
     .card {
-      background:var(--clr-bg-light);
+      background:#fff;
       border-radius:var(--r-sm);
-      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
       padding:var(--gap-md);
       margin-bottom:var(--gap-lg);
     }
@@ -102,8 +140,8 @@
     /* Summary block */
     .summary { display:flex; justify-content:space-between; align-items:center; }
     .summary .left { display:flex; flex-direction:column; gap:var(--gap-xs); }
-    .summary .left .label { font-size:14px; color:var(--clr-text-gray); }
-    .summary .left .value { font-size:20px; font-weight:600; color:var(--clr-text-dark); }
+    .summary .left .label { font-size:12px; color:var(--clr-text-gray); }
+    .summary .left .value { font-size:16px; font-weight:600; color:var(--clr-text-dark); }
     .summary img { width:80px; height:80px; border-radius:var(--r-sm); object-fit:cover; }
 
     /* Field list */
@@ -113,8 +151,8 @@
       padding:var(--gap-sm) 0; border-bottom:1px solid var(--clr-text-gray);
     }
     .field-list li:last-child { border:none; }
-    .field-list .label { color:var(--clr-text-gray); }
-    .field-list .value { font-weight:600; }
+    .field-list .label { color:var(--clr-text-gray); font-size: 14px;}
+    .field-list .value { font-weight:600; font-size: 14px;}
 
     /* Map */
     .map-container {

@@ -5,7 +5,7 @@
     :root {
       --clr-bg-dark:       #082d5f;
        --clr-bg-light:      #FFFFFF;
- --clr-primary-start: #0C2E5E;
+     --clr-primary-start: #0C2E5E;
       --clr-primary-end:   #0A254D;
       --clr-text-white:    #FFFFFF;
       --clr-text-light:    rgba(255,255,255,0.8);
@@ -22,7 +22,7 @@
       --gap-md: 16px;
       --gap-lg: 24px;
       --ff: 'Inter', sans-serif;
-      --shadow-card: 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-card: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     /* =============== Сброс =============== */
@@ -168,11 +168,12 @@
 
     /* =============== Контент-контейнер =============== */
     .content {
-      background: var(--clr-bg-light);
+      background: #F4F5F7;
       color: var(--clr-text-dark);
-      padding: var(--gap-lg) var(--gap-md) calc(var(--gap-lg) + env(safe-area-inset-bottom));
+      padding: var(--gap-lg) var(--gap-md) 
+      calc(var(--gap-lg) + env(safe-area-inset-bottom));
       border-top-left-radius: var(--r-lg);
-    border-top-right-radius: var(--r-lg);
+      border-top-right-radius: var(--r-lg);
       /* скроллит вся страница, поэтому overflow у контента не нужен */
     }
     .section {
@@ -201,7 +202,7 @@
     }
     .car-item {
       display: flex;
-      background: #F4F5F7;
+      background: #fff;
       border-radius: var(--r-sm);
       box-shadow: var(--shadow-card);
       overflow: hidden;
@@ -283,7 +284,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #F4F5F7;
+      background: #fff;
       border-radius: var(--r-sm);
       box-shadow: var(--shadow-card);
       padding: var(--gap-md);

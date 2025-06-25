@@ -1,46 +1,209 @@
- <div class="header">
-        <h1>Поддержка</h1>
+<style>
+    /* =============== Переменные =============== */
+    :root {
+      --clr-bg-dark:       #1F1F2F;
+      --clr-bg-light:      #FFFFFF;
+      --clr-primary-start: #082d5f;
+      --clr-primary-end:   #082d5f;
+      --clr-text-white:    #FFFFFF;
+      --clr-text-dark:     #111827;
+      --clr-text-gray:     #6B7280;
+      --clr-bubble-manager:#F3F4F6;
+      --clr-bubble-user:   #082d5f;
+      --clr-input-bg:      #F3F4F6;
+      --r-sm:              12px;
+      --r-lg:              20px;
+      --gap-xs:            4px;
+      --gap-sm:            8px;
+      --gap-md:            16px;
+      --gap-lg:            24px;
+      --ff: 'Inter', sans-serif;
+      --nav-height:        56px;
+    }
+    /* Reset */
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body {
+      font-family: var(--ff);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      overflow: hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; }
+ .nav-hero {
+  position: fixed !important;
+  }
+    /* Hero Header */
+.hero {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
+      position: relative;
+      
+      overflow: hidden;
+       padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
+    }
+    /* Малый тонкий круг сверху-слева */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      left: -250px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    /* Средний круг справа */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: 50px;
+      right: -300px;
+      border: 12px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    /* Большой круг внизу-справа */
+    .hero .circle {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      bottom: -400px;
+      right: -400px;
+      border: 20px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .hero__header { display:flex; align-items:center; }
+    .hero__header button { background:none; border:none; padding:var(--gap-sm); margin-right:var(--gap-sm); cursor:pointer; }
+    .hero__header button svg { width:24px; height:24px; stroke:var(--clr-text-white); stroke-width:2; }
+    .hero__logo { width:32px; height:32px; background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end)); border-radius:var(--r-sm); margin-right:var(--gap-sm); }
+    .hero__title { font-size:18px; font-weight:500; color:var(--clr-text-white); }
+    .hero__main-title { margin-top:var(--gap-lg); font-size:32px; font-weight:700; line-height:1.1; color:var(--clr-text-white); }
+
+    /* Small Header on scroll */
+    .small-header { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; padding:env(safe-area-inset-top) var(--gap-md) 8px; background:var(--clr-bg-dark); opacity:0; pointer-events:none; transition:opacity .3s; z-index:100; }
+    .small-header.visible { opacity:1; pointer-events:auto; }
+    .small-header button { background:none; border:none; padding:var(--gap-sm); cursor:pointer; }
+    .small-header button svg { width:24px; height:24px; stroke:var(--clr-text-white); stroke-width:2; }
+    .small-header .title { flex:1; text-align:center; font-size:18px; font-weight:500; color:var(--clr-text-white); }
+
+    /* Content */
+    .content {
+      position:absolute; top: calc(env(safe-area-inset-top) + 112px);
+      bottom: calc(var(--nav-height) + var(--gap-lg) + env(safe-area-inset-bottom));
+      left:0; right:0;
+      background:var(--clr-bg-light);
+      color:var(--clr-text-dark);
+      border-top-left-radius:var(--r-lg);
+      border-top-right-radius:var(--r-lg);
+      padding:var(--gap-lg) var(--gap-md) var(--gap-lg);
+      display:flex; flex-direction:column;
+      overflow-y:auto;
+    }
+    .subtitle { font-size:14px; color:var(--clr-text-gray); margin-bottom:var(--gap-md); }
+
+    /* Chat */
+    .chat { flex:1; display:flex; flex-direction:column; gap:var(--gap-sm); }
+    .message { max-width:75%; padding:var(--gap-sm) var(--gap-md); border-radius:var(--r-lg); font-size:14px; line-height:1.4; position:relative; }
+    .manager { align-self:flex-start; background:var(--clr-bubble-manager); color:var(--clr-text-dark); border-top-left-radius:0; }
+    .manager::before { content:''; position:absolute; left:-6px; top:12px; border:6px solid transparent; border-right-color:var(--clr-bubble-manager); }
+    .user { align-self:flex-end; background:var(--clr-bubble-user); color:var(--clr-text-white); border-top-right-radius:0; }
+    .user::after { content:''; position:absolute; right:-6px; top:12px; border:6px solid transparent; border-left-color:var(--clr-bubble-user); }
+    .timestamp { font-size:12px; color:var(--clr-text-gray); margin-top:var(--gap-xs); }
+
+    /* Input fixed */
+    .input-area {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(var(--nav-height) + env(safe-area-inset-bottom));
+      padding: var(--gap-md);
+      background: var(--clr-bg-light);
+      border-top: 1px solid var(--clr-input-bg);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      z-index: 100;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: calc(var(--gap-md) + 2px) var(--gap-lg);
+      border: 1px solid var(--clr-input-bg);
+      border-radius: var(--r-lg);
+      background: var(--clr-input-bg);
+      font-size: 16px;
+    }
+
+    .input-area button {
+      background: linear-gradient(90deg, var(--clr-primary-start), var(--clr-primary-end));
+      color: var(--clr-text-white);
+      border: none;
+      border-radius: var(--r-lg);
+      padding: var(--gap-md) calc(var(--gap-lg) * 1.5);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  
+  </style>
+
+
+  <!-- Hero -->
+  <div class="hero" id="hero">
+    <div class="hero__header">
+      <button aria-label="Назад" onclick="history.back()">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="hero__logo"></div>
+      <div class="hero__title">Базис Моторс</div>
     </div>
+    <div class="hero__main-title">Чат с менеджером</div>
+  </div>
 
-    <!--<div class="chat-container" id="chat-container">-->
-   
-         <div id="messages"></div>
-   
+  <!-- Small header -->
+  <div class="small-header" id="smallHeader">
+    <button aria-label="Назад" onclick="history.back()">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="title">Чат с менеджером</div>
+    <div style="width:32px;"></div>
+  </div>
 
-    <div class="chat-footer">
-         <div id="input">
-        <input type="text"  class="chat-input" id="msg" placeholder="Напишите сообщение...">
-        <button class="send-button" id="send">Отправить</button>
-        </div>
+  <!-- Chat Content -->
+  <div class="content">
+    <div class="subtitle">Отвечает обычно в течение часа</div>
+    <div class="chat" id="chat">
+      <div class="message manager">
+        Здравствуйте! Хотел записаться на замену масла.
+        <div class="timestamp">18:07</div>
+      </div>
+      <div class="message user">
+        Добрый день! Запишите меня на 15 апреля в 11:00, пожалуйста.
+        <div class="timestamp">18:09</div>
+      </div>
+      <div class="message manager">
+        Готово, ваша запись подтверждена.
+        <div class="timestamp">18:10</div>
+      </div>
     </div>
+  </div>
+
+  <!-- Input -->
+  <div class="input-area">
+    <input type="text" placeholder="Написать сообщение...">
+    <button>Отправить</button>
+  </div>
 
 
- 
- <script>
-   // 1) Настраиваем подключение к хабу
-   const connection = new signalR.HubConnectionBuilder()
-     .withUrl("/chatHub")
-     .build();
- 
-   // 2) Обработка приходящих сообщений
-   connection.on("ReceiveMessage", (user, text) => {
-     const msg = document.createElement("div");
-     msg.textContent = user + ": " + text;
-     document.getElementById("messages").appendChild(msg);
-     document.getElementById("messages").scrollTop = 1e9;
-   });
- 
-   // 3) Запускаем подключение
-   connection.start()
-     .then(() => console.log("SignalR подключён"))
-     .catch(err => console.error(err.toString()));
- 
-   // 4) Отправка сообщений на сервер
-   document.getElementById("send").addEventListener("click", () => {
-     const text = document.getElementById("msg").value;
-     if (!text) return;
-     connection.invoke("SendMessage", text)
-       .catch(err => console.error(err.toString()));
-     document.getElementById("msg").value = "";
-   });
- </script>
+
+  
+
+  <script>
+    const smallHdr = document.getElementById('smallHeader');
+    window.addEventListener('scroll', () => smallHdr.classList.toggle('visible', window.scrollY >= document.getElementById('hero').offsetHeight));
+    const chatEl = document.getElementById('chat'); chatEl.scrollTop = chatEl.scrollHeight;
+  </script>

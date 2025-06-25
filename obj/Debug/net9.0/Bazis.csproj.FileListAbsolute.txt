@@ -374,7 +374,6 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/v0zgfp0y55-87fc7y1x7t.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/yfc7ypekbg-mlv21k5csn.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/bluhkdfuoc-61n19gt1b8.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-xtxxf3hu2r.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/mq2dgs3ezn-bqjiyaj88i.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/3n3gnvu7gj-c2jlpeoesf.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i5yu8xyzye-erw9l3u2r3.gz
@@ -446,8 +445,9 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/Bazis.genruntimeconfig.cache
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/ref/Bazis.dll
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7pxwpux83a-d36mzp6s1a.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-oanay3ftyj.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-2mnzg67vt6.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Car/Create.cshtml.rz.scp.css
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-c40tnbj2gr.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-c40tnbj2gr.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-hng4t1704z.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-hng4t1704z.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-v1boqzggr0.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-uq58bun904.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-8iq8b5p39j.gz

@@ -2,60 +2,25 @@
     ViewData["Title"] = "Index";
 }
  <section class="content">
-      <!-- Dashboard -->
-      <div id="dashboard" class="section-page active">
-        <h1>Дашборд</h1>
-        <div class="cards">
-          <div class="card"><div class="label">Новые пользователи</div><div class="value">1 254</div></div>
-          <div class="card"><div class="label">Активные записи</div><div class="value">314</div></div>
-          <div class="card"><div class="label">Ожидают подтверждения</div><div class="value">27</div></div>
-          <div class="card"><div class="label">Начислено бонусов</div><div class="value">75 600</div></div>
-        </div>
-        <div class="charts">
-          <div class="chart-card"><h2>Записи за неделю</h2><canvas id="chart-appointments"></canvas></div>
-          <div class="chart-card"><h2>Рост пользователей</h2><canvas id="chart-users"></canvas></div>
-        </div>
+      <!-- Только dashboard -->
+      <h1>Дашборд</h1>
+      <div class="cards">
+        <div class="card"><div class="label">Новые пользователи</div><div class="value">1 254</div></div>
+        <div class="card"><div class="label">Активные записи</div><div class="value">314</div></div>
+        <div class="card"><div class="label">Ожидают подтверждения</div><div class="value">27</div></div>
+        <div class="card"><div class="label">Начислено бонусов</div><div class="value">75 600</div></div>
       </div>
- </section>
+      <div class="charts">
+        <div class="chart-card"><h2>Записи за неделю</h2><canvas id="chart-appointments"></canvas></div>
+        <div class="chart-card"><h2>Рост пользователей</h2><canvas id="chart-users"></canvas></div>
+      </div>
+    </section>
+  </div>
 
- <script>
-    // Sidebar toggle
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.querySelectorAll('.nav a');
-
-    function openSidebar() {
-      sidebar.classList.add('open');
-      overlay.classList.add('visible');
-    }
-    function closeSidebar() {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('visible');
-    }
-
-    menuBtn.addEventListener('click', () => {
-      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-    });
-    overlay.addEventListener('click', closeSidebar);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeSidebar();
-    });
-
-    // Page navigation
-    navLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        const page = link.getAttribute('data-page');
-        document.querySelectorAll('.section-page').forEach(sec => {
-          sec.classList.toggle('active', sec.id === page);
-        });
-        if (window.innerWidth < 768) closeSidebar();
-      });
-    });
-
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+   
     // Charts
     new Chart(document.getElementById('chart-appointments').getContext('2d'), {
       type: 'line',
@@ -64,7 +29,7 @@
         datasets: [{
           data: [45,60,75,50,90,30,20],
           borderColor: 'rgba(99,102,241,1)',
-          backgroundColor: 'rgba(99,102,241,0.2)',
+          backgroundColor: 'rgba(99,102,241,0.15)',
           tension: 0.4
         }]
       },
