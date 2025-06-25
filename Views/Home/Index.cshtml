@@ -278,7 +278,7 @@
     box-shadow:0 2px 6px rgba(0,0,0,0.1);
   }
   .news-item img {
-    width:80px; height:80px; object-fit:cover; border-radius:var(--r-sm);
+    width:120px; height:80px; object-fit:cover; border-radius:var(--r-sm);
   }
   .news-item .info {
     flex:1;
@@ -506,7 +506,15 @@
 {
   <a href="/News/Details/@news.Id">
         <li class="news-item">
-          <img src="/img/cars/geely-1.jpeg" alt="">
+
+            @if (!string.IsNullOrEmpty(news.Img))
+         {
+          <img src="~/images/@news.Img" alt="Chery Tiggo 8 Pro">
+          }
+          else
+          {
+          <img src="/img/cars/not-found.jpeg" alt="">
+          }
           <div class="info">
             <h4>@Html.DisplayFor(modelItem => news.Title)</h4>
             <p>@Html.DisplayFor(modelItem => news.PreviewText)</p>

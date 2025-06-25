@@ -223,7 +223,15 @@
       @foreach (var item in Model) {
       <a asp-action="Details" asp-route-id="@item.Id">      
         <div class="card">
+
+          @if (!string.IsNullOrEmpty(item.Img))
+         {
+          <img src="~/images/@item.Img" alt="Chery Tiggo 8 Pro">
+          }
+          else
+          {
         <img src="/img/news/news.jpeg" alt="Открытие нового сервиса">
+        }
         <div class="card-body">
           <time datetime="2025-06-18">@Html.DisplayFor(modelItem => item.ReleaseDate)</time>
           <h4>@Html.DisplayFor(modelItem => item.Title)</h4>

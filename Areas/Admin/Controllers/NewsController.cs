@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bazis.Data;
 using Bazis.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Bazis.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace Bazis.Areas.Admin.Controllers
     public class NewsController : Controller
     {
         private readonly ApplicationDbContext _context;
+         private readonly IWebHostEnvironment _hostEnv;
 
-        public NewsController(ApplicationDbContext context)
+        public NewsController(ApplicationDbContext context, IWebHostEnvironment hostEnv)
         {
             _context = context;
+              _hostEnv = hostEnv;
         }
 
         // GET: Admin/News
@@ -57,15 +60,45 @@ namespace Bazis.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,PreviewText,DetailText,NamePicture,Path,ReleaseDate")] News news)
+        public async Task<IActionResult> Create([Bind("Id,Title,PreviewText,DetailText,NamePicture,Path,ReleaseDate,ImageFile")] News news)
         {
+
+
             if (ModelState.IsValid)
+    {
+        // Если файл выбран — сохраняем
+        if (news.ImageFile is not null)
+        {
+            // Получаем путь к wwwroot/images
+            string uploads = Path.Combine(_hostEnv.WebRootPath, "images");
+            // Делаем уникальное имя
+            string fileName = Path.GetFileNameWithoutExtension(news.ImageFile.FileName)
+                              + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                              + Path.GetExtension(news.ImageFile.FileName);
+            string fullPath = Path.Combine(uploads, fileName);
+
+            // Сохраняем файл на диск
+            using var fileStream = new FileStream(fullPath, FileMode.Create);
+            await news.ImageFile.CopyToAsync(fileStream);
+
+            // В БД сохраняем только имя файла
+            news.Img = fileName;
+        }
+
+        _context.Add(news);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    return View(news);
+
+            /*if (ModelState.IsValid)
             {
                 _context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(news);
+            */
         }
 
         // GET: Admin/News/Edit/5
