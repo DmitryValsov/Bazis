@@ -4,7 +4,8 @@
   height:64px;;
   background:linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
   display:flex; justify-content:space-around; align-items:center;
-  border-top-left-radius:var(--r-lg); border-top-right-radius:var(--r-lg);
+  /*border-top-left-radius:var(--r-lg); 
+  border-top-right-radius:var(--r-lg);*/
   overflow:hidden;
 }
 .nav-hero::before, .nav-hero::after, .nav-hero .big-circle { content: ''; position:absolute; border-radius:50%; }

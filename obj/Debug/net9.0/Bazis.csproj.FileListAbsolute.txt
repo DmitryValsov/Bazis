@@ -450,4 +450,4 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-hng4t1704z.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-v1boqzggr0.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-uq58bun904.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-8iq8b5p39j.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-6rh1cd3rxe.gz
