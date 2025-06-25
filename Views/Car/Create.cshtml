@@ -133,23 +133,22 @@
     <div class="section__header"><h2>Новый автомобиль</h2></div>
     <div class="form-card">
         
-<form asp-controller="Car" id="addCarForm asp-action="Create" method="post">
+<form asp-controller="Car" id="addCarForm asp-action="Create" method="post" enctype="multipart/form-data">
    @Html.AntiForgeryToken()
     
         <div class="form-grid">
           <div class="form-group">
-            <select id="brand" name="Brand" required>
-              <option value="" disabled selected hidden></option>
-              <option>Chery</option>
-              <option>Changan</option>
-              <option>Toyota</option>
-              <option>BMW</option>
+
+            
+
+            <select id="carBrand" name="Brand" required>
+               <option value="">Выберите марку</option>
             </select>
             <label for="brand">Марка</label>
           </div>
           <div class="form-group">
-            <select id="model" name="Model" required>
-              <option value="" disabled selected hidden></option>
+            <select id="carModel" name="Model" required disabled>
+               <option value="">Сначала выберите марку</option>
             </select>
             <label for="model">Модель</label>
           </div>
@@ -171,11 +170,13 @@
             <input type="text" id="plate" name="GosNomer" placeholder="A111AA 116" pattern="^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\s?\d{2,3}$" required />
             <label for="plate">Гос. номер</label>
           </div>
+
           <div class="photo-upload">
             <svg viewBox="0 0 24 24"><path d="M19 16.9V19H5v-2.1c0-.5-.4-1-1-1-1.7 0-3 1.3-3 3v1h22v-1c0-1.7-1.3-3-3-3-.6 0-1 .5-1 1zM14 11c0-1.7-1.3-3-3-3S8 9.3 8 11c0 .6.3 1.2.8 1.6C9.1 13.9 11 16 11 16s1.9-2.1 2.2-3.4c.5-.4.8-1 .8-1.6zM18 3H6c-1.1 0-2 .9-2 2v8h2V5h12v8h2V5c0-1.1-.9-2-2-2z"/></svg>
             <p>Нажмите или перетащите фото автомобиля</p>
-            <input type="file" id="photo" name="Img" accept="image/*" />
+            <input  id="photo" type="file" name="ImageFile" accept="image/*" />
           </div>
+        
         </div>
         <button type="submit" value="Create" class="form-submit">Сохранить</button>
       </form>
@@ -191,7 +192,7 @@
         yearSel.appendChild(opt);
       }
       // Models
-      const models = {
+     /* const models = {
         'Chery': ['Tiggo 8 Pro','Tiggo 4'],
         'Changan': ['CS85 Coupe','CS75 Plus'],
         'Toyota': ['Camry','RAV4'],
@@ -201,7 +202,73 @@
         const opts = models[e.target.value] || [];
         const msel = document.getElementById('model');
         msel.innerHTML = '<option value="" disabled selected hidden></option>' + opts.map(m => `<option>${m}</option>`).join('');
-      });
+      });*/
+  
+ // глобальные переменные для хранения выбора
+ let selectedCarBrand = '';
+ let selectedCarModel = '';
+ 
+ // куда лежит ваш JSON
+ const jsonUrl = '/data/cars.json';
+ 
+ // объект для хранения данных из JSON
+ let carData = {};
+ 
+ // 1) Загружаем JSON и заполняем селект брендов
+ fetch(jsonUrl)
+   .then(res => {
+     if (!res.ok) throw new Error('Ошибка ' + res.status);
+     return res.json();
+   })
+   .then(doc => {
+     carData = doc.list || {};
+     const brandSel = document.getElementById('carBrand');
+     // наполняем
+     Object.keys(carData).forEach(brand => {
+       const opt = document.createElement('option');
+       opt.value = brand;
+       opt.textContent = brand;
+       brandSel.appendChild(opt);
+     });
+     brandSel.disabled = false;
+   })
+   .catch(err => {
+     console.error('Не удалось загрузить cars.json', err);
+   });
+ 
+ // 2) При выборе марки сохраняем в переменную и наполняем модели
+ document.getElementById('carBrand').addEventListener('change', function() {
+   selectedCarBrand = this.value;
+   selectedCarModel = ''; // сброс модели при смене бренда
+ 
+   const modelSel = document.getElementById('carModel');
+   modelSel.innerHTML = '';
+ 
+   if (!selectedCarBrand || !carData[selectedCarBrand]) {
+     modelSel.disabled = true;
+     modelSel.innerHTML = '<option value="">— Сначала выберите марку —</option>';
+     return;
+   }
+ 
+   // вытаскиваем модели, пропуская первый элемент (кол-во)
+   const models = carData[selectedCarBrand].slice(1).filter(x => x);
+ 
+   // placeholder
+   modelSel.innerHTML = '<option value="">— Выберите модель —</option>';
+   models.forEach(m => {
+     const opt = document.createElement('option');
+     opt.value = m;
+     opt.textContent = m;
+     modelSel.appendChild(opt);
+   });
+   modelSel.disabled = false;
+ });
+ 
+ // 3) При выборе модели сохраняем в переменную
+ document.getElementById('carModel').addEventListener('change', function() {
+   selectedCarModel = this.value;
+ });
+
       // Plate mask
       const plate = document.getElementById('plate');
       plate.addEventListener('input', () => {
