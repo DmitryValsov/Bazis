@@ -310,7 +310,7 @@
     <section class="section">
       <div class="section__header">
         <h2>Ближайшая запись</h2>
-         <a href="#">Смотреть все</a>
+         <a href="#"></a>
         </div>
       <div class="card">
         <div class="card__left">
@@ -414,24 +414,28 @@
 
     <!-- Каталог авто -->
     <section class="section">
-      <div class="section__header"><h2>Каталог авто</h2><a href="#">Смотреть все</a></div>
+      <div class="section__header"><h2>Каталог авто</h2>
+      <a href="https://bazis-motors.ru/cars/">Смотреть все</a></div>
+
       <div class="catalog">
+ @foreach(CatalogCar car in ViewBag.CatalogCar)
+{
+  <a href="@Html.DisplayFor(modelItem => car.Link)">
         <div class="catalog-item">
-          <img src="/img/cars/geely-4.jpeg" alt="Модель A">
-          <h3>Модель A</h3>
+              @if (!string.IsNullOrEmpty(car.Img))
+         {
+          <img src="~/img_catalog/@car.Img" alt="Chery Tiggo 8 Pro">
+          }
+          else
+          {
+          <img src="/img/cars/not-found.jpeg" alt="">
+          }
+          <h3>@Html.DisplayFor(modelItem => car.Title)</h3>
+          <p>@Html.DisplayFor(modelItem => car.PreviewText)</p>
         </div>
-        <div class="catalog-item">
-          <img src="/img/cars/geely-2.jpeg" alt="Модель B">
-          <h3>Модель B</h3>
-        </div>
-        <div class="catalog-item">
-          <img src="/img/cars/geely-3.jpeg" alt="Модель C">
-          <h3>Модель C</h3>
-        </div>
-        <div class="catalog-item">
-          <img src="/img/cars/geely-4.jpeg" alt="Модель D">
-          <h3>Модель D</h3>
-        </div>
+</a>
+
+        }
       </div>
     </section>
 
@@ -479,7 +483,9 @@
 
     <!-- Акции -->
     <section class="section">
-      <div class="section__header"><h2>Наши акции</h2></div>
+      <div class="section__header"><h2>Наши акции</h2>
+      <a href="#">Смотреть все</a>
+      </div>
       <div class="promotions">
         <div class="promo-item">
           <img src="/img/cars/geely-1.jpeg" alt="">

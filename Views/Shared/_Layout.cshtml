@@ -17,31 +17,73 @@
      
 
 <nav class="nav-hero">
-    <a href="/" aria-label="Главная">
-      <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9v9a1 1 0 0 1-1 1h-6v-6h-4v6H4a1 1 0 0 1-1-1v-9z"/></svg>
+    <!-- Главная -->
+    <a href="/"  aria-label="Главная">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 12L12 5L20 12"/>
+        <rect x="7" y="12" width="10" height="7" rx="2"/>
+      </svg>
       <span>Главная</span>
     </a>
-    <a href="/News/" aria-label="Записи">
-      <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm0 4h18v14H3V8zm2 2v10h14V10H5z"/></svg>
-      <span>Новости</span>
-    </a>
-    <a href="/Orders/Create/" aria-label="Сервисы">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M19.4 12.5l2.1-1.6a.5.5 0 0 0 .1-.7l-2-3.4a.5.5 0 0 0-.6-.2l-2.5 1a6 6 0 0 0-1.7-1l-.4-2.7a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4l-.4 2.7a6 6 0 0 0-1.7 1l-2.5-1a.5.5 0 0 0-.6.2l-2 3.4a.5.5 0 0 0 .1.7l2.1 1.6a6 6 0 0 0 0 2l-2.1 1.6a.5.5 0 0 0-.1.7l2 3.4a.5.5 0 0 0 .6.2l2.5-1a6 6 0 0 0 1.7 1l.4 2.7a.5.5 0 0 0 .5.4h4a.5.5 0 0 0 .5-.4l.4-2.7a6 6 0 0 0 1.7-1l2.5 1a.5.5 0 0 0 .6-.2l2-3.4a.5.5 0 0 0-.1-.7l-2.1-1.6a6 6 0 0 0 0-2z"/></svg>
-      <span>Запись</span>
-    </a>
-    
-    <a href="/Chat" aria-label="Чат">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.17L4 17.17V4z"/></svg>
-      <span>Чат</span>
-    </a>
-    <a href="/Car" aria-label="Профиль">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M2 22c0-5 4-9 10-9s10 4 10 9"/></svg>
+    <!-- Авто -->
+    <a href="/Car/" aria-label="Авто">
+      <svg viewBox="0 0 24 24">
+        <rect x="2.5" y="10.5" width="19" height="7" rx="2" />
+        <path d="M5 10.5V8a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2.5" />
+        <circle cx="7" cy="18" r="2" />
+        <circle cx="17" cy="18" r="2" />
+      </svg>
       <span>Авто</span>
     </a>
-  
-    <span class="big-circle"></span>
+    <!-- Запись -->
+    <a href="/Orders/Create/" aria-label="Запись">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8"/>
+        <line x1="12" y1="9.5" x2="12" y2="14.5"/>
+        <line x1="9.5" y1="12" x2="14.5" y2="12"/>
+      </svg>
+      <span>Запись</span>
+    </a>
+    <!-- Новости -->
+    <a href="/News/" aria-label="Новости">
+      <svg viewBox="0 0 24 24">
+        <rect x="3.5" y="6.5" width="17" height="11" rx="2" />
+        <line x1="7.5" y1="10" x2="16.5" y2="10"/>
+        <line x1="7.5" y1="13" x2="16.5" y2="13"/>
+        <circle cx="6" cy="17" r="1" />
+        <circle cx="18" cy="17" r="1" />
+      </svg>
+      <span>Новости</span>
+    </a>
+    <!-- Чат -->
+    <a href="/Chat/" aria-label="Чат">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 4v-4H6a2 2 0 0 1-2-2V7z"/>
+      </svg>
+      <span>Чат</span>
+    </a>
   </nav>
 
+
+
+ <script>
+    // Скрой меню при прокрутке вниз, покажи при прокрутке вверх
+    let lastScrollY = window.scrollY, ticking = false;
+    const nav = document.querySelector('.nav-hero');
+    const hero = document.querySelector('.hero');
+    function onScroll() {
+      const currentY = window.scrollY;
+      if(currentY > lastScrollY+8) {
+        nav.classList.add('hide-menu'); hero.classList.add('hide-menu');
+      } else if(currentY < lastScrollY-8) {
+        nav.classList.remove('hide-menu'); hero.classList.remove('hide-menu');
+      }
+      lastScrollY = currentY; ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
+    });
+  </script>
     
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

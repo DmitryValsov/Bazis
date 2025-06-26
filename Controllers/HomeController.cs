@@ -33,6 +33,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         ViewBag.News = await _context.News.ToListAsync();
+        ViewBag.CatalogCar = await _context.CatalogCar.ToListAsync();
         return View();
     }
 

@@ -448,6 +448,6 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Car/Create.cshtml.rz.scp.css
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-hng4t1704z.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-hng4t1704z.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-v1boqzggr0.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-uq58bun904.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-6rh1cd3rxe.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-4g13tac8kh.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-f4hffa1k58.gz

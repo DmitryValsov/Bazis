@@ -1,33 +1,122 @@
- /* Bottom Nav */
- .nav-hero {
-  position:sticky; bottom:0; left:0; right:0;
-  height:64px;;
-  background:linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
-  display:flex; justify-content:space-around; align-items:center;
-  /*border-top-left-radius:var(--r-lg); 
-  border-top-right-radius:var(--r-lg);*/
-  overflow:hidden;
+:root {
+  --clr-primary-start: #1943a6;
+  --clr-primary-end:   #0A254D;
+  --r-lg: 22px;
+  --nav-height: 66px;
+  --icon-size: 30px;
+  --nav-bg: rgba(28,40,76,0.86);
+  --header-max: 700px;
+  --menu-max: 520px;
 }
-.nav-hero::before, .nav-hero::after, .nav-hero .big-circle { content: ''; position:absolute; border-radius:50%; }
-.nav-hero::before {
-  width:300px; height:300px; top:-150px; left:-150px;
-  border:1px solid rgba(255,255,255,0.1);
+/* Нижнее меню */
+.nav-hero {
+  position: fixed;
+  left: 50%; bottom: calc(0px + env(safe-area-inset-bottom, 0px) + 8px);
+  transform: translateX(-50%);
+  width: 98vw; max-width: var(--menu-max); min-width: 120px;
+  height: var(--nav-height);
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px) saturate(140%);
+  display: flex; justify-content: space-around; align-items: center;
+  border-radius: var(--r-lg);
+  box-shadow: 0 -6px 36px 0 rgba(21,32,73,0.13), 0 0.5px 0 rgba(255,255,255,0.10);
+  z-index: 999;
+  border: 1.5px solid #2227;
+  animation: slideUp 0.8s;
+  transition: transform .5s cubic-bezier(.55,.06,.23,.98), width .2s;
+  will-change: transform;
+  padding: 0 6px;
 }
-.nav-hero::after {
-  width:400px; height:400px; top:-100px; right:-200px;
-  border:8px solid rgba(255,255,255,0.08);
-}
-.nav-hero .big-circle {
-  width:500px; height:500px; bottom:-250px; right:-250px;
-  border:12px solid rgba(255,255,255,0.06);
+.nav-hero.hide-menu { transform: translateX(-50%) translateY(110%);}
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(100px); opacity: 0;}
+  to   { transform: translateX(-50%) translateY(0); opacity: 1;}
 }
 .nav-hero a {
   position:relative; z-index:1;
-  text-decoration:none; color:rgba(255,255,255,0.7);
+  text-decoration:none;
+  color:rgba(255,255,255,0.78);
   display:flex; flex-direction:column; align-items:center;
-  font-size:12px;
+  font-size:11px; font-weight:500;
+  letter-spacing: 0.02em;
+  transition: color .22s, font-weight .13s, transform .13s;
+  user-select: none;
+  will-change: transform;
+  padding: 0 2px;
 }
-.nav-hero a.active { color:#FFFFFF; }
+.nav-hero a.active,
+.nav-hero a:active,
+.nav-hero a:focus-visible {
+  color: #fff;
+  font-weight: 700;
+  transform: scale(1.09);
+  text-shadow: 0 2px 12px #fff2;
+}
+.nav-hero a:active::after { opacity: 0.12; }
+.nav-hero a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 38px; height: 38px; border-radius: 50%;
+  background: #fff4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s, background .14s;
+}
+.nav-hero a:active::after { opacity: .10; }
 .nav-hero svg {
-  width:24px; height:24px; fill:currentColor; margin-bottom:4px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  min-width: var(--icon-size);
+  min-height: var(--icon-size);
+  max-width: var(--icon-size);
+  max-height: var(--icon-size);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-bottom: 2px;
+  display: block;
+  filter: drop-shadow(0 1px 4px #1f2d4e0a);
+}
+.nav-hero a.active svg { stroke: #fff; filter: drop-shadow(0 0 9px #1943a646);}
+.nav-hero span {
+  font-family: inherit;
+  letter-spacing: .01em;
+  font-size: 12px;
+  margin-top: 0.15em;
+  text-shadow: 0 1px 5px #0001;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .hero, .content { max-width: 99vw; }
+  .nav-hero { max-width: 99vw; }
+}
+@media (max-width: 600px) {
+  .hero { height:120px; border-radius: 0 0 16px 16px; }
+  .nav-hero { height:54px; border-radius:16px; --icon-size: 22px; --r-lg:16px;}
+  .nav-hero span { font-size: 10.7px; }
+}
+@media (max-width:390px){
+  .nav-hero { min-width: 80px; }
+  .hero { height:84px; }
+  .nav-hero span { font-size: 9.7px; }
+}
+/* Планшет и ПК: меню крупнее и центрально */
+@media (min-width: 768px) {
+  :root {
+    --icon-size: 34px;
+    --nav-height: 78px;
+    --r-lg: 28px;
+    --menu-max: 510px;
+  }
+  .nav-hero a { font-size: 13.5px; }
+}
+@media (min-width:1200px){
+  .hero { max-width: 670px;}
+  .nav-hero { max-width: 480px;}
 }
