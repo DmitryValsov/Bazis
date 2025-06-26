@@ -4,123 +4,80 @@
     ViewData["Title"] = "Index";
 }
 
-<style>
-        /* ===== Filter Bar ===== */
-    .filter-bar {
-      display:flex;flex-wrap:wrap;gap:var(--gap-md);
-      background:var(--clr-card-bg);
-      padding:var(--gap-md);border-radius:var(--r-md);
-      box-shadow:0 1px 3px rgba(0,0,0,0.1);
-      margin-bottom:var(--gap-lg);
-    }
-    .filter-group {
-      display:flex;flex-direction:column;font-size:14px;color:var(--clr-text-gray);
-    }
-    .filter-group label {margin-bottom:4px}
-    .filter-group input,
-    .filter-group select {
-      padding:8px var(--gap-sm);
-      border:1px solid #D1D5DB;
-      border-radius:var(--r-sm);
-      min-width:120px;
-    }
-    .filter-bar .btn {
-      height:var(--btn-h);
-      background:linear-gradient(90deg,var(--clr-primary-start),var(--clr-primary-end));
-      color:#fff;padding:0 var(--gap-lg);
-      border-radius:var(--r-sm);
-      font-size:15px;font-weight:600;
-      transition:opacity var(--transition);
-      align-self:flex-end;
-    }
-    .filter-bar .btn:active{opacity:0.8}
+<h1>Index</h1>
 
-    /* ===== Appointments Grid ===== */
-    .appointments {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:var(--gap-md);
-    }
-    
-    .appointment-card {
-      background:var(--clr-card-bg);
-      border-radius:var(--r-md);
-      box-shadow:0 1px 3px rgba(0,0,0,0.1);
-      padding:var(--gap-md);
-      display:flex;flex-direction:column;justify-content:space-between;
-    }
-    .appointment-header {
-      display:flex;justify-content:space-between;align-items:center;
-      margin-bottom:var(--gap-sm);
-    }
-    .appointment-date {
-      font-size:14px;color:var(--clr-text-gray);
-    }
-    .appointment-client {
-      font-size:16px;font-weight:600;color:var(--clr-text-dark);
-      margin-bottom:var(--gap-xs);
-    }
-    .appointment-service {
-      font-size:14px;color:var(--clr-text-gray);
-    }
-    .badge {
-      display:inline-block;padding:4px 12px;
-      border-radius:12px;font-size:12px;font-weight:500;color:#fff;
-    }
-    .badge.new     { background:var(--clr-status-new); }
-    .badge.pending { background:var(--clr-status-pending); }
-    .badge.done    { background:var(--clr-status-done); }
-    .badge.cancel  { background:var(--clr-status-cancel); }
-
-    .appointment-actions {
-      display:flex;justify-content:flex-end;gap:var(--gap-sm);
-      margin-top:var(--gap-sm);
-    }
-    .appointment-actions .btn {
-      height:32px;padding:0 12px;font-size:13px;
-      border-radius:var(--r-sm);
-      background:var(--clr-primary-start);
-      color:#fff;
-      transition:opacity var(--transition);
-    }
-    .appointment-actions .btn:nth-child(2) {
-      background:#E5E7EB;color:var(--clr-text-dark);
-    }
-    .appointment-actions .btn:active{opacity:0.8}
-</style>
-
-<section class="content">
-      <h1>Управление записями</h1>
-
-      <!-- Filters & Add -->
-      <div class="filter-bar">
-        <button class="btn" id="btn-add">Добавить запись</button>
-        <div class="filter-group">
-          <label for="date-from">С</label>
-          <input type="date" id="date-from">
-        </div>
-        <div class="filter-group">
-          <label for="date-to">По</label>
-          <input type="date" id="date-to">
-        </div>
-        <div class="filter-group">
-          <label for="status">Статус</label>
-          <select id="status">
-            <option value="">Все</option>
-            <option>Новая</option>
-            <option>Подтверждена</option>
-            <option>Выполнена</option>
-            <option>Отменена</option>
-          </select>
-        </div>
-        <div class="filter-group" style="flex:1">
-          <label for="search">Поиск</label>
-          <input type="text" id="search" placeholder="Клиент или услуга">
-        </div>
-        <button class="btn" id="btn-filter">Применить</button>
-      </div>
-
-      <!-- Appointments Grid -->
-      <div class="appointments" id="appointments-list"></div>
-    </section>
-
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usluga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Auto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usluga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

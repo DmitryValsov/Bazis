@@ -318,12 +318,13 @@
     <!-- Ближайшие записи -->
     <div id="current-list">
       <div class="section-title">Ближайшие</div>
-      @foreach (var item in Model) {
-      <a class="card-appointment" asp-action="Details" asp-route-id="@item.Id">
+      @foreach(Order order in ViewBag.ActiveOrders)
+      {   
+      <a class="card-appointment" asp-action="Details" asp-route-id="@order.Id">
         <div class="appointment-info">
-          <div class="date">@Html.DisplayFor(modelItem => item.CreatedAt)</div>
-          <div class="title">@Html.DisplayFor(modelItem => item.Usluga)</div>
-          <div class="address">@Html.DisplayFor(modelItem => item.ServiceAddress)</div>
+          <div class="date">@Html.DisplayFor(modelItem => order.CreatedAt)</div>
+          <div class="title">@Html.DisplayFor(modelItem => order.Usluga)</div>
+          <div class="address">@Html.DisplayFor(modelItem => order.ServiceAddress)</div>
           <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>
         </div>
         <img src="https://via.placeholder.com/64x64?text=TO" alt="" class="appointment-img">
@@ -337,25 +338,18 @@
     <div id="history-list" style="display:none;">
       <div class="section-title">История</div>
       
-     <a class="card-appointment" href="record-detail.html">
+      @foreach(Order order in ViewBag.FinishOrders)
+      {   
+      <a class="card-appointment" asp-action="Details" asp-route-id="@order.Id">
         <div class="appointment-info">
-          <div class="date">02 февраля 2025, 09:30</div>
-          <div class="title">Диагностика подвески</div>
-          <div class="address">ул. Широтная, 201</div>
-          <div class="status canceled">Отменено</div>
+          <div class="date">@Html.DisplayFor(modelItem => order.CreatedAt)</div>
+          <div class="title">@Html.DisplayFor(modelItem => order.Usluga)</div>
+          <div class="address">@Html.DisplayFor(modelItem => order.ServiceAddress)</div>
+          <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>
         </div>
-        <img src="https://via.placeholder.com/64x64?text=Diag" alt="" class="appointment-img">
+        <img src="https://via.placeholder.com/64x64?text=TO" alt="" class="appointment-img">
       </a>
-      <a class="card-appointment" href="record-detail.html">
-        <div class="appointment-info">
-          <div class="date">02 февраля 2025, 09:30</div>
-          <div class="title">Диагностика подвески</div>
-          <div class="address">ул. Широтная, 201</div>
-          <div class="status canceled">Отменено</div>
-        </div>
-        <img src="https://via.placeholder.com/64x64?text=Diag" alt="" class="appointment-img">
-      </a>
-      
+      } 
     </div>
   </div>
 
