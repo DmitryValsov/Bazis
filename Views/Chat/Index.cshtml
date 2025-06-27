@@ -110,7 +110,7 @@
     .message { max-width:75%; padding:var(--gap-sm) var(--gap-md); border-radius:var(--r-lg); font-size:14px; line-height:1.4; position:relative; }
     .manager { align-self:flex-start; background:var(--clr-bubble-manager); color:var(--clr-text-dark); border-top-left-radius:0; }
     .manager::before { content:''; position:absolute; left:-6px; top:12px; border:6px solid transparent; border-right-color:var(--clr-bubble-manager); }
-    .user { align-self:flex-end; background:var(--clr-bubble-user); color:var(--clr-text-white); border-top-right-radius:0; }
+    .user {margin-top:10px; align-self:flex-end; background:var(--clr-bubble-user); color:var(--clr-text-white); border-top-right-radius:0; }
     .user::after { content:''; position:absolute; right:-6px; top:12px; border:6px solid transparent; border-left-color:var(--clr-bubble-user); }
     .timestamp { font-size:12px; color:var(--clr-text-gray); margin-top:var(--gap-xs); }
 
@@ -151,59 +151,54 @@
   
   </style>
 
-
-  <!-- Hero -->
-  <div class="hero" id="hero">
-    <div class="hero__header">
-      <button aria-label="Назад" onclick="history.back()">
-        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="hero__logo"></div>
-      <div class="hero__title">Базис Моторс</div>
+<div class="header">
+        <h1>Поддержка</h1>
     </div>
-    <div class="hero__main-title">Чат с менеджером</div>
-  </div>
-
-  <!-- Small header -->
-  <div class="small-header" id="smallHeader">
-    <button aria-label="Назад" onclick="history.back()">
-      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="title">Чат с менеджером</div>
-    <div style="width:32px;"></div>
-  </div>
-
-  <!-- Chat Content -->
-  <div class="content">
+<div class="content">
     <div class="subtitle">Отвечает обычно в течение часа</div>
     <div class="chat" id="chat">
-      <div class="message manager">
-        Здравствуйте! Хотел записаться на замену масла.
-        <div class="timestamp">18:07</div>
-      </div>
-      <div class="message user">
-        Добрый день! Запишите меня на 15 апреля в 11:00, пожалуйста.
-        <div class="timestamp">18:09</div>
-      </div>
-      <div class="message manager">
-        Готово, ваша запись подтверждена.
-        <div class="timestamp">18:10</div>
-      </div>
+         <div id="messages"></div>
     </div>
-  </div>
-
-  <!-- Input -->
-  <div class="input-area">
-    <input type="text" placeholder="Написать сообщение...">
-    <button>Отправить</button>
-  </div>
+      </div>
+        </div>
 
 
+ <div class="input-area">
+         <div id="input">
+        <input type="text"  class="chat-input" id="msg" placeholder="Напишите сообщение...">
+        <button class="send-button" id="send">Отправить</button>
+        </div>
+        </div>
 
-  
+    <script>
+   // 1) Настраиваем подключение к хабу
+   const connection = new signalR.HubConnectionBuilder()
+     .withUrl("/chatHub")
+     .build();
+ 
+   // 2) Обработка приходящих сообщений
+   connection.on("ReceiveMessage", (user, text) => {
+     const msg = document.createElement("div");
+     
+     //msg.classList.add( "message user" );
+     msg.className = "message user";
 
-  <script>
-    const smallHdr = document.getElementById('smallHeader');
-    window.addEventListener('scroll', () => smallHdr.classList.toggle('visible', window.scrollY >= document.getElementById('hero').offsetHeight));
-    const chatEl = document.getElementById('chat'); chatEl.scrollTop = chatEl.scrollHeight;
-  </script>
+     msg.textContent = user + ": " + text;
+     document.getElementById("messages").appendChild(msg);
+     document.getElementById("messages").scrollTop = 1e9;
+   });
+ 
+   // 3) Запускаем подключение
+   connection.start()
+     .then(() => console.log("SignalR подключён"))
+     .catch(err => console.error(err.toString()));
+ 
+   // 4) Отправка сообщений на сервер
+   document.getElementById("send").addEventListener("click", () => {
+     const text = document.getElementById("msg").value;
+     if (!text) return;
+     connection.invoke("SendMessage", text)
+       .catch(err => console.error(err.toString()));
+     document.getElementById("msg").value = "";
+   });
+ </script>
