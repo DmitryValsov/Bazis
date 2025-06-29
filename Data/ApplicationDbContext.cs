@@ -27,6 +27,14 @@ public class ApplicationDbContext : IdentityDbContext
        .HasForeignKey(o => o.UserId)
        .OnDelete(DeleteBehavior.Cascade);
 
+
+       // Явно настраиваем связь Car → ApplicationUser»
+        builder.Entity<Car>()
+       .HasOne<IdentityUser>(o => o.User)
+       .WithMany()                    // без коллекции на стороне User
+       .HasForeignKey(o => o.UserId)
+       .OnDelete(DeleteBehavior.Cascade);
+
     }
 
 public DbSet<Bazis.Models.Car> Car { get; set; } = default!;

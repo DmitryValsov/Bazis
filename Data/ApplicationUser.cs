@@ -9,5 +9,7 @@ namespace Bazis.Data
     {
         // Навигационное свойство: у одного пользователя много заказов
         public ICollection<Order> Orders { get; set; } = new List<Order>();
+
+         public ICollection<Car> Car { get; set; } = new List<Car>();
     }
 }

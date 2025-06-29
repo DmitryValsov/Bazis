@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Bazis.Data;
 using Bazis.Models;
 using Microsoft.AspNetCore.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bazis.Controllers
 {
@@ -16,17 +18,30 @@ namespace Bazis.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnv;
+         private readonly UserManager<IdentityUser> _userManager;
 
-        public CarController(ApplicationDbContext context, IWebHostEnvironment hostEnv)
+        public CarController(ApplicationDbContext context, IWebHostEnvironment hostEnv, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _hostEnv = hostEnv;
+            _userManager = userManager;
         }
 
         // GET: Car
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Car.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound(); // Или перенаправить на страницу входа
+            }
+
+            var applicationDbContext = await _context.Car
+            .Where(p => p.UserId == user.Id) 
+            // Предполагается, что у вас есть поле UserId в модели Post
+            .ToListAsync();
+
+            return View(applicationDbContext);
         }
 
         // GET: Car/Details/5
@@ -50,6 +65,8 @@ namespace Bazis.Controllers
         // GET: Car/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             return View();
         }
 
@@ -58,7 +75,7 @@ namespace Bazis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 [ValidateAntiForgeryToken]
-public async Task<IActionResult> Create([Bind("Id,Brand,Model,Year,Color,VIN,GosNomer,ReleaseDate,ImageFile")] Car car)
+public async Task<IActionResult> Create([Bind("Id,Brand,Model,Year,Color,VIN,GosNomer,ReleaseDate,ImageFile,UserId")] Car car)
 {
     if (ModelState.IsValid)
     {
@@ -85,6 +102,7 @@ public async Task<IActionResult> Create([Bind("Id,Brand,Model,Year,Color,VIN,Gos
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+    ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", car.UserId);
     return View(car);
 }
 
@@ -102,6 +120,7 @@ public async Task<IActionResult> Create([Bind("Id,Brand,Model,Year,Color,VIN,Gos
             {
                 return NotFound();
             }
+             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", car.UserId);
             return View(car);
         }
 
@@ -137,6 +156,7 @@ public async Task<IActionResult> Create([Bind("Id,Brand,Model,Year,Color,VIN,Gos
                 }
                 return RedirectToAction(nameof(Index));
             }
+             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", car.UserId);
             return View(car);
         }
 

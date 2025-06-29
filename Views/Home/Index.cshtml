@@ -12,8 +12,10 @@
     --clr-primary-end: #082d5f;
 */
 
- --clr-primary-start: #0C2E5E;
+      --clr-primary-start: #0C2E5E;
       --clr-primary-end:   #0A254D;
+
+
 
 
 
@@ -49,10 +51,17 @@
       background: linear-gradient(135deg, var(--clr-primary-start), var(--clr-primary-end));
       position: relative;
       
+      /*background: linear-gradient(120deg, var(--clr-primary-start) 55%, var(--clr-primary-end));
+      
+      box-shadow: 0 8px 36px 0 rgba(48,67,127,0.10);
+      transition: transform .5s cubic-bezier(.55,.06,.23,.98);
+      will-change: transform;*/
+
+
       overflow: hidden;
        padding: env(safe-area-inset-top) var(--gap-md) var(--gap-lg);
     }
-    /* Малый тонкий круг сверху-слева */
+   
     .hero::before {
       content: '';
       position: absolute;
@@ -63,7 +72,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 50%;
     }
-    /* Средний круг справа */
+   
     .hero::after {
       content: '';
       position: absolute;
@@ -74,7 +83,7 @@
       border: 12px solid rgba(255,255,255,0.08);
       border-radius: 50%;
     }
-    /* Большой круг внизу-справа */
+   
     .hero .circle {
       position: absolute;
       width: 800px;
@@ -84,12 +93,14 @@
       border: 20px solid rgba(255,255,255,0.06);
       border-radius: 50%;
     }
+  
+
 
   .hero__header {
     display:flex; align-items:center; gap:var(--gap-sm);
   }
   .hero__logo {
-    width:32px; height:32px; background:var(--clr-primary-start); border-radius:var(--r-sm);
+    width:32px; height:32px; background: white; border-radius:var(--r-sm);
   }
   .hero__title { font-size:18px; font-weight:500 }
   .hero__main-title {
@@ -154,7 +165,7 @@
   /* =============== Карточки Ближайшей/Прошлых/Истории =============== */
   .card {
     background:#fff;
-    border-radius:var(--r-sm);
+    border-radius:30px;
     box-shadow:0 2px 6px rgba(0,0,0,0.1);
     padding:var(--gap-md);
     display:flex; align-items:center; justify-content:space-between;
@@ -285,7 +296,11 @@
   }
   .news-item .info h4 { font-size:16px; margin-bottom:var(--gap-xs); color:var(--clr-text-dark) }
   .news-item .info p { font-size:14px; color:var(--clr-text-gray) }
-
+  .card_header
+  {
+    display: flex;
+    justify-content: center;
+  }
   
 
  </style>
@@ -322,12 +337,14 @@
             <div class="card__text">@ViewBag.LastOrder.CreatedAt · @ViewBag.LastOrder.ServiceAddress</div>
           </div>
         </div>
-        <div class="card--map">
+        <!--<div class="card--map">
           <div class="map-thumb">
           
           </div>
           <div class="map-label">Сервис в центре</div>
-        </div>
+        </div>-->
+
+
       </div>
       </a>
       
@@ -344,7 +361,7 @@
 
       @foreach(Order order in ViewBag.FinishOrders)
       { 
-        <a class="card-appointment" asp-action="Details" asp-route-id="@order.Id">
+        <a class="card-appointment" href="/Orders/Details/@order.Id">
       <div class="card">
         <div class="card__left">
           <div class="card__icon">      
@@ -385,23 +402,31 @@
       <div class="section__header"><h2>Наши услуги</h2></div>
       <div class="features">
         <div class="feature-card">
-           <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
-          
+           <!--<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>-->
+           <div class="card_header">
+           <img src="/images/main_page/diagnost.png" width="60" height="60">
+           </div>
           <h3>Диагностика</h3>
           <p>Полная проверка всех систем автомобиля.</p>
         </div>
         <div class="feature-card">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
+           <div class="card_header">
+           <img src="/images/main_page/remont.png" width="60" height="60">
+           </div>
           <h3>Ремонт</h3>
           <p>Своевременный ремонт любых неисправностей.</p>
         </div>
         <div class="feature-card">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
+           <div class="card_header">
+           <img src="/images/main_page/obsluszh.png" width="60" height="60">
+           </div>
           <h3>Обслуживание</h3>
           <p>Регулярное ТО и замена расходников.</p>
         </div>
         <div class="feature-card">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
+           <div class="card_header">
+           <img src="/images/main_page/montazh.png" width="60" height="60">
+           </div>
           <h3>Шиномонтаж</h3>
           <p>Балансировка и сезонная замена колес.</p>
         </div>
@@ -410,26 +435,32 @@
 
     <!-- Каталог авто -->
     <section class="section">
-      <div class="section__header"><h2>Каталог авто</h2>
-      <a href="https://bazis-motors.ru/cars/">Смотреть все</a></div>
+      <div class="section__header">
+        <h2>Каталог авто</h2>
+      <a href="https://bazis-motors.ru/cars/">Смотреть все</a>
+      </div>
 
-      <div class="catalog">
+      <div class="new-arrivals">
  @foreach(CatalogCar car in ViewBag.CatalogCar)
 {
-  <a href="@Html.DisplayFor(modelItem => car.Link)">
-        <div class="catalog-item">
+ 
+        <div class="new-item">
               @if (!string.IsNullOrEmpty(car.Img))
          {
+           <a href="@Html.DisplayFor(modelItem => car.Link)">
           <img src="~/img_catalog/@car.Img" alt="Chery Tiggo 8 Pro">
+           </a>
           }
           else
           {
+            <a href="@Html.DisplayFor(modelItem => car.Link)">
           <img src="/img/cars/not-found.jpeg" alt="">
+          </a>
           }
           <h3>@Html.DisplayFor(modelItem => car.Title)</h3>
           <p>@Html.DisplayFor(modelItem => car.PreviewText)</p>
         </div>
-</a>
+
 
         }
       </div>
@@ -437,7 +468,9 @@
 
     <!-- Новинки -->
     <section class="section">
-      <div class="section__header"><h2>Новинки</h2></div>
+      <div class="section__header">
+        <h2>Новинки</h2>
+        </div>
       <div class="new-arrivals">
         <div class="new-item">
           <img src="/img/cars/geely-1.jpeg" alt="">
@@ -453,6 +486,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- Условия трейд-ин -->
     <section class="section">
@@ -482,15 +516,15 @@
       <div class="section__header"><h2>Наши акции</h2>
       <a href="#">Смотреть все</a>
       </div>
-      <div class="promotions">
-        <div class="promo-item">
+      <div class="new-arrivals">
+        <div class="new-item">
           <img src="/img/cars/geely-1.jpeg" alt="">
           <div class="body">
             <h4>Сезонная скидка</h4>
             <p>Скидка 15% на шиномонтаж до конца месяца.</p>
           </div>
         </div>
-        <div class="promo-item">
+        <div class="new-item">
           <img src="/img/cars/geely-1.jpeg" alt="">
           <div class="body">
             <h4>Бесплатная диагностика</h4>
@@ -502,30 +536,34 @@
 
     <!-- Новости -->
     <section class="section">
-      <div class="section__header"><h2>Новости</h2><a href="/News/">Все новости</a></div>
-      <ul class="news-list">
+      <div class="section__header"><h2>Новости</h2><a href="/News/">Смотреть все</a></div>
+      <div class="new-arrivals">
         @foreach(News news in ViewBag.News)
 {
-  <a href="/News/Details/@news.Id">
-        <li class="news-item">
+  
+        <div class="new-item">
 
             @if (!string.IsNullOrEmpty(news.Img))
          {
+          <a href="/News/Details/@news.Id">
           <img src="~/images/@news.Img" alt="Chery Tiggo 8 Pro">
+            </a>
           }
           else
           {
+            <a href="/News/Details/@news.Id">
           <img src="/img/cars/not-found.jpeg" alt="">
+          </a>
           }
           <div class="info">
             <h4>@Html.DisplayFor(modelItem => news.Title)</h4>
             <p>@Html.DisplayFor(modelItem => news.PreviewText)</p>
           </div>
-        </li>
-  </a>
+        </div>
+
         }
        
-      </ul>
+      </div>
     </section>
 
   </div>

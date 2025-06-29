@@ -135,6 +135,12 @@
         
 <form asp-controller="Car" id="addCarForm asp-action="Create" method="post" enctype="multipart/form-data">
    @Html.AntiForgeryToken()
+
+     <input 
+    type="hidden" 
+    name="UserId" 
+    id="UserId" 
+    value="@ViewData["UserId"]" />
     
         <div class="form-grid">
           <div class="form-group">

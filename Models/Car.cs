@@ -1,6 +1,7 @@
 // Models/Item.cs
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bazis.Models
 {
@@ -25,10 +26,15 @@ namespace Bazis.Models
 
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
-        
 
-                [NotMapped]
+
+        [NotMapped]
         public IFormFile? ImageFile { get; set; }
+
+
+        //Связь с пользователем 
+       public string? UserId { get; set; }
+       public IdentityUser? User { get; set; }
 
     
     }

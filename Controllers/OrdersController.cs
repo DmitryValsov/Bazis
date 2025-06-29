@@ -60,17 +60,7 @@ namespace Bazis.Controllers
                 return NotFound(); // Или перенаправить на страницу входа
             }
 
-            //var applicationDbContext = await _context.Orders
-            //.Where(p => p.UserId == user.Id) // Предполагается, что у вас есть поле UserId в модели Post
-            //.Where(c => c.Status == "1")
-            //.ToListAsync();
-
-            //var applicationDbContext = _context.Orders.Include(o => o.UserId);
-            //return View(await applicationDbContext.ToListAsync());
-            //return View(applicationDbContext);
-
-            //ViewBag.News = await _context.News.ToListAsync();
-
+            
             ViewBag.FinishOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "1")
