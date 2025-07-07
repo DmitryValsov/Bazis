@@ -170,7 +170,7 @@
     <div class="hero__main">Выбор сервисного центра</div>
   </header>
 
-  <main id="scroller" style="min-height: 2400px;">
+  <main id="scroller" style="min-height: 100%;">
     <h2>Где вам удобнее?</h2>
     <div id="map">
 
@@ -180,7 +180,7 @@
     <h2>Найдены сервисы</h2>
     <div class="service-list">
 
-      <div class="service-item service-card" style="padding: 10px;" data-service="Базис-сервис - 11 км Окружной дороги,6" data-lat="57.1445" data-lng="65.5340">
+      <div class="service-item service-card" style="padding: 10px;" data-service="11 км Окружной дороги,6" data-lat="57.1445" data-lng="65.5340">
         <div class="service-item__info">
           <div class="service-item__title">Базис-сервис - 11 км Окружной дороги,6</div>
           <div class="service-item__meta">
@@ -195,7 +195,7 @@
       </div>
 
 
-      <div class="service-item service-card" style="padding: 10px;" data-service="Базис-сервис - Федюнинского,83" data-lat="57.1445" data-lng="65.5340">
+      <div class="service-item service-card" style="padding: 10px;" data-service="Федюнинского,83" data-lat="57.1445" data-lng="65.5340">
      
         <div class="service-item__info">
           <div class="service-item__title">Базис-сервис - Федюнинского,83</div>
@@ -211,7 +211,7 @@
     
       </div>
 
-<div class="service-item service-card" style="padding: 10px;" data-service="Базис-сервис - Пермякова, 19" data-lat="57.1445" data-lng="65.5340">
+<div class="service-item service-card" style="padding: 10px;" data-service="Пермякова, 19" data-lat="57.1445" data-lng="65.5340">
         <div class="service-item__info">
           <div class="service-item__title">Базис-сервис - Пермякова, 19</div>
           <div class="service-item__meta">
@@ -225,7 +225,7 @@
         </div>
       
       </div>
-      <div class="service-item service-card" style="padding: 10px;" data-service="Базис-сервис - Окружная дорога, 202" data-lat="57.1445" data-lng="65.5340">
+      <div class="service-item service-card" style="padding: 10px;" data-service="Окружная дорога, 202" data-lat="57.1445" data-lng="65.5340">
         <div class="service-item__info">
           <div class="service-item__title">Базис-сервис - Окружная дорога, 202</div>
           <div class="service-item__meta">
@@ -503,7 +503,7 @@
     <div class="hero__main">Выбор услуги</div>
   </header>
 
-  <main style="min-height: 1300px;">
+  <main style="min-height: 100%;">
     <h2>Выберите услугу</h2>
     <div class="service-list" id="serviceList">
       <div class="service-card" tabindex="0" data-service="Техобслуживание">
@@ -845,7 +845,7 @@
     <div class="hero__main-title">Мои автомобили</div>
   </div>
 
-  <main style="min-height: 1550px;">
+  <main style="min-height: 100%;">
     <h2>Выберите автомобиль</h2>
     <div class="car-list" id="carList">
        @foreach(Car car in ViewBag.UsersCars)
@@ -965,7 +965,7 @@
     <div class="hero__main-title">Выберите дату и время</div>
   </div>
 
-  <main style="min-height: 650px;">      
+  <main style="min-height: 100%;">      
                 
 
                
@@ -1156,6 +1156,7 @@
 
         // Навигация между страницами
         function showPage(pageId) {
+          window.scrollTo(0, 0);
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
