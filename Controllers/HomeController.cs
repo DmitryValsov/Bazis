@@ -65,7 +65,7 @@ public class HomeController : Controller
 
         ViewBag.LastOrder = await _context.Orders
             .Where(p => p.UserId == user.Id)
-            .OrderByDescending(e => e.CreatedAt) // Замените `Id` на актуальный столбец
+            .OrderByDescending(e => e.Id) // Замените `Id` на актуальный столбец
             .FirstOrDefaultAsync();
 
             
