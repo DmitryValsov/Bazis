@@ -64,13 +64,13 @@ namespace Bazis.Controllers
             ViewBag.FinishOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "1")
-            .OrderByDescending(p => p.CreatedAt)
+            .OrderByDescending(p => p.Id)
             .ToListAsync();
 
             ViewBag.ActiveOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "0")
-            .OrderByDescending(p => p.CreatedAt)
+            .OrderByDescending(p => p.Id)
             .ToListAsync();
 
             //ViewBag.CatalogCar = await _context.CatalogCar.ToListAsync();
