@@ -399,47 +399,28 @@
 
     <!-- История обслуживания выбранного авто -->
     <section class="section history">
-      <div class="history__header">Chery Tiggo 8 Pro, 2022</div>
+        @foreach(Car car in ViewBag.HistoryCar)
+        { 
+      <div style="padding-top: 15px;" class="history__header">@Html.DisplayFor(modelItem => car.Brand) @Html.DisplayFor(modelItem => car.Model), @Html.DisplayFor(modelItem => car.VIN)</div>
       <div class="history-list">
+           @foreach(var item in car.Orders)
+          {
         <div class="history-item">
           <div class="history-item__left">
             <div class="history-item__icon">
               <svg viewBox="0 0 24 24"><path d="M6 2h1v2H6V2zm10 0h1v2h-1V2zm-10 4h12v14H6V6z"/></svg>
             </div>
             <div class="history-item__info">
-              <div class="history-item__title">Замена масла</div>
+              <div class="history-item__title"> @item.Usluga</div>
               <div class="history-item__subtitle">Выполнено 30 150 км</div>
             </div>
           </div>
           <div class="history-item__km">30 150 км</div>
         </div>
-
-        <div class="history-item">
-          <div class="history-item__left">
-            <div class="history-item__icon">
-              <svg viewBox="0 0 24 24"><path d="M6 2h1v2H6V2zm10 0h1v2h-1V2zm-10 4h12v14H6V6z"/></svg>
-            </div>
-            <div class="history-item__info">
-              <div class="history-item__title">Сезонная замена шин</div>
-              <div class="history-item__subtitle">Выполнено 26 300 км</div>
-            </div>
-          </div>
-          <div class="history-item__km">26 300 км</div>
-        </div>
-
-        <div class="history-item">
-          <div class="history-item__left">
-            <div class="history-item__icon">
-              <svg viewBox="0 0 24 24"><path d="M6 2h1v2H6V2zm10 0h1v2h-1V2zm-10 4h12v14H6V6z"/></svg>
-            </div>
-            <div class="history-item__info">
-              <div class="history-item__title">Замена стекловых стёкол</div>
-              <div class="history-item__subtitle">Выполнено 25 900 км</div>
-            </div>
-          </div>
-          <div class="history-item__km">25 900 км</div>
-        </div>
+         }
       </div>
+      }
+
     </section>
 
   </div>

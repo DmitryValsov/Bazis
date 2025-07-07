@@ -66,6 +66,7 @@ public class HomeController : Controller
         ViewBag.LastOrder = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .OrderByDescending(e => e.Id) // Замените `Id` на актуальный столбец
+            .Include(c => c.Car) // Загрузка связанных продуктов
             .FirstOrDefaultAsync();
 
             

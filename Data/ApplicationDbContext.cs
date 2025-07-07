@@ -28,12 +28,19 @@ public class ApplicationDbContext : IdentityDbContext
        .OnDelete(DeleteBehavior.Cascade);
 
 
-       // Явно настраиваем связь Car → ApplicationUser»
+        // Явно настраиваем связь Car → ApplicationUser»
         builder.Entity<Car>()
        .HasOne<IdentityUser>(o => o.User)
        .WithMany()                    // без коллекции на стороне User
        .HasForeignKey(o => o.UserId)
        .OnDelete(DeleteBehavior.Cascade);
+       
+
+         builder.Entity<Car>()
+        .HasMany(e => e.Orders)
+        .WithOne(e => e.Car)
+        .HasForeignKey(e => e.CarId)
+        .IsRequired(false);
 
     }
 

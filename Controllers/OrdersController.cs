@@ -64,12 +64,14 @@ namespace Bazis.Controllers
             ViewBag.FinishOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "1")
+            .Include(c => c.Car)
             .OrderByDescending(p => p.Id)
             .ToListAsync();
 
             ViewBag.ActiveOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "0")
+            .Include(c => c.Car)
             .OrderByDescending(p => p.Id)
             .ToListAsync();
 
@@ -88,6 +90,7 @@ namespace Bazis.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.User)
+                .Include(c => c.Car)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -125,7 +128,7 @@ namespace Bazis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedAt,UserId,Name,Phone,Auto,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,CreatedAt,CarId,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -160,7 +163,7 @@ namespace Bazis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,Auto,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
         {
             if (id != order.Id)
             {

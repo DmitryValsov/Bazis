@@ -58,7 +58,7 @@ namespace Bazis.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedAt,UserId,Name,Phone,Auto,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace Bazis.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,Auto,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
         {
             if (id != order.Id)
             {

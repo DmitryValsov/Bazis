@@ -226,13 +226,14 @@
         <div class="label">Услуга</div>
         <div class="value">@Html.DisplayFor(model => model.Usluga)</div>
       </div>
-      <img src="https://via.placeholder.com/80" alt="Диагностика">
+        <img src="~/images/@Html.DisplayFor(model => model.Car.Img)" alt="Chery Tiggo 8 Pro">
+      <!--<img src="https://via.placeholder.com/80" alt="Диагностика">-->
     </div>
 
     <!-- Параметры записи -->
     <div class="card">
       <ul class="field-list">
-        <li><span class="label">Автомобиль</span><span class="value">@Html.DisplayFor(model => model.Auto)</span></li>
+        <li><span class="label">Автомобиль</span><span class="value">@Html.DisplayFor(model => model.Car.Brand) @Html.DisplayFor(model => model.Car.Model)</span></li>
         <li><span class="label">Сервис</span><span class="value">@Html.DisplayFor(model => model.ServiceAddress)</span></li>
         <li><span class="label">ФИО</span><span class="value">@Html.DisplayFor(model => model.Name)</span></li>
         <li><span class="label">Телефон</span><span class="value">@Html.DisplayFor(model => model.Phone)</span></li>

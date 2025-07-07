@@ -41,6 +41,14 @@ namespace Bazis.Controllers
             // Предполагается, что у вас есть поле UserId в модели Post
             .ToListAsync();
 
+
+            ViewBag.HistoryCar = await _context.Car
+            .Where(p => p.UserId == user.Id)
+            .Include(c => c.Orders)
+            .OrderByDescending(p => p.Id)
+            .ToListAsync();
+
+
             return View(applicationDbContext);
         }
 

@@ -327,7 +327,7 @@
           <div class="address">@Html.DisplayFor(modelItem => order.ServiceAddress)</div>
           <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>
         </div>
-        <img src="https://via.placeholder.com/64x64?text=TO" alt="" class="appointment-img">
+        <img src="~/images/@Html.DisplayFor(modelItem => order.Car.Img)" class="appointment-img" alt="Chery Tiggo 8 Pro">
       </a>
       }
       

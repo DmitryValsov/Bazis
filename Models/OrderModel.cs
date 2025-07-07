@@ -15,9 +15,9 @@ namespace Bazis.Models
         // Когда создан заказ
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-       public string? UserId { get; set; }
-       public IdentityUser? User { get; set; }
-       
+        public string? UserId { get; set; }
+        public IdentityUser? User { get; set; }
+
         // Пример дополнительного поля
         [Required]
         [StringLength(200)]
@@ -25,9 +25,12 @@ namespace Bazis.Models
         [Required]
         [StringLength(200)]
         public string? Phone { get; set; }
-        [Required]
-        [StringLength(200)]
-        public string? Auto { get; set; }
+
+
+        //[Required]
+        //[StringLength(200)]
+        //public string? Auto { get; set; }
+
         [Required]
         [StringLength(200)]
         public string? ServiceAddress { get; set; }
@@ -40,6 +43,11 @@ namespace Bazis.Models
         [Required]
         [StringLength(200)]
         public string? Status { get; set; }
+        
+
+
+        public int? CarId { get; set; } // Optional foreign key property
+        public Car? Car { get; set; }
     
     }
 }

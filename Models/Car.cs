@@ -1,6 +1,7 @@
 // Models/Item.cs
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Bazis.Areas.Admin.Controllers;
 using Microsoft.AspNetCore.Identity;
 
 namespace Bazis.Models
@@ -33,9 +34,11 @@ namespace Bazis.Models
 
 
         //Связь с пользователем 
-       public string? UserId { get; set; }
-       public IdentityUser? User { get; set; }
+        public string? UserId { get; set; }
+        public IdentityUser? User { get; set; }
+       
 
-    
+
+       public ICollection<Order> Orders { get; } = new List<Order>();
     }
 }
