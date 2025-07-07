@@ -37,6 +37,11 @@ public class HomeController : Controller
 
         var user = await _userManager.GetUserAsync(User);
 
+        if (user == null)
+            {
+                return NotFound(); // Или перенаправить на страницу входа
+            }
+
         ViewBag.News = await _context.News.ToListAsync();
         ViewBag.CatalogCar = await _context.CatalogCar.ToListAsync();
 
@@ -48,6 +53,7 @@ public class HomeController : Controller
             .Take(3)
             .ToListAsync();
 
+
         ViewBag.ActiveOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "0")
@@ -58,8 +64,11 @@ public class HomeController : Controller
 
 
         ViewBag.LastOrder = await _context.Orders
+            .Where(p => p.UserId == user.Id)
             .OrderByDescending(e => e.CreatedAt) // Замените `Id` на актуальный столбец
             .FirstOrDefaultAsync();
+
+            
 
         return View();
     }
