@@ -217,6 +217,68 @@ body[b-emifky0eme] {
     { grid-template-columns:repeat(3,1fr); 
     } 
     }
+/* _content/Bazis/Views/Orders/Create.cshtml.rz.scp.css */
+@media(max-width:600px){
+    .service-item[b-0yviibxg5l] {
+      flex-direction:column; align-items:flex-start;
+    }
+    .service-item__img[b-0yviibxg5l] {
+      margin-top: var(--gap-md);
+    }
+  }
+
+  @media (max-width:390px){
+    .nav-hero[b-0yviibxg5l] { min-width: 80px; }
+    .hero[b-0yviibxg5l] { padding-left: 4px; padding-right: 4px; }
+    .nav-hero span[b-0yviibxg5l] { font-size: 9.7px; }
+  }
+  @media (min-width: 768px) {
+    :root[b-0yviibxg5l] {
+      --icon-size: 34px;
+      --nav-height: 78px;
+      --r-lg: 28px;
+      --menu-max: 510px;
+    }
+    .nav-hero a[b-0yviibxg5l] { font-size: 13.5px; }
+  }
+
+  @media (max-width: 900px) {
+    .hero[b-0yviibxg5l], .content[b-0yviibxg5l] { max-width: 99vw; }
+    .nav-hero[b-0yviibxg5l] { max-width: 99vw; }
+  }
+  @media (max-width: 600px) {
+    .hero[b-0yviibxg5l] { padding-left: 7px; padding-right: 7px; }
+    .nav-hero[b-0yviibxg5l] { height:54px; border-radius:16px; --icon-size: 22px; --r-lg:16px;}
+    .nav-hero span[b-0yviibxg5l] { font-size: 10.7px; }
+    .btn-next[b-0yviibxg5l] { font-size:14px; padding: 13px 0;}
+    .service-list[b-0yviibxg5l] { display: flex; flex-direction: column; gap: var(--gap-md);}
+    .service-card[b-0yviibxg5l] { flex-direction: row; align-items: center; min-height: 100px;}
+    .service-card__img-wrapper[b-0yviibxg5l] { flex: 0 0 100px; height: 80px; padding-top: 0; }
+    .service-card__gradient[b-0yviibxg5l] { display: none; }
+    .service-card__info[b-0yviibxg5l] { position: static; color: var(--clr-text-dark); text-shadow: none; margin-left: var(--gap-md);}
+    .service-card__title[b-0yviibxg5l], .service-card__desc[b-0yviibxg5l] { color: var(--clr-text-dark);}
+  }
+
+  @media (max-width: 600px) {
+    .hero[b-0yviibxg5l] { padding-left: 7px; padding-right: 7px; }
+    .nav-hero[b-0yviibxg5l] { height:54px; border-radius:16px; --icon-size: 22px; --r-lg:16px;}
+    .nav-hero span[b-0yviibxg5l] { font-size: 10.7px; }
+    .btn-next[b-0yviibxg5l] { font-size:14px; }
+  }
+  @media (max-width:390px){
+    .nav-hero[b-0yviibxg5l] { min-width: 80px; }
+    .hero[b-0yviibxg5l] { padding-left: 4px; padding-right: 4px; }
+    .nav-hero span[b-0yviibxg5l] { font-size: 9.7px; }
+  }
+  @media (min-width: 768px) {
+    :root[b-0yviibxg5l] {
+      --icon-size: 34px;
+      --nav-height: 78px;
+      --r-lg: 28px;
+      --menu-max: 510px;
+    }
+    .nav-hero a[b-0yviibxg5l] { font-size: 13.5px; }
+  }
 /* _content/Bazis/Views/Orders/DashBoard.cshtml.rz.scp.css */
 
     :root[b-ru3mu5lzth] {
