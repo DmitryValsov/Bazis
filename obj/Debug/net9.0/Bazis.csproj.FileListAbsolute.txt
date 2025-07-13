@@ -13,7 +13,6 @@
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Files/cars.json
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Bazis.staticwebassets.runtime.json
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Bazis.staticwebassets.endpoints.json
-/Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/app.db
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Bazis
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Bazis.deps.json
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Bazis.runtimeconfig.json
@@ -456,3 +455,4 @@
 /Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Newtonsoft.Json.Bson.dll
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/2vuholimuh-ebkuuy66we.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-aaz44k6aze.gz
+/Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/app.db

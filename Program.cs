@@ -26,6 +26,9 @@ builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<SlotWindowService>();
 
+
+
+
 // Telegram.Bot client
 builder.Services.AddSingleton<ITelegramBotClient>(sp =>
     new TelegramBotClient(builder.Configuration["Telegram:BotToken"])
@@ -34,7 +37,7 @@ builder.Services.AddSingleton<ITelegramBotClient>(sp =>
 // BackgroundService для «обратки» из Telegram
 builder.Services.AddHostedService<TelegramRelayService>();
 
-
+builder.Services.AddScoped<Bazis.Services.TelegramService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 

@@ -1072,7 +1072,7 @@
    .selected-slot   { background:#0c2a5b; color:#fff; }
    #submitBtn       { padding:8px 16px; margin-top:12px; }
  </style>
-                <button class="btn" id="toPage4" disabled>Продолжить</button>
+                <button class="btn btn-next" id="toPage4" disabled>Продолжить</button>
     </div>
 
 
@@ -1291,6 +1291,19 @@ document.addEventListener('DOMContentLoaded', function(){
     name="CreatedAt" 
     id="CreatedAt" 
     value="@ViewData["CreatedAt"]" />
+
+
+      <input 
+    type="hidden" 
+    name="Date" 
+    id="CreatedAt" 
+    value="${selectedDate}" />
+
+      <input 
+    type="hidden" 
+    name="Time" 
+    id="CreatedAt" 
+    value="${selectedTime}" />
 
     <input type="hidden"  
     name="Usluga" 

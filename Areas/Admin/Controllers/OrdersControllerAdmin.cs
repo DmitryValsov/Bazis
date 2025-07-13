@@ -84,6 +84,7 @@ namespace Bazis.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+             ViewData["CarId"] = new SelectList(_context.Car, "Id", "Id", order.CarId);
             return View(order);
         }
 
@@ -92,7 +93,7 @@ namespace Bazis.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,CarId,Name,Phone,ServiceAddress,Usluga,Comment,Status,Date,Time")] Order order)
         {
             if (id != order.Id)
             {
@@ -120,6 +121,7 @@ namespace Bazis.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+            ViewData["CarId"] = new SelectList(_context.Car, "Id", "Id", order.CarId);
             return View(order);
         }
 

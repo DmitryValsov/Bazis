@@ -222,11 +222,11 @@
     <div class="card summary">
       <div class="left">
         <div class="label">Дата и время</div>
-        <div class="value">@Html.DisplayFor(model => model.CreatedAt)</div>
+        <div class="value">@Html.DisplayFor(model => model.Date) - @Html.DisplayFor(model => model.Time)</div>
         <div class="label">Услуга</div>
         <div class="value">@Html.DisplayFor(model => model.Usluga)</div>
       </div>
-        <img src="~/images/@Html.DisplayFor(model => model.Car.Img)" alt="Chery Tiggo 8 Pro">
+     
       <!--<img src="https://via.placeholder.com/80" alt="Диагностика">-->
     </div>
 
@@ -241,10 +241,7 @@
 
       <!-- Карта сервиса -->
       <div class="map-container">
-        <iframe
-          src="https://www.google.com/maps?q=ул.+Мельникайте,+125&output=embed"
-          width="100%" height="100%" frameborder="0" allowfullscreen="" loading="lazy">
-        </iframe>
+        <img src="~/images/@Html.DisplayFor(model => model.Car.Img)" style="max-width:70%;">
       </div>
     </div>
 

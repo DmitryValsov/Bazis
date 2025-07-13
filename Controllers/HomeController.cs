@@ -49,7 +49,8 @@ public class HomeController : Controller
         ViewBag.FinishOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "1")
-            .OrderByDescending(p => p.CreatedAt)
+            .OrderByDescending(p => p.Id)
+            .Include(c => c.Car) // Загрузка связанных продуктов
             .Take(3)
             .ToListAsync();
 
@@ -57,7 +58,8 @@ public class HomeController : Controller
         ViewBag.ActiveOrders = await _context.Orders
             .Where(p => p.UserId == user.Id)
             .Where(c => c.Status == "0")
-             .OrderByDescending(p => p.CreatedAt)
+            .OrderByDescending(p => p.Id)
+            .Include(c => c.Car) // Загрузка связанных продуктов
             .Take(3)
             .ToListAsync();
 

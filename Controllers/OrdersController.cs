@@ -13,6 +13,8 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Bazis.Services;
+using System.Runtime.CompilerServices;
 
 namespace Bazis.Controllers
 {
@@ -22,12 +24,17 @@ namespace Bazis.Controllers
         private readonly IWebHostEnvironment _env;
 
         private readonly UserManager<IdentityUser> _userManager;
+            private readonly TelegramService _telegramService;
 
-        public OrdersController(ApplicationDbContext context, IWebHostEnvironment env, UserManager<IdentityUser> userManager)
+
+
+        public OrdersController(ApplicationDbContext context, IWebHostEnvironment env, UserManager<IdentityUser> userManager,TelegramService telegramService)
         {
             _context = context;
             _env = env;
             _userManager = userManager;
+            _telegramService = telegramService;
+
         }
 
         // GET: Orders
@@ -90,7 +97,7 @@ namespace Bazis.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.User)
-                .Include(c => c.Car)
+                .Include(o => o.Car)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -131,15 +138,36 @@ namespace Bazis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedAt,CarId,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,CreatedAt,CarId,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status,Date,Time")] Order order)
         {
             if (ModelState.IsValid)
             {
+
+
+                string telegramMessage = $"Получена новая запись через сервис";
+
+                await _telegramService.SendMessageAsync(telegramMessage);
+
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+
+
+                //   string subject = "Подтверждение бронирования";
+           // Отправляем сообщение в Telegram администратору
+
+           
+
+           
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+
+
+            string tg = "Проверка";
+           await _telegramService.SendMessageAsync(tg);
+
             //ViewData["UserId"] = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return View(order);
         }
@@ -166,7 +194,7 @@ namespace Bazis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UserId,Name,Phone,ServiceAddress,Usluga,Comment,Status,Date,Time")] Order order)
         {
             if (id != order.Id)
             {

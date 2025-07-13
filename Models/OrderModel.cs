@@ -43,6 +43,18 @@ namespace Bazis.Models
         [Required]
         [StringLength(200)]
         public string? Status { get; set; }
+
+
+
+         [Required]
+        [StringLength(200)]
+        public string? Date { get; set; }
+        
+
+        [Required]
+        [StringLength(200)]
+        public string? Time { get; set; }
+        
         
 
 

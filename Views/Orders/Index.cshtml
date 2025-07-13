@@ -322,7 +322,7 @@
       {   
       <a class="card-appointment" asp-action="Details" asp-route-id="@order.Id">
         <div class="appointment-info">
-          <div class="date">@Html.DisplayFor(modelItem => order.CreatedAt)</div>
+          <div class="date">@Html.DisplayFor(modelItem => order.Date) - @Html.DisplayFor(modelItem => order.Time)</div>
           <div class="title">@Html.DisplayFor(modelItem => order.Usluga)</div>
           <div class="address">@Html.DisplayFor(modelItem => order.ServiceAddress)</div>
           <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>
@@ -342,7 +342,7 @@
       {   
       <a class="card-appointment" asp-action="Details" asp-route-id="@order.Id">
         <div class="appointment-info">
-          <div class="date">@Html.DisplayFor(modelItem => order.CreatedAt)</div>
+          <div class="date">@Html.DisplayFor(modelItem => order.Date) - @Html.DisplayFor(modelItem => order.Time)</div>
           <div class="title">@Html.DisplayFor(modelItem => order.Usluga)</div>
           <div class="address">@Html.DisplayFor(modelItem => order.ServiceAddress)</div>
           <button class="btn-edit" onclick="event.preventDefault();event.stopPropagation();">Изменить</button>

@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Bazis.Data;
 using Bazis.Models;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CarLiftBooking.Controllers
 {
@@ -13,12 +14,18 @@ namespace CarLiftBooking.Controllers
     public class SlotsController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        public SlotsController(ApplicationDbContext db) => _db = db;
+        //private readonly TelegramService _telegramService;
+        public SlotsController(ApplicationDbContext db)
+        {
+            _db = db;
+           // _telegramService = telegramService;
+        }
+    
 
         public class SlotInfo
         {
             public string Time { get; set; }
-            public int    Free { get; set; }
+            public int Free { get; set; }
         }
 
         // GET api/slots?center=1&start=2025-07-10&end=2025-07-20&type=3
@@ -81,6 +88,7 @@ namespace CarLiftBooking.Controllers
         // POST api/slots/book
         [HttpPost("book")]
         public IActionResult Book([FromBody] BookRequest req)
+            //public async Task<IActionResult> Book([FromBody] BookRequest req)
         {
             // 1) проверяем услугу
             var svcType = _db.ServiceTypes.Find(req.ServiceTypeId);
@@ -134,7 +142,6 @@ namespace CarLiftBooking.Controllers
             toBook.ForEach(s => s.IsBooked = true);
             _db.SaveChanges();
             tx.Commit();
-
             return Ok(new { success = true });
         }
     }
