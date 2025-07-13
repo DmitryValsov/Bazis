@@ -844,15 +844,14 @@
        d.innerHTML = 
         `
         <div class="service-item__info">
-          <div class="service-item__title">Базис-сервис - 11 км Окружной дороги,6</div>
+          <div class="service-item__title">${c.name}</div>
           <div class="service-item__meta">
             ${c.rating} ★★★★★ (160) · Автосалон<br/>
             Тюмень, Россия · <a href="tel:+73452394696">${c.phone}</a><br/>
-            <span class="status">Открыто</span> · Закроется в ${c.openingHours}
+            <span class="status">Открыто</span> · Часы работы: ${c.openingHours}
           </div>
         </div>
-        <div>
-       <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3A0b09699e6ae64e2bacd736a0986ec38140255a8172bc8d73be64747deeb13a8e&amp;source=constructor" width="360" height="300" frameborder="0"></iframe>
+       
         </div>
       `;
        
