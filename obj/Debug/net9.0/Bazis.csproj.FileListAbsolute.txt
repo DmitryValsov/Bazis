@@ -447,8 +447,12 @@
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/7pxwpux83a-d36mzp6s1a.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Car/Create.cshtml.rz.scp.css
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/i2awsrsmzm-uq58bun904.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-4g13tac8kh.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/nzjfejh385-05ssuep23l.gz
 /Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/scopedcss/Views/Orders/Create.cshtml.rz.scp.css
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-my55lt7dp5.gz
-/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-my55lt7dp5.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/0dy53hdi62-gdt6pteba8.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/x2c7ykh8dc-gdt6pteba8.gz
+/Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/dmitrii/Desktop/Bazis/bin/Debug/net9.0/Newtonsoft.Json.Bson.dll
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/2vuholimuh-ebkuuy66we.gz
+/Users/dmitrii/Desktop/Bazis/obj/Debug/net9.0/compressed/n05bdk62l0-aaz44k6aze.gz

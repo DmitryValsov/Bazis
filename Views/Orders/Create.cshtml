@@ -170,85 +170,12 @@
     <div class="hero__main">Выбор сервисного центра</div>
   </header>
 
-  <main id="scroller" style="min-height: 100%;">
-    <h2>Где вам удобнее?</h2>
-    <div id="map">
-
-  <iframe style="border-radius: 10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3A7bef223a4f32160bcbd68b79316f0e375244f02f71ec888c93ae6545d09e9d2c&amp;source=constructor" width="350" height="336" frameborder="0"></iframe>
-    </div>
-
+  <main id="scroller" style="min-height: 100%;" class="selector">
+     <!-- Селектор центров -->
     <h2>Найдены сервисы</h2>
     <div class="service-list">
-
-      <div class="service-item service-card" style="padding: 10px;" data-service="11 км Окружной дороги,6" data-lat="57.1445" data-lng="65.5340">
-        <div class="service-item__info">
-          <div class="service-item__title">Базис-сервис - 11 км Окружной дороги,6</div>
-          <div class="service-item__meta">
-            4,9 ★★★★★ (160) · Автосалон<br/>
-            Тюмень, Россия · <a href="tel:+73452394696">+7 (3452) 39‒46‒96</a><br/>
-            <span class="status">Открыто</span> · Закроется в 20:00
-          </div>
-        </div>
-        <div>
-       <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3A0b09699e6ae64e2bacd736a0986ec38140255a8172bc8d73be64747deeb13a8e&amp;source=constructor" width="360" height="300" frameborder="0"></iframe>
-        </div>
-      </div>
-
-
-      <div class="service-item service-card" style="padding: 10px;" data-service="Федюнинского,83" data-lat="57.1445" data-lng="65.5340">
-     
-        <div class="service-item__info">
-          <div class="service-item__title">Базис-сервис - Федюнинского,83</div>
-          <div class="service-item__meta">
-            4,9 ★★★★★ (140) · Автосалон<br/>
-            Тюмень, Россия · <a href="tel:+73452579151">+7 (3452) 57‒91‒51</a><br/>
-            <span class="status">Открыто</span> · Закроется в 20:00
-          </div>
-        </div>
-        <div>
-      <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3Abcf7defa0dcbfbf539d0a61cad5517f5aa58b1fcc3a3b6e96fb28a5cd762caef&amp;source=constructor" width="360" height="300" frameborder="0"></iframe>
-        </div>
-    
-      </div>
-
-<div class="service-item service-card" style="padding: 10px;" data-service="Пермякова, 19" data-lat="57.1445" data-lng="65.5340">
-        <div class="service-item__info">
-          <div class="service-item__title">Базис-сервис - Пермякова, 19</div>
-          <div class="service-item__meta">
-            4,9 ★★★★★ (179) · Автосалон<br/>
-            Тюмень, Россия · <a href="tel:+73452579838">+73452579838</a><br/>
-            <span class="status">Открыто</span> · Закроется в 20:00
-          </div>
-        </div>
-        <div>
-       <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3Adb9f3b345718bfe4c916a87f1c5ed0d50d2e245fbc63cfddce6a657d18cefa03&amp;source=constructor" width="360" height="300" frameborder="0"></iframe>
-        </div>
-      
-      </div>
-      <div class="service-item service-card" style="padding: 10px;" data-service="Окружная дорога, 202" data-lat="57.1445" data-lng="65.5340">
-        <div class="service-item__info">
-          <div class="service-item__title">Базис-сервис - Окружная дорога, 202</div>
-          <div class="service-item__meta">
-            4,8 ★★★★★ (67) · Автосалон<br/>
-            Тюмень, Россия · <a href="tel:73452564435">+7 (3452) 56‒44‒35</a><br/>
-            <span class="status">Открыто</span> · Закроется в 20:00
-          </div>
-        </div>
-        <div>
-      <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3A61c7ac36d25b59a3608c09c7f71af23b20e7b36c6abd0da7c291b29e78f196c3&amp;source=constructor" width="360" height="300" frameborder="0"></iframe> 
-        </div>
-      
-      </div>
-      
-
-     
-
-     
-
-      
-      
-
-
+    <div class="service-list selector options-container" id="centerOptions">
+    </div>
     </div>
   </main>
 
@@ -503,49 +430,10 @@
     <div class="hero__main">Выбор услуги</div>
   </header>
 
-  <main style="min-height: 100%;">
+  <main style="min-height: 100%;" class="selector">
     <h2>Выберите услугу</h2>
-    <div class="service-list" id="serviceList">
-      <div class="service-card" tabindex="0" data-service="Техобслуживание">
-        <div class="service-card__img-wrapper">
-          <img class="service-card__img" src="~/images/tehobsl.jpg" alt="Техобслуживание">
-          <div class="service-card__gradient"></div>
-        </div>
-        <div class="service-card__info">
-          <div class="service-card__title">Техобслуживание</div>
-          <div class="service-card__desc">Регулярное ТО и замена расходников</div>
-        </div>
-      </div>
-      <div class="service-card" tabindex="0" data-service="Шиномонтаж">
-        <div class="service-card__img-wrapper">
-          <img class="service-card__img" src="~/images/shin.webp" alt="Шиномонтаж">
-          <div class="service-card__gradient"></div>
-        </div>
-        <div class="service-card__info">
-          <div class="service-card__title">Шиномонтаж</div>
-          <div class="service-card__desc">Балансировка и сезонная замена колёс</div>
-        </div>
-      </div>
-      <div class="service-card" tabindex="0" data-service="Диагностика">
-        <div class="service-card__img-wrapper">
-          <img class="service-card__img" src="~/images/diagnos.jpg" alt="Диагностика">
-          <div class="service-card__gradient"></div>
-        </div>
-        <div class="service-card__info">
-          <div class="service-card__title">Диагностика</div>
-          <div class="service-card__desc">Полная проверка всех систем авто</div>
-        </div>
-      </div>
-      <div class="service-card" tabindex="0" data-service="Ремонт">
-        <div class="service-card__img-wrapper">
-          <img class="service-card__img" src="~/images/remont.webp" alt="Ремонт">
-          <div class="service-card__gradient"></div>
-        </div>
-        <div class="service-card__info">
-          <div class="service-card__title">Ремонт</div>
-          <div class="service-card__desc">Своевременный ремонт любых неисправностей</div>
-        </div>
-      </div>
+     <div class="selector">
+    <div class="service-list options-container" id="typeOptions"></div>
     </div>
     <button class="btn-next" id="toPage2" disabled>Далее</button>
   </main>
@@ -901,311 +789,290 @@
 
     <!-- Выбор даты и времени -->
     <div id="page3" class="page">
-        <style>
-            * { box-sizing: border-box; margin: 0; padding: 0; }
-            body { font-family: Arial, sans-serif; background: #f7f8fa; color: #0f1944; }
-            .phone { width: 375px; margin: 20px auto; border: 16px solid #333; border-radius: 36px; position: relative; }
-            .screen { background: #fff; border-radius: 20px; padding: 16px; width: 100%; position: relative; }
-
-            /* Header */
-            .header { display: flex; align-items: center; margin-bottom: 16px; }
-            .back { background: none; border: none; cursor: pointer; padding: 4px; margin-right: 8px; }
-            .back svg { display: block; }
-            .logo { width: 32px; height: 32px; margin-right: 8px; }
-            .title-block { display: flex; flex-direction: column; }
-            .title-block .title { font-size: 13px; font-weight: 600; line-height: 1.2; }
-            .title-block .subtitle { font-size: 9px; color: #6b7280; margin-top: 2px; }
-
-            h1 { font-size: 20px; font-weight: 600; text-align: center; margin-bottom: 16px; }
-
-            /* Calendar */
-            .calendar { background: #fff; border-radius: 12px; padding: 12px; }
-            .month { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-            .month button { background: none; border: none; cursor: pointer; padding: 4px; font-size: 20px; line-height: 1; }
-            .month-label { display: flex; flex-direction: column; align-items: center; }
-            .month-name { font-size: 18px; font-weight: 600; }
-            .year-name { font-size: 14px; color: #6b7280; margin-top: 2px; }
-            .weekdays, .days { display: grid; grid-template-columns: repeat(7, 1fr); }
-            .weekdays div { padding: 6px; font-size: 14px; color: #9ca3af; text-align: center; }
-            .days div { padding: 6px; font-size: 14px; text-align: center; margin-bottom: 4px; border-radius: 50%; }
-            .days div.blank { visibility: hidden; }
-            .days div.past { color: #9ca3af; }
-            .days div.no-slots { color: #000; }
-            .days div.available { color: #0f1944; cursor: pointer; }
-            .days div.selected { background: #0f1944; color: #fff; }
-
-            /* Timeslots */
-            .timeslots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
-            .timeslots button { padding: 10px 0; border: 1px solid #0f1944; border-radius: 8px; background: #fff; font-size: 14px; cursor: pointer; }
-            .timeslots button.available { color: #0f1944; }
-            .timeslots button.selected { background: #0f1944; color: #fff; }
-
-            /* Legend */
-            .legend { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-            .legend-item { display: flex; align-items: center; font-size: 12px; }
-            .legend-item .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-            .legend-item .available-dot { background: #0f1944; }
-            .legend-item .no-slots-dot { background: #000; }
-
-            /* Continue button */
-            .btn { width: 100%; padding: 14px 0; background: #0f1944; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-bottom: 48px; }
-
-            /* Navbar */
-            .navbar { position: absolute; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-around; padding: 8px 0; }
-            .navbar .item { display: flex; flex-direction: column; align-items: center; font-size: 12px; color: #0f1944; }
-            .navbar .item svg { width: 24px; height: 24px; margin-bottom: 4px; }
-        </style>
-
-
-          <div class="hero" id="hero">
-    <div class="hero__header">
-      <div class="hero__logo"></div>
-      <div class="hero__title">Базис Моторс</div>
-    </div>
-    <div class="hero__main-title">Выберите дату и время</div>
-  </div>
-
-  <main style="min-height: 100%;">      
-                
-
-               
-                  <!-- Calendar -->
-                <div class="calendar">
-                    <div class="month">
-                        <button class="prev">‹</button>
-                        <div class="month-label">
-                            <span class="month-name" id="monthName"></span>
-                            <span class="year-name" id="yearName"></span>
-                        </div>
-                        <button class="next">›</button>
-                    </div>
-                    <div class="weekdays">
-                        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
-                    </div>
-                    <div class="days" id="daysContainer"></div>
-                </div>
-
-                <!-- Time slots -->
-                <div class="timeslots" id="timeslotsContainer">
-                    <!-- Временные слоты появятся здесь -->
-                </div>
-
-                <!-- Legend -->
-                <div class="legend">
-                    <div class="legend-item"><span class="dot available-dot"></span>Есть время для записи</div>
-                    <div class="legend-item"><span class="dot no-slots-dot"></span>Нет времени для записи</div>
-                </div>
-
-                <button class="btn" id="toPage4" disabled>Продолжить</button>
-
-</main>
+        
 
 
 
-        <script>
-            const monthNames = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
-            const today = new Date();
-            let currentMonth = today.getMonth();
-            let currentYear = today.getFullYear();
-
-            let selectedDate = null;
-            let selectedTime = null;
-
-            const daysContainer      = document.getElementById('daysContainer');
-            const timeslotsContainer = document.getElementById('timeslotsContainer');
-            const monthNameEl        = document.getElementById('monthName');
-            const yearNameEl         = document.getElementById('yearName');
-            const continueBtn        = document.querySelector('.btn');
-
-            // Объект с доступными слотами по дате (формат YYYY-MM-DD)
 
 
+<div id="calendar"   style="max-width:900px; margin:0 auto 2rem;"></div>
+<div id="timeslots"  style="max-width:900px; margin:0 auto 2rem;"></div>
 
-             // === КОНСТАНТЫ ===
+ <button id="submitBtn" type="submit" style="display:none;" disabled>Записаться</button>
 
- // Сколько дней вперёд генерировать
 
- const DAYS_AHEAD = 30;
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js"></script>
+
+ <script>
+      
+      let selectedServiceAddress = ''; // Адрес сервиса
+      let selectedServiceType = '';   // Тип услуги
+      let selectedDate = null;
+      let selectedTime = null;
+
+ document.addEventListener('DOMContentLoaded', () => {
+   const centerOpts = document.getElementById('centerOptions'),
+         typeOpts   = document.getElementById('typeOptions'),
+         calEl      = document.getElementById('calendar'),
+         timesEl    = document.getElementById('timeslots'),
+         form       = document.getElementById('bookingForm'),
+         submitBtn  = document.getElementById('submitBtn');
+         btnForm = document.getElementById('toPage4');
+ 
+   let slots = {},
+       selDate = null,
+       selTime = null,
+       selBtn = null,
+       selectedCenterId = null,
+       selectedTypeId   = null,
+       selectedDuration = null;
 
  
+   // 1) загрузить центры и типы услуг
+   Promise.all([
+     fetch('/api/servicecenters').then(r=>r.json()),
+     fetch('/api/servicetypes')  .then(r=>r.json())
+   ]).then(([centers, types]) => {
+     // центры
+     centers.forEach(c => {
+       const d = document.createElement('div');
+       d.className = 'service-item service-card';
+       d.dataset.value = c.serviceCenterId;
+       d.dataset.service = c.name;
+       
+       d.innerHTML = 
+        `
+        <div class="service-item__info">
+          <div class="service-item__title">Базис-сервис - 11 км Окружной дороги,6</div>
+          <div class="service-item__meta">
+            ${c.rating} ★★★★★ (160) · Автосалон<br/>
+            Тюмень, Россия · <a href="tel:+73452394696">${c.phone}</a><br/>
+            <span class="status">Открыто</span> · Закроется в ${c.openingHours}
+          </div>
+        </div>
+        <div>
+       <iframe style="border-radius: 10px; padding-top:10px;" src="https://yandex.ru/map-widget/v1/?um=constructor%3A0b09699e6ae64e2bacd736a0986ec38140255a8172bc8d73be64747deeb13a8e&amp;source=constructor" width="360" height="300" frameborder="0"></iframe>
+        </div>
+      `;
+       
+       d.addEventListener('click', () => {
+         // снять выделение у всех
+         centerOpts.querySelectorAll('.service-card')
+           .forEach(o => o.classList.remove('selected'));
+         d.classList.add('selected');
+         selectedCenterId = c.serviceCenterId;
+         selectedServiceAddress = c.name;
+         resetDate(); resetTime();
+         loadSlots();
+         console.log(selectedCenterId);
+         document.getElementById('toPage1-5').disabled = false;
+       });
+       centerOpts.appendChild(d);
+     });
+     // услуги
 
- // Полный набор слотов на каждый день
+      types.forEach(t => {
+       const d = document.createElement('div');
+       
+       d.className = 'service-card';
+       //d.textContent = `${t.name} (${t.durationHours}ч)`;
+       d.dataset.value    = t.serviceTypeId;
+       d.dataset.duration = t.durationHours;
+       d.dataset.service = t.name;
 
- const FULL_SLOTS = [
 
-   "10:00","11:30","12:30","14:00","15:00",
+         
+       d.innerHTML = 
+        `
+        <div class="service-card__img-wrapper">
+          <img class="service-card__img" src="~/images/diagnos.jpg" alt="Диагностика">
+          <div class="service-card__gradient"></div>
+        </div>
+        <div class="service-card__info">
+          <div class="service-card__title">${t.name}</div>
+          <div class="service-card__desc">Будущее описание</div>
+        </div>
+      
+      `;
 
-   "16:00","17:00","18:00","19:00"
 
- ];
-
+       d.addEventListener('click', () => {
+         typeOpts.querySelectorAll('.service-card')
+           .forEach(o => o.classList.remove('selected'));
+         d.classList.add('selected');
+         selectedTypeId   = t.serviceTypeId;
+         console.log(selectedTypeId);
+         selectedDuration = t.durationHours;
+         selectedServiceType = t.name
+         console.log(selectedServiceType);
+         resetDate(); resetTime();
+         loadSlots();
+        document.getElementById('toPage2').disabled = false;
+         submitBtn.disabled = !(selDate && selTime);
+       });
+       typeOpts.appendChild(d);
+     });
+   });
  
-
- // === ГЕНЕРАТОР ===
-
- function generateSlotsByDate(daysCount) {
-
-   const result = {};
-
-   const today = new Date();
-
+   // 2) инициализация календаря
+   const calendar = new FullCalendar.Calendar(calEl, {
+     initialView:'dayGridMonth',
+     locale:'ru',
+     datesSet: loadSlots,
+     dateClick: info => onDateClick(info.dateStr, info.dayEl)
+   });
+   calendar.render();
  
-
-   for (let i = 0; i < daysCount; i++) {
-
-     // создаём дату Сегодня + i дней, без наследования времени
-
-     const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
-
+   function getRange() {
+     const v = calendar.view;
+     return {
+       start: v.currentStart.toISOString().slice(0,10),
+       end:   v.currentEnd.toISOString().slice(0,10)
+     };
+   }
  
-
-     // форматируем ключ YYYY-MM-DD
-
-     const key = d.toISOString().slice(0, 10);
-
+   // 3) загрузка слотов с учётом duration, центра и типа
+   async function loadSlots() {
+     resetDate(); resetTime();
+     if (!selectedCenterId || !selectedTypeId) return;
+     const { start, end } = getRange();
+     const url = `/api/slots?center=${selectedCenterId}` +
+                 `&start=${start}&end=${end}` +
+                 `&type=${selectedTypeId}`;
+     const res = await fetch(url);
+     slots = await res.json();
+     document.querySelectorAll('.fc-daygrid-day')
+       .forEach(el => el.classList.remove('has-slots'));
+     Object.keys(slots).forEach(d => {
+       const cell = document.querySelector(`[data-date="${d}"]`);
+       if (cell) cell.classList.add('has-slots');
+     });
+   }
  
+   // 4) выбор даты
+   function onDateClick(dateStr, dayEl) {
+     if (!slots[dateStr]) return;
+     resetDate(); resetTime();
+     selDate = dateStr;
+     selectedDate = dateStr;
 
-     // клонируем массив, чтобы потом можно было править слоты по конкретной дате
+     dayEl.classList.add('selected-day');
+     renderTimes(dateStr);
+     submitBtn.disabled = true;
 
-     result[key] = FULL_SLOTS.slice();
+     document.getElementById('toPage4').disabled = false;
+
+
+   }
+   function resetDate() {
+     document.querySelectorAll('.selected-day')
+       .forEach(e => e.classList.remove('selected-day'));
+     selDate = null;
+     timesEl.innerHTML = '';
+   }
+ 
+   // 5) рендер слотов
+   function renderTimes(date) {
+     timesEl.innerHTML = `<h3>Слоты на ${date}</h3>`;
+     slots[date].forEach(({time, free}) => {
+       const btn = document.createElement('button');
+       btn.className   = 'slot-btn';
+       btn.textContent = `${time} (${free})`;
+       btn.disabled    = free===0;
+       btn.onclick     = () => onTimeClick(btn, time);
+       timesEl.appendChild(btn);
+     });
+   }
+ 
+   // 6) выбор времени
+   function onTimeClick(btn, time) {
+     if (selBtn===btn) {
+       btn.classList.remove('selected-slot');
+       selBtn = selTime = null;
+       submitBtn.disabled = true;
+       
+       document.getElementById('toPage4').disabled = false;
+
+       return;
+     }
+     if (selBtn) selBtn.classList.remove('selected-slot');
+     btn.classList.add('selected-slot');
+     selBtn = btn; 
+     selTime = time;
+     selectedTime = time;
+     submitBtn.disabled = !(selDate && selTime);
+     
+    
+     document.getElementById('toPage4').disabled = false;
+   }
+   function resetTime() {
+     if (selBtn) selBtn.classList.remove('selected-slot');
+     selBtn = selTime = null;
+     submitBtn.disabled = true;
+
+     document.getElementById('toPage4').disabled = false;
 
    }
 
+
+   // 7) бронирование
+
+ // btnForm = document.getElementById('toPage4');
+   //form.onsubmit = async e => { submitBtn
+   btnForm.onclick = async e => {
+     e.preventDefault();
+     //if (!selDate||!selTime) return alert('Выберите дату и время');
+     const body = {
+       ServiceCenterId: +selectedCenterId,
+       ServiceTypeId:   +selectedTypeId,
+       Date:            selDate,
+       Time:            selTime,
+       Duration:        +selectedDuration
+     };
+     //submitBtn.disabled = true;
+     const res = await fetch('/api/slots/book',{
+       method:'POST',
+       headers:{'Content-Type':'application/json'},
+       body:JSON.stringify(body)
+     });
+     if (res.ok) {
+       const [h,m] = selTime.split(':').map(Number);
+       for(let i=0;i<selectedDuration;i++){
+         const t = `${String(h+i).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+         const rec = slots[selDate].find(s=>s.time===t);
+         if (rec) rec.free--;
+         const b = Array.from(timesEl.querySelectorAll('button'))
+                        .find(x=>x.textContent.startsWith(t));
+         if (b) {
+           if (rec.free>0) b.textContent=`${t} (${rec.free})`;
+           else b.remove();
+         }
+       }
+       //alert('Успешно');
+       resetTime();
+     } else {
+       const err = await res.json().catch(()=>({error:'Ошибка'}));
+       alert(err.error);
+       if(selBtn) selBtn.remove();
+       resetTime();
+     }
+   };
+
  
+  
+ });
+ </script>
 
-   return result;
-
- }
-
- 
-
- // === ИСПОЛЬЗОВАНИЕ ===
-
- // В переменной slotsByDate появится объект вида:
-
- // {
-
- //   "2025-07-07": ["10:00","11:30",...,"19:00"],
-
- //   "2025-07-08": ["10:00","11:30",...,"19:00"],
-
- //    …
-
- // }
-
- const slotsByDate = generateSlotsByDate(DAYS_AHEAD);
-
-
-
-
-
-
-
-
-
-
-            function formatDateISO(year, month, day) {
-                const mm = String(month + 1).padStart(2, '0');
-                const dd = String(day).padStart(2, '0');
-                return `${year}-${mm}-${dd}`;
-            }
-
-            function renderTimeslots(dateKey) {
-                timeslotsContainer.innerHTML = '';
-                const times = slotsByDate[dateKey] || [];
-                if (times.length === 0) {
-                    timeslotsContainer.innerHTML = '<p>Нет доступных слотов на выбранную дату.</p>';
-                    return;
-                }
-                times.forEach(time => {
-                    const btn = document.createElement('button');
-                    btn.textContent = time;
-                    btn.classList.add('available');
-                    btn.addEventListener('click', () => {
-                        timeslotsContainer.querySelectorAll('button').forEach(el => el.classList.remove('selected'));
-                        btn.classList.add('selected');
-                        selectedTime = time;  // сохраняем время
-                    });
-                    timeslotsContainer.appendChild(btn);
-                });
-            }
-
-            function renderCalendar(month, year) {
-                monthNameEl.textContent = monthNames[month];
-                yearNameEl.textContent = year;
-                daysContainer.innerHTML = '';
-
-                const firstDay = new Date(year, month, 1).getDay();
-                const blanks = (firstDay + 6) % 7; // сдвиг, чтобы Пн=0
-                for (let i = 0; i < blanks; i++) {
-                    const div = document.createElement('div');
-                    div.classList.add('blank');
-                    daysContainer.appendChild(div);
-                }
-
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-                for (let d = 1; d <= daysInMonth; d++) {
-                    const date = new Date(year, month, d);
-                    const iso = formatDateISO(year, month, d);
-                    const dayDiv = document.createElement('div');
-                    dayDiv.textContent = d;
-
-                    if (date < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
-                        dayDiv.classList.add('past');
-                    } else if (slotsByDate[iso]?.length > 0) {
-                        dayDiv.classList.add('available');
-                        dayDiv.addEventListener('click', () => {
-                            daysContainer.querySelectorAll('div').forEach(el => el.classList.remove('selected'));
-                            dayDiv.classList.add('selected');
-                            selectedDate = iso;           // сохраняем дату
-                            selectedTime = null;          // сбрасываем время
-                            renderTimeslots(iso);
-                            document.getElementById('toPage4').disabled = false;
-                        });
-                    } else {
-                        dayDiv.classList.add('no-slots');
-                    }
-
-                    daysContainer.appendChild(dayDiv);
-                }
-            }
-
-            document.querySelector('.prev').addEventListener('click', () => {
-                currentMonth = (currentMonth === 0 ? 11 : currentMonth - 1);
-                if (currentMonth === 11) currentYear--;
-                renderCalendar(currentMonth, currentYear);
-                timeslotsContainer.innerHTML = '';
-                selectedDate = selectedTime = null;
-            });
-            document.querySelector('.next').addEventListener('click', () => {
-                currentMonth = (currentMonth === 11 ? 0 : currentMonth + 1);
-                if (currentMonth === 0) currentYear++;
-                renderCalendar(currentMonth, currentYear);
-                timeslotsContainer.innerHTML = '';
-                selectedDate = selectedTime = null;
-            });
-
-            continueBtn.addEventListener('click', () => {
-                if (!selectedDate || !selectedTime) {
-                    alert('Пожалуйста, выберите дату и время.');
-                    return;
-                }
-                document.getElementById('toPage4').disabled = false;
-                // Здесь можно отправить selectedDate и selectedTime на сервер
-                console.log('Запись на', selectedDate, selectedTime);
-                // Например:
-                // fetch('/api/book', { method: 'POST', body: JSON.stringify({ date: selectedDate, time: selectedTime }) })
-            });
-
-
-
-            // Инициализация
-            renderCalendar(currentMonth, currentYear);
-        </script>
-
-
-
-     
+ <style>
+   .has-slots       { background:#e0f7ff!important; cursor:pointer; }
+   .selected-day    { outline:2px solid #0c2a5b; }
+   .slot-btn        { margin:4px; padding:6px 10px; border:1px solid #0c2a5b; border-radius:4px; }
+   .slot-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+   .selected-slot   { background:#0c2a5b; color:#fff; }
+   #submitBtn       { padding:8px 16px; margin-top:12px; }
+ </style>
+                <button class="btn" id="toPage4" disabled>Продолжить</button>
     </div>
 
 
@@ -1223,8 +1090,8 @@
     
 
         // Выбранные значения
-        let selectedServiceAddress = ''; // Адрес сервиса
-        let selectedServiceType = '';   // Тип услуги
+        //let selectedServiceAddress = ''; // Адрес сервиса
+       //let selectedServiceType = '';   // Тип услуги
         
     
 
@@ -1240,7 +1107,7 @@
             card.addEventListener('click', () => {
                 document.querySelectorAll('#page1 .service-card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-                selectedServiceAddress = card.dataset.service;
+               // selectedServiceAddress = card.dataset.service;
                 document.getElementById('toPage1-5').disabled = false;
             });
         });
@@ -1255,7 +1122,7 @@
             card.addEventListener('click', () => {
                 document.querySelectorAll('#page1-5 .service-card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-                selectedServiceType = card.dataset.service;
+              //  selectedServiceType = card.dataset.service;
                 document.getElementById('toPage2').disabled = false;
             });
         });
@@ -1315,7 +1182,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-        // Переход к деталям записи
+  // Переход к деталям записи
         document.getElementById('toPage4').addEventListener('click', () => {
             showPage('page4');
             document.getElementById('details').innerHTML = `
@@ -1403,7 +1270,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <main class="content" style="min-height: 650px;">
 
 
-<form asp-controller="Orders" asp-action="Create" method="post">
+<form asp-controller="Orders" asp-action="Create" method="post" id="bookingForm">
    @Html.AntiForgeryToken()
 
   <input 
@@ -1459,7 +1326,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <textarea name="Comment" placeholder="Комментарий (необязательно)"></textarea>
     </section>
 
-    <button class="btn-submit" value="Create" type="submit">Записаться</button>
+    <button class="btn-submit" id="btnForm" value="Create" type="submit">Записаться</button>
         </form>
   </main>
 
@@ -1471,11 +1338,12 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('confirm').addEventListener('click', () => {
             alert(`Запись успешно оформлена! Сервис: ${selectedServiceAddress}, Услуга: ${selectedServiceType}, Дата: ${selectedDate}, Время: ${selectedTime}`);
         });
+
+
+
+
+         
     </script>
-
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3Z7x5x+8drQ=",
+  "dgSpecHash": "q2cmCJNtsjg=",
   "success": true,
   "projectFilePath": "/Users/dmitrii/Desktop/Bazis/Bazis.csproj",
   "expectedPackageFiles": [
@@ -61,6 +61,8 @@
     "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.diagnostics.entityframeworkcore/9.0.5/microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.5.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/9.0.5/microsoft.aspnetcore.identity.entityframeworkcore.9.0.5.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.5/microsoft.aspnetcore.identity.ui.9.0.5.nupkg.sha512",
+    "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.jsonpatch/9.0.7/microsoft.aspnetcore.jsonpatch.9.0.7.nupkg.sha512",
+    "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/9.0.7/microsoft.aspnetcore.mvc.newtonsoftjson.9.0.7.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.aspnetcore.razor.language/6.0.24/microsoft.aspnetcore.razor.language.6.0.24.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.build/17.10.4/microsoft.build.17.10.4.nupkg.sha512",
@@ -78,7 +80,7 @@
     "/Users/dmitrii/.nuget/packages/microsoft.codeanalysis.scripting.common/4.8.0/microsoft.codeanalysis.scripting.common.4.8.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.codeanalysis.workspaces.common/4.8.0/microsoft.codeanalysis.workspaces.common.4.8.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.codeanalysis.workspaces.msbuild/4.8.0/microsoft.codeanalysis.workspaces.msbuild.4.8.0.nupkg.sha512",
-    "/Users/dmitrii/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
+    "/Users/dmitrii/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.data.sqlclient/5.1.6/microsoft.data.sqlclient.5.1.6.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.data.sqlclient.sni.runtime/5.1.1/microsoft.data.sqlclient.sni.runtime.5.1.1.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/microsoft.data.sqlite.core/9.0.5/microsoft.data.sqlite.core.9.0.5.nupkg.sha512",
@@ -147,6 +149,7 @@
     "/Users/dmitrii/.nuget/packages/microsoft.visualstudio.web.codegenerators.mvc/9.0.0/microsoft.visualstudio.web.codegenerators.mvc.9.0.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/Users/dmitrii/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/nuget.common/6.11.0/nuget.common.6.11.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/nuget.configuration/6.11.0/nuget.configuration.6.11.0.nupkg.sha512",
     "/Users/dmitrii/.nuget/packages/nuget.dependencyresolver.core/6.11.0/nuget.dependencyresolver.core.6.11.0.nupkg.sha512",

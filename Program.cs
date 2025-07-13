@@ -20,8 +20,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHostedService<DataSeeder>();
+
 builder.Services.AddSignalR();
 
+builder.Services.AddHostedService<SlotWindowService>();
 
 // Telegram.Bot client
 builder.Services.AddSingleton<ITelegramBotClient>(sp =>
@@ -33,7 +36,23 @@ builder.Services.AddHostedService<TelegramRelayService>();
 
 
 
+builder.Services.AddControllers().AddNewtonsoftJson();
+
+
 var app = builder.Build();
+
+
+
+// Настраиваем webhook для бота
+
+var botClient = app.Services.GetRequiredService<ITelegramBotClient>();
+var webhookUrl = builder.Configuration["Telegram:WebhookUrl"];
+
+//if (webhookUrl)
+//{
+   // await botClient.SetWebhookAsync(webhookUrl);
+//}
+
 
 
 
@@ -52,6 +71,12 @@ else
 using(var scope = app.Services.CreateScope())
 {
     await IdentityDataSeeder.SeedAsync(scope.ServiceProvider);
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
 }
 
 

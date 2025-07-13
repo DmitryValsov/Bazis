@@ -116,6 +116,9 @@ namespace Bazis.Controllers
             var userId = _userManager.GetUserId(User);
             ViewBag.UsersCars = _context.Car.Where(p => p.UserId == userId).ToList();
 
+            ViewBag.Services = _context.ServiceCenters.ToList();
+
+             ViewBag.Types = _context.ServiceTypes.ToList();
 
            // ViewData["CreatedAt"] = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

@@ -83,6 +83,26 @@ namespace Bazis.Data.Migrations
                     b.ToTable("CatalogCar");
                 });
 
+            modelBuilder.Entity("Bazis.Models.Lift", b =>
+                {
+                    b.Property<int>("LiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ServiceCenterId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LiftId");
+
+                    b.HasIndex("ServiceCenterId");
+
+                    b.ToTable("Lifts");
+                });
+
             modelBuilder.Entity("Bazis.Models.News", b =>
                 {
                     b.Property<int>("Id")
@@ -167,6 +187,89 @@ namespace Bazis.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Bazis.Models.ServiceCenter", b =>
+                {
+                    b.Property<int>("ServiceCenterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MapLink")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OpeningHours")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Rating")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ServiceCenterId");
+
+                    b.ToTable("ServiceCenters");
+                });
+
+            modelBuilder.Entity("Bazis.Models.ServiceType", b =>
+                {
+                    b.Property<int>("ServiceTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DurationHours")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ServiceTypeId");
+
+                    b.ToTable("ServiceTypes");
+                });
+
+            modelBuilder.Entity("Bazis.Models.Slot", b =>
+                {
+                    b.Property<int>("SlotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsBooked")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LiftId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ServiceCenterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SlotId");
+
+                    b.HasIndex("LiftId");
+
+                    b.HasIndex("ServiceCenterId", "Date", "Time", "IsBooked");
+
+                    b.HasIndex("ServiceCenterId", "LiftId", "Date", "Time")
+                        .IsUnique();
+
+                    b.ToTable("Slots");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -375,6 +478,17 @@ namespace Bazis.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Bazis.Models.Lift", b =>
+                {
+                    b.HasOne("Bazis.Models.ServiceCenter", "ServiceCenter")
+                        .WithMany("Lifts")
+                        .HasForeignKey("ServiceCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceCenter");
+                });
+
             modelBuilder.Entity("Bazis.Models.Order", b =>
                 {
                     b.HasOne("Bazis.Models.Car", "Car")
@@ -389,6 +503,25 @@ namespace Bazis.Data.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Bazis.Models.Slot", b =>
+                {
+                    b.HasOne("Bazis.Models.Lift", "Lift")
+                        .WithMany()
+                        .HasForeignKey("LiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bazis.Models.ServiceCenter", "ServiceCenter")
+                        .WithMany()
+                        .HasForeignKey("ServiceCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lift");
+
+                    b.Navigation("ServiceCenter");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -445,6 +578,11 @@ namespace Bazis.Data.Migrations
             modelBuilder.Entity("Bazis.Models.Car", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Bazis.Models.ServiceCenter", b =>
+                {
+                    b.Navigation("Lifts");
                 });
 #pragma warning restore 612, 618
         }
