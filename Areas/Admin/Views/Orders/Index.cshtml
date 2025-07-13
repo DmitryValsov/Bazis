@@ -4,76 +4,240 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+/* Variables */
+    :root {
+      --ff: 'Inter', sans-serif;
+      --bg: #f0f2f5;
+      --card: #ffffff;
+      --text: #1f1f2f;
+      --text-light: #6b7280;
+      --primary: #5a67d8;
+      --primary-light: #7f85e8;
+      --secondary: #edf2f7;
+      --danger: #e53e3e;
+      --radius: 12px;
+      --gap-sm: 8px;
+      --gap: 16px;
+      --gap-lg: 24px;
+      --shadow: rgba(0, 0, 0, 0.06);
+    }
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--ff);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-         
-            <th>
-                @Html.DisplayNameFor(model => model.ServiceAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usluga)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usluga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: var(--gap-lg) var(--gap);
+    }
+    h1 {
+      margin-bottom: var(--gap-lg);
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: grid;
+      grid-template-columns: auto repeat(auto-fill, minmax(140px, 1fr)) auto;
+      gap: var(--gap);
+      background: var(--card);
+      padding: var(--gap);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px var(--shadow);
+      align-items: center;
+      margin-bottom: var(--gap-lg);
+    }
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      padding: 0 var(--gap);
+      height: 48px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: background .3s;
+    }
+    .btn-add:hover { background: var(--primary-light); }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      font-size: .9rem;
+      color: var(--text-light);
+    }
+    .filter-group label {
+      margin-bottom: var(--gap-sm);
+      font-weight: 500;
+    }
+    .filter-group input,
+    .filter-group select {
+      height: 44px;
+      padding: 0 var(--gap-sm);
+      border: 1px solid #d1d5db;
+      border-radius: var(--radius);
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(90,103,216,0.2);
+    }
+    .btn-apply {
+      padding: 0 var(--gap);
+      height: 48px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: background .3s;
+    }
+    .btn-apply:hover { background: var(--primary-light); }
+
+    /* Appointments Grid */
+    .appointments {
+      display: grid;
+      gap: var(--gap-lg);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    .appointment-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px var(--shadow);
+      padding: var(--gap);
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s, box-shadow .3s;
+      border-left: 4px solid transparent;
+    }
+    .appointment-card[data-status="Новая"] { border-color: #34d399; }
+    .appointment-card[data-status="Подтверждена"] { border-color: #fbbf24; }
+    .appointment-card[data-status="Выполнена"] { border-color: #60a5fa; }
+    .appointment-card[data-status="Отменена"] { border-color: #f87171; }
+    .appointment-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+    .appointment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--gap-sm);
+    }
+    .appointment-date {
+      font-size: .85rem;
+      color: var(--text-light);
+    }
+    .badge {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: .75rem;
+      font-weight: 500;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .badge.new     { background: #34d399; }
+    .badge.pending { background: #fbbf24; }
+    .badge.done    { background: #60a5fa; }
+    .badge.cancel  { background: #f87171; }
+
+    .appointment-client {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: var(--gap-sm);
+    }
+    .appointment-service {
+      font-size: .95rem;
+      color: var(--text-light);
+      margin-bottom: var(--gap-lg);
+    }
+    .appointment-actions {
+      margin-top: auto;
+      display: flex;
+      gap: var(--gap-sm);
+      justify-content: flex-end;
+    }
+    .appointment-actions a,
+    .appointment-actions button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--secondary);
+      transition: background .2s;
+      font-size: 1.1rem;
+    }
+    .appointment-actions a:hover,
+    .appointment-actions button:hover { background: #e2e8f0; }
+    .appointment-actions a.edit { color: var(--primary); }
+    .appointment-actions button.delete { color: var(--danger); }
+  </style>
+
+  <div class="container">
+    <h1>Управление записями</h1>
+
+    <div class="filter-bar">
+      <a href="add.html" class="btn-add">➕ Добавить запись</a>
+      <div class="filter-group">
+        <label for="date-from">С</label>
+        <input type="date" id="date-from">
+      </div>
+      <div class="filter-group">
+        <label for="date-to">По</label>
+        <input type="date" id="date-to">
+      </div>
+      <div class="filter-group">
+        <label for="status">Статус</label>
+        <select id="status">
+          <option value="">Все</option>
+          <option>Новая</option>
+          <option>Подтверждена</option>
+          <option>Выполнена</option>
+          <option>Отменена</option>
+        </select>
+      </div>
+      <div class="filter-group" style="grid-column: span 2;">
+        <label for="search">Поиск</label>
+        <input type="text" id="search" placeholder="Клиент или услуга">
+      </div>
+      <button class="btn-apply" id="btn-filter">Применить</button>
+    </div>
+
+    <!-- Примеры записей -->
+    <div class="appointments">
+     @foreach (var item in Model) {
+      <div class="appointment-card" data-status="Новая">
+        <div class="appointment-header">
+          <div class="appointment-date">@Html.DisplayFor(modelItem => item.Date) - @Html.DisplayFor(modelItem => item.Time)</div>
+          <span class="badge new">Новая</span>
+        </div>
+        <div class="appointment-client">@Html.DisplayFor(modelItem => item.UserId)</div>
+        <div class="appointment-service">@Html.DisplayFor(modelItem => item.Usluga)</div>
+        <div class="appointment-actions">
+          <a asp-action="Edit" asp-route-id="@item.Id" class="edit" title="Редактировать">✏️</a>
+           <a asp-action="Delete" asp-route-id="@item.Id" class="delete" title="Редактировать">🗑️</a>
+      
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+
+

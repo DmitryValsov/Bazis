@@ -4,81 +4,404 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+
+
+
+
+ <style>
+    :root {
+      --clr-sidebar-bg:     #252C4A;
+      --clr-sidebar-hover:  #333A5B;
+      --clr-content-bg:     #F7F8FA;
+      --clr-card-bg:        #FFFFFF;
+      --clr-header-bg:      #FFFFFF;
+      --clr-text-dark:      #111827;
+      --clr-text-gray:      #6B7280;
+      --clr-primary-start:  #082d5f;
+      --clr-primary-end:    #4f46e5;
+      --clr-danger:         #e30613;
+      --r-sm:               8px;
+      --r-md:               12px;
+      --gap-xs:             4px;
+      --gap-sm:             8px;
+      --gap-md:             16px;
+      --gap-lg:             24px;
+      --sidebar-w:          240px;
+      --header-h:           56px;
+      --ff:                 'Inter', sans-serif;
+      --transition:         0.3s cubic-bezier(.52,.2,.35,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0 }
+    html,body {
+      height:100%; overflow:auto;
+      font-family:var(--ff);
+      background:var(--clr-content-bg);
+      color:var(--clr-text-dark);
+    }
+    a { color:inherit; text-decoration:none }
+    button { background:none; border:none; font:inherit; cursor:pointer }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed; top:0; left:0; bottom:0;
+      width: var(--sidebar-w);
+      background: var(--clr-sidebar-bg);
+      color: #fff;
+      display: flex; flex-direction:column;
+      z-index:100;
+      transition: transform var(--transition);
+      transform: translateX(-100%);
+    }
+    .sidebar.open { transform: translateX(0); }
+   
+    .logo {
+      height: var(--header-h);
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:700;
+      border-bottom:1px solid #3A3F5E;
+      letter-spacing:.05em;
+    }
+    .nav { flex:1; display:flex; flex-direction:column; }
+    .nav a {
+      display:flex; align-items:center; gap:var(--gap-sm);
+      padding:var(--gap-md);
+      font-size:16px; opacity:.85;
+      transition: background var(--transition), opacity var(--transition);
+    }
+    .nav a:hover, .nav a.active {
+      background: var(--clr-sidebar-hover); opacity:1;
+    }
+    .nav svg { width:20px; height:20px; fill:currentColor; }
+
+    /* Overlay */
+    .overlay {
+      position:fixed; top:0; left:0; right:0; bottom:0;
+      background:rgba(0,0,0,0.33);
+      opacity:0; pointer-events:none;
+      transition:opacity var(--transition);
+      z-index:99;
+    }
+    .overlay.visible { opacity:1; pointer-events:all; }
+
+    /* Main */
+    .main {
+      display:flex; flex-direction:column;
+      margin-left:0; transition:margin-left var(--transition);
+    }
+   
+
+    /* Header */
+    .header {
+      height: var(--header-h);
+      background: var(--clr-header-bg);
+      box-shadow:0 1px 4px rgba(0,0,0,0.08);
+      display:flex; align-items:center; justify-content:flex-end;
+      padding:0 var(--gap-md); gap:var(--gap-sm);
+      position:sticky; top:0; z-index:10;
+    }
+    .menu-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; margin-right:auto;
+    }
+    .menu-btn svg { width:28px; height:28px; }
+   
+    .user { display:flex; align-items:center; gap:var(--gap-sm); }
+    .user img { width:32px; height:32px; border-radius:50%; }
+    .user span { font-size:14px; font-weight:500; }
+
+    /* Content */
+    .content {
+      flex:1; overflow-y:auto;
+      padding:var(--gap-lg) var(--gap-md);
+      min-height:0;
+    }
+    .content h1 {
+      font-size:24px; margin-bottom:var(--gap-lg);
+      color: var(--clr-primary-start);
+    }
+
+    /* Form Card */
+    .card {
+      background: var(--clr-card-bg);
+      border-radius: var(--r-md);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: var(--gap-md);
+      margin-bottom: var(--gap-lg);
+    }
+    .form-group {
+      display:flex; flex-direction:column;
+      margin-bottom: var(--gap-md);
+    }
+    .form-group label {
+      font-size: .9rem; color: var(--clr-text-gray);
+      margin-bottom: var(--gap-xs); font-weight:500;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="datetime-local"],
+    .form-group input[type="file"],
+    .form-group select,
+    .form-group textarea {
+      padding: 8px 12px;
+      border: 1px solid #E0E0E0;
+      border-radius: var(--r-sm);
+      font-size: 1rem;
+      transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--clr-primary-end);
+    }
+    /* Preview */
+    #photoPreview {
+      max-width: 100%;
+      margin-top: var(--gap-sm);
+      border-radius: var(--r-sm);
+      display: none;
+    }
+
+    /* Price-list */
+    .price-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 8px;
+    }
+    .price-header h2 {
+      font-size: 1.1rem; margin: 0; font-weight: 600;
+    }
+    .price-header button {
+      background: var(--clr-primary-start);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: var(--r-sm);
+      transition: background .2s;
+    }
+    .price-header button:hover {
+      background: var(--clr-primary-end);
+    }
+    table.price-table {
+      width: 100%; border-collapse: collapse; margin-bottom: var(--gap-md);
+    }
+    table.price-table th, table.price-table td {
+      padding: 8px; text-align: left; border-bottom: 1px solid #E0E0E0;
+      font-size: .95rem;
+    }
+    table.price-table td input {
+      width: 100%;
+    }
+    table.price-table td .btn-delete {
+      color: var(--clr-danger); font-size: 1.2rem;
+    }
+    .total-row {
+      display:flex; justify-content:flex-end; font-size:1.1rem;
+      font-weight:600; gap:var(--gap-md);
+    }
+
+    /* Action buttons */
+    .form-actions {
+      display:flex; justify-content:flex-end; gap:var(--gap-sm);
+    }
+    .btn-save, .btn-cancel {
+      padding: 10px 20px; font-size: 1rem; font-weight:600;
+      border-radius: var(--r-sm);
+      transition: background .2s, color .2s;
+    }
+    .btn-save {
+      background: var(--clr-primary-start); color: #fff;
+    }
+    .btn-save:hover {
+      background: var(--clr-primary-end);
+    }
+    .btn-cancel {
+      background: #fff; color: var(--clr-primary-start);
+      border: 2px solid var(--clr-primary-start);
+    }
+    .btn-cancel:hover {
+      background: var(--clr-primary-start); color: #fff;
+    }
+  </style>
+
+  <div class="main">
+
+    <section class="content">
+      <h1>Детали записи</h1>
+         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+        <div class="card">
+          <!-- Дата и время, Услуга -->
+          <div class="form-group">
+            <label for="datetime">Дата создания</label>
+            <input asp-for="CreatedAt">
+          </div>
+
+          <div class="form-group">
+            <label for="datetime">Дата</label>
+            <input asp-for="Date">
+          </div>
+
             <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group">
-                <label asp-for="ServiceAddress" class="control-label"></label>
-                <input asp-for="ServiceAddress" class="form-control" />
-                <span asp-validation-for="ServiceAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Usluga" class="control-label"></label>
-                <input asp-for="Usluga" class="form-control" />
-                <span asp-validation-for="Usluga" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Comment" class="control-label"></label>
-                <input asp-for="Comment" class="form-control" />
-                <span asp-validation-for="Comment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Time" class="control-label"></label>
-                <input asp-for="Time" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <label for="datetime">Время</label>
+            <input asp-for="Time">
+          </div>
+
+           <div class="form-group">
+            <label for="datetime">Авто</label>
+            <select id="service" asp-for="CarId" asp-items="ViewBag.CarId"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="service">Пользователь</label>
+            <select id="service" asp-for="UserId" asp-items="ViewBag.UserId">
+            </select>
+          </div>
+          <!-- Данные клиента и авто -->
+          <div class="form-group">
+            <label for="car">Услуга</label>
+            <input type="text" id="car" asp-for="Usluga">
+          </div>
+          <div class="form-group">
+            <label for="station">Станция</label>
+            <input type="text" id="station" asp-for="ServiceAddress">
+          </div>
+          <div class="form-group">
+            <label for="client">ФИО клиента</label>
+            <input type="text" id="client" asp-for="Name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" asp-for="Phone">
+          </div>
+
+           <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <input asp-for="Status" class="form-control" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+           
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="card">
+          <!-- Прайс-лист -->
+          <div class="price-header">
+            <h2>Прайс-лист</h2>
+            <button type="button" id="add-item">Добавить позицию</button>
+          </div>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Наименование</th>
+                <th>Цена, ₽</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="price-body">
+              <!-- строки динамически -->
+            </tbody>
+          </table>
+          <div class="total-row">
+            <div>Итого:</div>
+            <div id="total-value">0 ₽</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="form-group">
+            <label for="notes">Примечание</label>
+            <textarea id="notes" asp-for="Comment" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" onclick="history.back()">Отмена</button>
+          <button type="submit" value="Save" class="btn-save">Сохранить</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Sidebar toggle
+      const sidebar = document.getElementById('sidebar'),
+            overlay = document.getElementById('overlay'),
+            menuBtn = document.getElementById('menuBtn');
+      function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+      menuBtn.addEventListener('click', openSidebar);
+      overlay.addEventListener('click', closeSidebar);
+      window.addEventListener('keydown', e => { if (e.key==='Escape') closeSidebar(); });
+
+      // Превью фото
+      const photoInput = document.getElementById('photoFile');
+      const photoPreview = document.getElementById('photoPreview');
+      photoInput.addEventListener('change', () => {
+        const file = photoInput.files[0];
+        if (!file) {
+          photoPreview.style.display = 'none';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = e => {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Прайс-лист
+      const priceBody = document.getElementById('price-body');
+      const totalValue = document.getElementById('total-value');
+      const addItemBtn = document.getElementById('add-item');
+      function formatPrice(n){ return n.toLocaleString('ru-RU')+' ₽'; }
+      function recalcTotal(){
+        let sum=0;
+        priceBody.querySelectorAll('input.price-input').forEach(inp=>{
+          const v=parseFloat(inp.value.replace(',','.'));
+          if(!isNaN(v)) sum+=v;
+        });
+        totalValue.textContent = formatPrice(sum);
+      }
+      function createRow(name='', price=''){
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td><input type="text" class="service-name" value="${name}" placeholder="напр. Диагностика"></td>
+          <td><input type="text" class="price-input" value="${price}" placeholder="0"></td>
+          <td><button type="button" class="btn-delete">&times;</button></td>
+        `;
+        tr.querySelector('.price-input').addEventListener('input', recalcTotal);
+        tr.querySelector('.btn-delete').addEventListener('click', ()=>{
+          tr.remove(); recalcTotal();
+        });
+        return tr;
+      }
+      priceBody.appendChild(createRow());
+      addItemBtn.addEventListener('click', ()=> priceBody.appendChild(createRow()));
+
+     
+        // Пример отправки:
+        /*
+        fetch('/admin/records', {
+          method:'POST',
+          body:fd
+        }).then(r=>{/*...*/});
+        */
+        console.log('Готовы отправить:', ...fd.entries());
+        alert('Данные записи собраны (см. консоль)');
+      });
+    });
+  </script>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
